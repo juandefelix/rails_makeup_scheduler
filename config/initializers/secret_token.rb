@@ -9,4 +9,22 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-RailsMakeupScheduler::Application.config.secret_key_base = '226315a26becbfdfefbed64b1afcd1bfe5c2bffd105559a412062137164730f7919ad51a184ba05e35e9b0dfec8c5d8f10cfbd1c916a936cec84f77a2b1ca44a'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+
+
+RailsMakeupScheduler::Application.config.secret_key_base = secure_token
