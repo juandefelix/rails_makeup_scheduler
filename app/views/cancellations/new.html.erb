@@ -1,2 +1,11 @@
-<h1>Cancellations#new</h1>
-<p>Find me in app/views/cancellations/new.html.erb</p>
+<%= form_tag(cancellations_path, method:"post") do %>
+  <%= label_tag(:name, "Student's name:") %>
+  <%= text_field_tag(:name) %>
+  <%= label_tag(:instrument, "Instrument") %>
+  <%= text_field_tag(:instrument) %>
+  <%= label_tag(:date, "Date") %>
+  <%= text_field_tag(:date) %>
+  <%= label_tag(:time, "Time") %>
+  <%= text_field_tag(:time) %>
+  <%= submit_tag %>
+<% end %>

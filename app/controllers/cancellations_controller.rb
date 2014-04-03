@@ -3,6 +3,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
+    @params = params
   end
   
   def destroy
