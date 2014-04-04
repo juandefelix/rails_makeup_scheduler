@@ -1,4 +1,5 @@
 class CancellationsController < ApplicationController
+
   def new
   end
 
@@ -6,5 +7,8 @@ class CancellationsController < ApplicationController
   end
   
   def destroy
+  end
+
+  def show
   end
 end

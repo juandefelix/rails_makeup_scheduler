@@ -1,5 +1,6 @@
 RailsMakeupScheduler::Application.routes.draw do
 
+  get "cancellations/index"
   root 'cancellations#new'
   resources :cancellations, only: [:new, :create, :destroy]
 
