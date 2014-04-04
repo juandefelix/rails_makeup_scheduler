@@ -1,8 +1,8 @@
 RailsMakeupScheduler::Application.routes.draw do
 
-  get "cancellations/index"
   root 'cancellations#new'
-  resources :cancellations, only: [:new, :create, :destroy]
+  
+  resources :cancellations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
