@@ -1,2 +1,19 @@
-<h1>Cancellations#new</h1>
-<p>Find me in app/views/cancellations/new.html.erb</p>
+<%= form_for(@cancellation) do |f| %>
+  <%= f.label :name, "Student Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :instrument, "Instrument" %>
+  <%= f.text_field :instrument%>
+
+  <%= f.label :date, "Date" %>
+  <%= f.text_field :date %>
+
+  <%= f.label :start_time, "Start time" %>
+  <%= f.text_field :start_time %>
+
+  <%= f.label :end_time, "End time" %>
+  <%= f.text_field :end_time  %>
+
+  <%= f.submit "Create"%>
+
+<% end %>
