@@ -1,19 +1,25 @@
-<%= form_for(@cancellation) do |f| %>
-  <%= f.label :name, "Student Name" %>
-  <%= f.text_field :name %>
+<%= provide(:title, "Notify an absence")%>
+  <div class="row">
+    <div class="span6 offset3">
+      <h3> Notify an absence </h3>
+      <%= form_for(@cancellation) do |f| %>
+        <%= f.label :name, "Student Name" %>
+        <%= f.text_field :name %>
 
-  <%= f.label :instrument, "Instrument" %>
-  <%= f.text_field :instrument%>
+        <%= f.label :instrument, "Instrument" %>
+        <%= f.text_field :instrument%>
 
-  <%= f.label :date, "Date" %>
-  <%= f.text_field :date %>
+        <%= f.label :date, "Date" %>
+        <%= f.text_field :date %>
 
-  <%= f.label :start_time, "Start time" %>
-  <%= f.text_field :start_time %>
+        <%= f.label :start_time, "Start time" %>
+        <%= f.text_field :start_time %>
 
-  <%= f.label :end_time, "End time" %>
-  <%= f.text_field :end_time  %>
+        <%= f.label :end_time, "End time" %>
+        <%= f.text_field :end_time  %>
+        <br><br>
+        <%= f.submit "Send", class: "btn"%>
 
-  <%= f.submit "Create"%>
-
-<% end %>
+      <% end %>
+    </div>
+  </div> 
