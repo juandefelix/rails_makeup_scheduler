@@ -1,6 +1,9 @@
 RailsMakeupScheduler::Application.routes.draw do
 
   root 'cancellations#new'
+
+  get "static_pages/home"
+  get "static_pages/help"
   
   resources :cancellations
 
