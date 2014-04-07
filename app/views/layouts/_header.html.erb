@@ -1,12 +1,12 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Makeup Scheduler", "#", id: "logo" %>
+      <%= link_to "Makeup Scheduler", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home",              "#" %></li>
-          <li><%= link_to "Help",              "#" %></li>
-          <li><%= link_to "Notify an absence", "#" %></li>
+          <li><%= link_to "Home",              static_pages_home_path %></li>
+          <li><%= link_to "Help",              static_pages_help_path %></li>
+          <li><%= link_to "Notify an absence", new_cancellation_path %></li>
         </ul>
       </nav>
     </div>
