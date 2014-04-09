@@ -1,2 +1,14 @@
-<h1>Cancellations#show</h1>
-<p>Find me in app/views/cancellations/show.html.erb</p>
+<% provide(:title, "#{@cancellation.name} #{@cancellation.date}")%>
+<div class="row">
+  <aside class="span4 hero-unit">
+    <section>
+      <h4><%= @cancellation.name %></h4>
+      <p>
+        <b>Date: </b> <%= @cancellation.date %><br>
+        <b>Instrument:</b> <%= @cancellation.instrument %><br>
+        <b>Start time: </b><%= @cancellation.start_time %><br>
+        <b>End time: </b><%= @cancellation.end_time %><br>
+      </p>
+    </section>
+  </aside>
+</div>
