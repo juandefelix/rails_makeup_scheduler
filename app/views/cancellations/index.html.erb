@@ -4,9 +4,9 @@
 
   <% @cancellation.each do |cancellation| %>
     <div class="makeup">
-      <p><b>Date <%= cancellation.date %></b></p> 
-      <p><b>Name</b> <%= cancellation.name %></p>
-      <p><b>Instrument:</b> <%= cancellation.instrument %> <b>from</b> <%= cancellation.start_time %> <b>to</b> <%= cancellation.end_time %></p>
+      <p><b>Date: <%= cancellation.date %></b></p> 
+      <p><b>Name: </b><%= cancellation.name %></p>
+      <p><b>Instrument: </b> <%= cancellation.instrument %> <b>from</b> <%= cancellation.start_time %> <b>to</b> <%= cancellation.end_time %></p>
     </div>
   <% end %>
 

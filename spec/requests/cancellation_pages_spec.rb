@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Cancellation Pages" do
   subject { page }
 
-  describe "cancellation page (single cancellation)" do
+  describe "Cancellation show" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
     before { visit cancellation_path(cancellation)}
 
@@ -11,7 +11,7 @@ describe "Cancellation Pages" do
     it { should have_title("#{cancellation.name} #{cancellation.date}") }
   end
 
-  describe "Notify and absence page" do
+  describe "Cancellationa new (Notify and absence page)" do
     before { visit new_cancellation_path }
     
     it { should have_title "Notify an absence"}
@@ -45,10 +45,21 @@ describe "Cancellation Pages" do
   end
 
   describe "Cancellations index page" do
-    before { visit cancellations_path }
+    before do 
+      FactoryGirl.create(:cancellation)
+      FactoryGirl.create(:cancellation, name: "Doris")
+      visit cancellations_path 
+    end
 
     it { should have_title full_title("Available Makeups") }
     it { should have_content("Available Makeups") }
-    it { should have_content("Name") }
+    it { should have_content("Name: ") }
+    it { should have_content("Date: ") }
+
+    it "should list each cancellation" do
+      Cancellation.all.each do |cancellation|
+        expect(page).to have_content(cancellation.name)
+      end
+    end
   end
 end
