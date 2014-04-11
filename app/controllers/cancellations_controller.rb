@@ -22,6 +22,10 @@ class CancellationsController < ApplicationController
     @cancellation = Cancellation.find(params[:id])
   end
 
+  def index
+    @cancellation = Cancellation.all
+  end
+
   private
 
     def cancellation_params

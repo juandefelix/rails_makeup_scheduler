@@ -1,14 +1,15 @@
 <% provide(:title, "#{@cancellation.name} #{@cancellation.date}")%>
-<div class="row">
-  <aside class="span4 hero-unit">
-    <section>
-      <h4><%= @cancellation.name %></h4>
-      <p>
-        <b>Date: </b> <%= @cancellation.date %><br>
-        <b>Instrument:</b> <%= @cancellation.instrument %><br>
-        <b>Start time: </b><%= @cancellation.start_time %><br>
-        <b>End time: </b><%= @cancellation.end_time %><br>
-      </p>
-    </section>
-  </aside>
+<div class="span7 offset2">
+<!-- <div class="row"> -->
+  <h2>Thank you for notifying us your absence!</h2>
+  <div class="makeup">
+    <br>
+    <h4><%= @cancellation.name %></h4>
+    <p>
+      <b>Date: </b> <%= @cancellation.date %><br>
+      <b>Instrument:</b> <%= @cancellation.instrument %><br>
+      <b>Start time: </b><%= @cancellation.start_time %><br>
+      <b>End time: </b><%= @cancellation.end_time %><br>
+    </p>
+  </div>
 </div>
