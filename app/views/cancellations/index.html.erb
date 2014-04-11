@@ -1,10 +1,11 @@
-<% provide :title, "Available makepus"%>
+<% provide :title, "Available Makeups"%>
 <div class="span6 offset3">
-  <h2>Available makeups</h2>
+  <h2>Available Makeups</h2>
 
   <% @cancellation.each do |cancellation| %>
     <div class="makeup">
-      <p><b>Date <%= cancellation.date %> - </b> <b>Name</b> <%= cancellation.name %></p>
+      <p><b>Date <%= cancellation.date %></b></p> 
+      <p><b>Name</b> <%= cancellation.name %></p>
       <p><b>Instrument:</b> <%= cancellation.instrument %> <b>from</b> <%= cancellation.start_time %> <b>to</b> <%= cancellation.end_time %></p>
     </div>
   <% end %>

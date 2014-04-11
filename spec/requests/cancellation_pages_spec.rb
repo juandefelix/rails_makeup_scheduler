@@ -43,4 +43,12 @@ describe "Cancellation Pages" do
       end
     end
   end
+
+  describe "Cancellations index page" do
+    before { visit cancellations_path }
+
+    it { should have_title full_title("Available Makeups") }
+    it { should have_content("Available Makeups") }
+    it { should have_content("Name") }
+  end
 end
