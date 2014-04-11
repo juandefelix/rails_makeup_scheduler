@@ -1,6 +1,6 @@
 <% provide(:title, "#{@cancellation.name} #{@cancellation.date}")%>
-<div>
-<!-- <div class="row"> -->
+
+<div class="span6 offset3 center">
   <h2>Thank you for notifying us your absence!</h2>
   <div class="makeup">
     <br>
@@ -12,4 +12,5 @@
       <b>End time: </b><%= @cancellation.end_time %><br>
     </p>
   </div>
+      <%= link_to "Exit" , "#", id: "exit", class: "btn btn-primary" %>
 </div>
