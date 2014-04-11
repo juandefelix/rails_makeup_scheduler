@@ -16,6 +16,9 @@ class CancellationsController < ApplicationController
   end
   
   def destroy
+    Cancellation.find(params[:id]).destroy
+    flash[:success] = "Absence deleted from your list."
+    redirect_to cancellations_url
   end
 
   def show
@@ -23,7 +26,7 @@ class CancellationsController < ApplicationController
   end
 
   def index
-    @cancellation = Cancellation.all
+    @cancellations = Cancellation.all
   end
 
   private
