@@ -1,28 +1,14 @@
-== README
+== MAKEUP SCHEDULER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an application built in Rails 4.0
 
-Things you may want to cover:
+In order to run this application you should have intalled Rails 4.0.
+Copy this repo in your computer. In you terminal got to the application folder and type:  
+`bundle install`  
+To start the rails server, run in your console:  
+`rails s`  
+You shold be able to see the home page in your browser typing `localhost:3000/` in your browser.
 
-* Ruby version
+###Why This Application###
+This application was built to help some small business like music schools, to help manage student absences. Currently these absences are notified by phone or email, which takes so much time. With this application, the student notify their absences filling a form in this web application. The administrator will be able to see and manage all the notified absences in one single page instead of several emailes.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
