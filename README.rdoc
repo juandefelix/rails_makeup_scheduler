@@ -1,4 +1,4 @@
-== MAKEUP SCHEDULER
+## MAKEUP SCHEDULER  ##
 
 This is an application built in Rails 4.0
 

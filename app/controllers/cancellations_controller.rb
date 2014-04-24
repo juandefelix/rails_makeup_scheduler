@@ -10,7 +10,7 @@ class CancellationsController < ApplicationController
       flash[:success] = "Successfully created..."
       redirect_to @cancellation
     else
-      flash[:error] = "An error occurred when trying to create an absence"
+      flash[:error] = "An error occurred when trying to notify an absence"
       render 'new'
     end
   end
