@@ -1,6 +1,6 @@
 <div class="makeup">
   <p><b>Date: <%= cancellation.date %></b></p> 
   <p><b>Name: </b><%= cancellation.name %></p>
-  <p><b>Instrument: </b> <%= cancellation.instrument %> <b>from</b> <%= cancellation.start_time %> <b>to</b> <%= cancellation.end_time %></p>
+  <p>Instrument: <b><%= cancellation.instrument.capitalize %></b> at <b><%= cancellation.start_time %></b></p>
   <%= link_to "delete", cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
 </div>
