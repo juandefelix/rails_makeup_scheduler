@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Cancellation do
-  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date:"12-3-12", start_time:"12:00pm", end_time:"12:30pm") }
+  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date:"12-3-12", start_time:"12:00pm") }
 
   subject { @cancellation }
 
@@ -11,7 +11,7 @@ describe Cancellation do
   it { should respond_to(:instrument) }
   it { should respond_to(:date) }
   it { should respond_to(:start_time) }
-  it { should respond_to(:end_time) }
+  it { should_not respond_to(:end_time) }
 
   it { should be_valid }
 
@@ -37,10 +37,10 @@ describe Cancellation do
     it { should_not be_valid }
   end
 
-  describe "when end_time is not present" do
-    before { @cancellation.end_time = "" }
-    it { should_not be_valid }
-  end
+  # describe "when end_time is not present" do
+  #   before { @cancellation.end_time = "" }
+  #   it { should_not be_valid }
+  # end
 
 # format of some attributes ==========================
 
@@ -51,8 +51,8 @@ describe Cancellation do
       before { @cancellation.start_time = wrong_time }
       it { should_not be_valid }
 
-      before { @cancellation.end_time = wrong_time }
-      it { should_not be_valid }
+      # before { @cancellation.end_time = wrong_time }
+      # it { should_not be_valid }
     end
   end
 
@@ -64,8 +64,8 @@ describe Cancellation do
         before { @cancellation.start_time = valid_time }
         it { should be_valid}
 
-        before { @cancellation.end_time = valid_time }
-        it { should be_valid }
+        # before { @cancellation.end_time = valid_time }
+        # it { should be_valid }
     end
   end
 end

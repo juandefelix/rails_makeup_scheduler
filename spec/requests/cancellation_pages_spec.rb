@@ -34,8 +34,7 @@ describe "Cancellation Pages" do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
         fill_in "Date", with: "12/4/14"
-        fill_in "Start time", with: "3:30pm"
-        fill_in "End time", with: "4:00pm"
+        select "3:30pm", :from => "Start time" 
       end
 
       it "should create a user " do
@@ -64,9 +63,13 @@ describe "Cancellation Pages" do
   end
 
   describe "delete cancellations" do
-    before { visit cancellations_path }
+    before do 
+      FactoryGirl.create(:cancellation)
+      visit cancellations_path 
+    end
 
     it { should have_link("delete", href: cancellation_path(Cancellation.first) ) }
+
     it "should be able to delete a cancellation" do
       expect do
         click_link('delete', match: :first)

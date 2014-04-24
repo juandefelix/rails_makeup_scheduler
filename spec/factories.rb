@@ -4,6 +4,5 @@ FactoryGirl.define do
     instrument "Guitar"
     date "12/4/14"
     start_time "3:30pm"
-    end_time "4:00pm"
   end
 end
