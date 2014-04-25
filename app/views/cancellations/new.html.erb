@@ -31,12 +31,22 @@
   $(document).ready(function(){
     $("#new_cancellation").submit(function(event){
       event.preventDefault();
-      var now = new Date();
+      // the dateTime when the user submit the form
+      var now = new Date();     
+
+      // the date of the absence (entered by the user)
       var date = $("#cancellation_date").val();
-      var hour = $("select").val(); 
-      alert(date);
+      var dateParts= date.split("/");
+
+      // the hour of the absence (enters b the user)
+      var time = $("select").val(); 
+      var timeParts = time.match(/(\d{1,2}):(\d{2})\s/)
+
+      var absenceDate = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0], timeParts[1], timeParts[2]);
+      alert(absenceDate);
     })
   })
+
 
 
   </script>
