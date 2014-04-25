@@ -24,7 +24,19 @@
 
         
       <% end %>
-      
-
     </div>
   </div> 
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#new_cancellation").submit(function(event){
+      event.preventDefault();
+      var now = new Date();
+      var date = $("#cancellation_date").val();
+      var hour = $("select").val(); 
+      alert(date);
+    })
+  })
+
+
+  </script>
