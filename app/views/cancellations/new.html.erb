@@ -15,7 +15,7 @@
         <%= f.text_field :instrument%>
 
         <%= f.label :date, "Date" %>
-        <%= f.text_field :date %>
+        <%= f.text_field :date, placeholder: "mm/dd/yy" %>
 
         <%= f.label :start_time, "Start time" %>
         <%= f.select(:start_time, options_for_select(times)) %>
@@ -34,6 +34,7 @@
 
       // the dateTime when the user submit the form
       var notificationDateTime = new Date();     
+      notificationDateTime.setDate(notificationDateTime.getDate() + 1);
 
       // the date of the absence (entered by the user)
       var date = $("#cancellation_date").val();
@@ -44,16 +45,17 @@
       var timeParts = time.match(/(\d{2}):(\d{2})/)
       // dateTime of the absence
       var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
+      
 
 
       console.log(notificationDateTime + " " + absenceDateTime);
 
       // comparing the dates
       if (notificationDateTime < absenceDateTime) {
-        alert("Before");  
+        alert("Notification Added");  
       }
       else { 
-        alert("After");
+        alert("Less than 24hr. to your class");
       }
     })
   })
