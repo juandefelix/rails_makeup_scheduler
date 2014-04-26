@@ -9,13 +9,13 @@
 
 
         <%= f.label :name, "Student Name" %>
-        <%= f.text_field :name %>
+        <%= f.text_field :name, value: "Juan Ortiz" %>
 
         <%= f.label :instrument, "Instrument" %>
-        <%= f.text_field :instrument%>
+        <%= f.text_field :instrument, value: "Guitar" %>
 
         <%= f.label :date, "Date" %>
-        <%= f.text_field :date, placeholder: "mm/dd/yy" %>
+        <%= f.text_field :date, placeholder: "mm/dd/yy", value: "4/27/14" %>
 
         <%= f.label :start_time, "Start time" %>
         <%= f.select(:start_time, options_for_select(times)) %>
@@ -28,6 +28,7 @@
   </div> 
 
   <script type="text/javascript">
+  
   $(document).ready(function(){
     $("#new_cancellation").submit(function(event){
       event.preventDefault();
@@ -42,21 +43,25 @@
 
       // the hour of the absence (enters b the user)
       var time = $("select").val(); 
-      var timeParts = time.match(/(\d{2}):(\d{2})/)
+      var timeParts = time.match(/(\d{2}):(\d{2})/);
+
       // dateTime of the absence
       var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
-      
-
-
-      console.log(notificationDateTime + " " + absenceDateTime);
 
       // comparing the dates
       if (notificationDateTime < absenceDateTime) {
-        alert("Notification Added");  
+        $.ajax({
+          url: "/cancellations ",
+          type: 'POST',
+          data: $("form"),
+          success: function(e){console.log("Success!!")},
+          error: function(){console.log("ERROR")}
+        }); // end Ajax
       }
       else { 
-        alert("Less than 24hr. to your class");
+        alert("Your absence should be notified at least 24hr. before your class");
       }
-    })
-  })
+    }); // end submit
+  }); // end document
+
   </script>

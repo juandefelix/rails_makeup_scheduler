@@ -34,7 +34,7 @@ describe "Cancellation Pages" do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
         fill_in "Date", with: "12/4/14"
-        select "3:30pm", :from => "Start time" 
+        select "3:30 pm", :from => "Start time" 
       end
 
       it "should create a user " do

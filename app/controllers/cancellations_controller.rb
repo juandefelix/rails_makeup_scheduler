@@ -8,10 +8,12 @@ class CancellationsController < ApplicationController
     @cancellation = Cancellation.new(cancellation_params)
     if @cancellation.save
       flash[:success] = "Successfully created..."
-      redirect_to @cancellation
+      true
+      # redirect_to @cancellation
     else
       flash[:error] = "An error occurred when trying to notify an absence"
-      render 'new'
+      false
+      # render 'new'
     end
   end
   
@@ -33,6 +35,6 @@ class CancellationsController < ApplicationController
 
     def cancellation_params
       params.require(:cancellation).permit(:name, :instrument, 
-                                           :date, :start_time, :end_time)
+                                           :date, :start_time)
     end
 end
