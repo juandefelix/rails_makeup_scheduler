@@ -4,7 +4,7 @@
     <div class="span3 offset4">
       <h3> Notify an absence </h3>
 
-      <%= form_for(@cancellation) do |f| %>
+      <%= form_for @cancellation, remote: true do |f| %>
         <%= render 'shared/error_messages' %>
 
 

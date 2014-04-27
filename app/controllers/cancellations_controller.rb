@@ -8,12 +8,16 @@ class CancellationsController < ApplicationController
     @cancellation = Cancellation.new(cancellation_params)
     if @cancellation.save
       flash[:success] = "Successfully created..."
-      true
-      # redirect_to @cancellation
+      respond_to do |format|
+        format.html { redirect_to @cancellation }
+        format.js
+      end
     else
       flash[:error] = "An error occurred when trying to notify an absence"
-      false
-      # render 'new'
+      respond_to do |format|
+        format.html { render 'new' }
+        format.js
+      end
     end
   end
   
