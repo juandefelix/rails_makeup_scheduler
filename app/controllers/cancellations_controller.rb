@@ -1,5 +1,3 @@
-require 'pry'
-
 class CancellationsController < ApplicationController
 
   def new
@@ -7,7 +5,6 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @cancellation = Cancellation.new(cancellation_params)
     
     respond_to do |format|    
@@ -20,14 +17,6 @@ class CancellationsController < ApplicationController
         render :new
       end
     end
-
-    # if @cancellation.save
-    #   flash[:success] = "Successfully created..."
-    #   redirect_to @cancellation
-    # else
-    #   flash[:error] = "An error occurred when trying to notify an absence"
-    #   render :new
-    # end
   end
   
   def destroy

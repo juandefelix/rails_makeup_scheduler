@@ -55,20 +55,19 @@
       }
       else{
         $.ajax({
-        url: "/cancellations",
-        type: 'POST',
-        data: $("form").serialize() ,
-        dataType: 'json',
-        error: function(){ 
-          console.log("error") 
-        },
-        success: function(r){ 
-          window.location = "/cancellations/" + r;
-        }
-      }) // end ajax
-      }
-      
+          url: "/cancellations",
+          type: 'POST',
+          data: $("form").serialize() ,
+          dataType: 'json',
+          error: function(){ 
+            console.log("error") 
+          },
+          success: function(r){ 
+            window.location = "/cancellations/" + r;
+          }
+        }) // end ajax
+      } // end else
     }); // end submit
   }); // end document
 
-  // </script>
+  </script>
