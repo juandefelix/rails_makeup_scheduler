@@ -15,7 +15,7 @@ This application was built to help some small business like music schools, to he
 
 ####Where I Am####
 
-I just handle the `create` action with an ajax request. In the '/new' template, a javascript function validates the date and time entered in the form before it is sent via an ajax request.
+I just handled the `create` action with an ajax request. In the '/new' template, a javascript function validates the date and time entered in the form before it is sent via an ajax request.
 
 **Need to:**  
  - Refactor Javascript in 'app/views/cancellations/new' 
