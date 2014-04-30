@@ -59,11 +59,12 @@
         url: "/cancellations",
         type: 'POST',
         data: $("form").serialize() ,
+        dataType: 'json',
         error: function(){ 
           console.log("error") 
         },
         success: function(r){ 
-          console.log("success:" + r);
+          window.location = "/cancellations/" + r;
         }
       }) // end ajax
     }); // end submit
