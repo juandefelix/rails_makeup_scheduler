@@ -12,3 +12,7 @@ You shold be able to see the home page in your browser typing `localhost:3000/` 
 ###Why This Application###
 This application was built to help some small business like music schools, to help manage student absences. Currently these absences are notified by phone or email, which takes so much time. With this application, the student notify their absences filling a form in this web application. The administrator will be able to see and manage all the notified absences in one single page instead of several emailes.
 
+
+####Where I Am####
+
+Trying to make the `create` action in the CancellationsController work with AJAX

@@ -208,6 +208,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   pg (= 0.15.1)
+  pry
   rails (= 4.0.4)
   rails_12factor (= 0.0.2)
   rspec-rails (= 2.13.1)
