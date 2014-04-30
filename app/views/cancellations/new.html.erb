@@ -4,7 +4,7 @@
     <div class="span3 offset4">
       <h3> Notify an absence </h3>
 
-      <%= form_for @cancellation do |f| %>
+      <%= form_for @cancellation, :id => "new_cancellation" do |f| %>
         <%= render 'shared/error_messages' %>
 
 
@@ -28,10 +28,11 @@
   </div> 
 
   <script type="text/javascript">
-  
-  // $(document).ready(function(){
-  //   $("#new_cancellation").submit(function(event){
-  //     event.preventDefault();
+
+  $(document).ready(function(){
+    $("#new_cancellation").submit(function(event){
+      event.preventDefault();
+
 
   //     // the dateTime when the user submit the form
   //     var notificationDateTime = new Date();     
@@ -53,7 +54,19 @@
   //       alert("Your absence should be notified at least 24hr. before your class");
   //       window.location = "/cancellations/new";
   //     }
-  //   }); // end submit
-  // }); // end document
+      console.log("Inside submit");
+      $.ajax({
+        url: "/cancellations",
+        type: 'POST',
+        data: $("form").serialize() ,
+        error: function(){ 
+          console.log("error") 
+        },
+        success: function(r){ 
+          console.log("success:" + r);
+        }
+      }) // end ajax
+    }); // end submit
+  }); // end document
 
   // </script>

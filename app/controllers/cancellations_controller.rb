@@ -1,3 +1,5 @@
+require 'pry'
+
 class CancellationsController < ApplicationController
 
   def new
@@ -5,6 +7,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @cancellation = Cancellation.new(cancellation_params)
     
     if @cancellation.save
