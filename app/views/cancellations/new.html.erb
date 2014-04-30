@@ -15,7 +15,7 @@
         <%= f.text_field :instrument, value: "Guitar" %>
 
         <%= f.label :date, "Date" %>
-        <%= f.text_field :date, placeholder: "mm/dd/yy", value: "4/29/14" %>
+        <%= f.text_field :date, placeholder: "mm/dd/yy", value: "5/1/14" %>
 
         <%= f.label :start_time, "Start time" %>
         <%= f.select(:start_time, options_for_select(times)) %>
@@ -34,28 +34,27 @@
       event.preventDefault();
 
 
-  //     // the dateTime when the user submit the form
-  //     var notificationDateTime = new Date();     
-  //     notificationDateTime.setDate(notificationDateTime.getDate() + 1); // +1 day
+      // the dateTime when the user submit the form
+      var notificationDateTime = new Date();     
+      notificationDateTime.setDate(notificationDateTime.getDate() + 1); // +1 day
 
-  //     // the date of the absence (entered by the user)
-  //     var date = $("#cancellation_date").val();
-  //     var dateParts= date.split("/");
+      // the date of the absence (entered by the user)
+      var date = $("#cancellation_date").val();
+      var dateParts= date.split("/");
 
-  //     // the hour of the absence (entered by the user)
-  //     var time = $("select").val(); 
-  //     var timeParts = time.match(/(\d{2}):(\d{2})/);
+      // the hour of the absence (entered by the user)
+      var time = $("select").val(); 
+      var timeParts = time.match(/(\d{2}):(\d{2})/);
 
-  //     // dateTime of the absence
-  //     var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
+      // dateTime of the absence
+      var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
 
-  //     // comparing the dates
-  //     if (notificationDateTime > absenceDateTime) {
-  //       alert("Your absence should be notified at least 24hr. before your class");
-  //       window.location = "/cancellations/new";
-  //     }
-      console.log("Inside submit");
-      $.ajax({
+      // comparing the dates
+      if (notificationDateTime > absenceDateTime) {
+        alert("Your absence should be notified at least 24hr. before your class");
+      }
+      else{
+        $.ajax({
         url: "/cancellations",
         type: 'POST',
         data: $("form").serialize() ,
@@ -67,6 +66,8 @@
           window.location = "/cancellations/" + r;
         }
       }) // end ajax
+      }
+      
     }); // end submit
   }); // end document
 
