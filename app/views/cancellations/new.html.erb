@@ -4,7 +4,7 @@
     <div class="span3 offset4">
       <h3> Notify an absence </h3>
 
-      <%= form_for @cancellation, remote: true do |f| %>
+      <%= form_for @cancellation do |f| %>
         <%= render 'shared/error_messages' %>
 
 
@@ -15,7 +15,7 @@
         <%= f.text_field :instrument, value: "Guitar" %>
 
         <%= f.label :date, "Date" %>
-        <%= f.text_field :date, placeholder: "mm/dd/yy", value: "4/27/14" %>
+        <%= f.text_field :date, placeholder: "mm/dd/yy", value: "4/29/14" %>
 
         <%= f.label :start_time, "Start time" %>
         <%= f.select(:start_time, options_for_select(times)) %>
@@ -29,39 +29,31 @@
 
   <script type="text/javascript">
   
-  $(document).ready(function(){
-    $("#new_cancellation").submit(function(event){
-      event.preventDefault();
+  // $(document).ready(function(){
+  //   $("#new_cancellation").submit(function(event){
+  //     event.preventDefault();
 
-      // the dateTime when the user submit the form
-      var notificationDateTime = new Date();     
-      notificationDateTime.setDate(notificationDateTime.getDate() + 1);
+  //     // the dateTime when the user submit the form
+  //     var notificationDateTime = new Date();     
+  //     notificationDateTime.setDate(notificationDateTime.getDate() + 1); // +1 day
 
-      // the date of the absence (entered by the user)
-      var date = $("#cancellation_date").val();
-      var dateParts= date.split("/");
+  //     // the date of the absence (entered by the user)
+  //     var date = $("#cancellation_date").val();
+  //     var dateParts= date.split("/");
 
-      // the hour of the absence (enters b the user)
-      var time = $("select").val(); 
-      var timeParts = time.match(/(\d{2}):(\d{2})/);
+  //     // the hour of the absence (entered by the user)
+  //     var time = $("select").val(); 
+  //     var timeParts = time.match(/(\d{2}):(\d{2})/);
 
-      // dateTime of the absence
-      var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
+  //     // dateTime of the absence
+  //     var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
 
-      // comparing the dates
-      if (notificationDateTime < absenceDateTime) {
-        $.ajax({
-          url: "/cancellations ",
-          type: 'POST',
-          data: $("form"),
-          success: function(e){console.log("Success!!")},
-          error: function(){console.log("ERROR")}
-        }); // end Ajax
-      }
-      else { 
-        alert("Your absence should be notified at least 24hr. before your class");
-      }
-    }); // end submit
-  }); // end document
+  //     // comparing the dates
+  //     if (notificationDateTime > absenceDateTime) {
+  //       alert("Your absence should be notified at least 24hr. before your class");
+  //       window.location = "/cancellations/new";
+  //     }
+  //   }); // end submit
+  // }); // end document
 
-  </script>
+  // </script>
