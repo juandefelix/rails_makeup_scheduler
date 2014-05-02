@@ -1,35 +1,4 @@
-<%= provide(:title, "Notify an absence")%>
-
-  <div class="row">
-    <div class="span3 offset4">
-      <h3> Notify an absence </h3>
-
-      <%= form_for @cancellation, :id => "new_cancellation" do |f| %>
-        <%= render 'shared/error_messages' %>
-
-
-        <%= f.label :name, "Student Name" %>
-        <%= f.text_field :name, :value => "Juan Ortiz" %>
-
-        <%= f.label :instrument, "Instrument" %>
-        <%= f.text_field :instrument, :value => "Guitar" %>
-
-        <%= f.label :date, "Date" %>
-        <%= f.text_field :date, placeholder: "mm/dd/yy", :value => "5/3/14"%>
-
-        <%= f.label :start_time, "Start time" %>
-        <%= f.select(:start_time, options_for_select(times)) %>
-        <br><br>
-        <%= f.submit "Send", class: "btn btn-primary"%>
-
-        
-      <% end %>
-    </div>
-  </div> 
-
-  <script type="text/javascript">
-
-  var validateDateTime = function(){
+var validateDateTime = function(){
 
       // the dateTime when the user submit the form
       var notificationDateTime = new Date();     
@@ -74,5 +43,3 @@
       } // end else
     }); // end submit
   }); // end document
-
-  </script>
