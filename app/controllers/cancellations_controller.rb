@@ -1,3 +1,5 @@
+require 'pry'
+
 class CancellationsController < ApplicationController
 
   def new
@@ -7,6 +9,8 @@ class CancellationsController < ApplicationController
   def create
     @cancellation = Cancellation.new(cancellation_params)
     
+    # binding.pry
+    
     respond_to do |format|    
       if @cancellation.save
         flash[:success] = "Successfully created..."
@@ -14,7 +18,7 @@ class CancellationsController < ApplicationController
         format.js { render :json => @cancellation.id  }
       else
         flash[:error] = "An error occurred when trying to notify an absence"
-        render :new
+        format.html { render :new }
       end
     end
   end
