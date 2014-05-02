@@ -1,4 +1,4 @@
-var validateDateTime = function(){
+    var validateDateTime = function(){
 
       // the dateTime when the user submit the form
       var notificationDateTime = new Date();     
