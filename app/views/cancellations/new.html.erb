@@ -29,10 +29,7 @@
 
   <script type="text/javascript">
 
-  $(document).ready(function(){
-    $("#new_cancellation").submit(function(event){
-      event.preventDefault();
-
+  var validateDateTime = function(){
 
       // the dateTime when the user submit the form
       var notificationDateTime = new Date();     
@@ -49,8 +46,16 @@
       // dateTime of the absence
       var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
 
+      return notificationDateTime > absenceDateTime
+  }
+
+  $(document).ready(function(){
+    $("#new_cancellation").submit(function(event){
+      event.preventDefault();
+
+
       // comparing the dates
-      if (notificationDateTime > absenceDateTime) {
+      if (validateDateTime()) {
         alert("Your absence should be notified at least 24hr. before your class");
       }
       else{
