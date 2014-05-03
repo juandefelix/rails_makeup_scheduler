@@ -21,7 +21,6 @@ class Cancellation < ActiveRecord::Base
   end
 
   def cannot_be_in_the_past
-    
     errors[:base] << "The date and time can not be in the past" if date_and_time < Time.now
   end
 

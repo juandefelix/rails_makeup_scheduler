@@ -19,7 +19,9 @@ var validateDateTime = function(){
 }
 
 $(document).ready(function(){
+  console.log("ready");
   $("#new_cancellation").submit(function(event){
+    console.log("in submit");
     event.preventDefault();
 
 
