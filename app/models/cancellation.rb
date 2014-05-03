@@ -11,12 +11,12 @@ class Cancellation < ActiveRecord::Base
     date_and_time = self.date + " " + self.start_time
     date_and_time_array = date_and_time.split(/[\D]/)
 
-    year = "20" + date_and_time_array[2]
-    month = date_and_time_array[0]
-    day = date_and_time_array[1]
-    hour = date_and_time_array[3]
-    minute = date_and_time_array[4]
-
+    year = "20" + date_and_time_array[2] || "1975"
+    month = date_and_time_array[0] || "01"
+    day = date_and_time_array[1]  || "01"
+    hour = date_and_time_array[3]  || "12"
+    minute = date_and_time_array[4]  || "00"
+    # binding.pry
     Time.new(year, month, day, hour, minute)
   end
 
@@ -26,7 +26,7 @@ class Cancellation < ActiveRecord::Base
 
   def less_than_24
     one_day_after = Time.now + 1.day
-    # binding.pry
+    
     errors[:base] << "Please, notify your absence within 24hr." if  date_and_time < one_day_after
   end
 end
