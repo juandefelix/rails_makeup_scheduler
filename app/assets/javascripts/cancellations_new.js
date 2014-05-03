@@ -15,7 +15,7 @@ var validateDateTime = function(){
   // dateTime of the absence
   var absenceDateTime = new Date("20" + dateParts[2], (dateParts[0] - 1), dateParts[1], timeParts[1], timeParts[2]);
 
-  return notificationDateTime > absenceDateTime
+  return notificationDateTime > absenceDateTime;
 }
 
 $(document).ready(function(){
