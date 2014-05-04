@@ -1,5 +1,3 @@
-require 'pry'
-
 class CancellationsController < ApplicationController
 
   def new

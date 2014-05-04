@@ -14,8 +14,7 @@ This application was built to help some small business like music schools, to he
 
 
 ####Where I Am####
-
-I just handled the `create` action with an ajax request. In the '/new' template, a javascript function validates the date and time entered in the form before it is sent via an ajax request.
+Adding javascript to validate user input. A cancellation is not valid if create less than 24hr from the class.
 
 **Need to:**  
- - Refactor Javascript in 'app/views/cancellations/new' 
+ - The cancellation model need to handle empty fields
