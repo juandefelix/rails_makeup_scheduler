@@ -15,7 +15,7 @@ class CancellationsController < ApplicationController
         format.html { redirect_to @cancellation }
         format.js { render :json => @cancellation.id  }
       else
-        flash[:error] = "An error occurred when trying to notify an absence"
+        # flash[:error] = "An error occurred when trying to notify an absence"
         format.html { render :new }
       end
     end
