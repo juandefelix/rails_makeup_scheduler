@@ -36,7 +36,9 @@ $(document).ready(function(){
         data: $("form").serialize() ,
         dataType: 'json',
         error: function(){ 
-          console.log("error") 
+          console.log("error");
+          // $(".alert alert-error")."Your submission has errors"
+          alert("Please, fill in all the fields in the form");
         },
         success: function(r){ 
           window.location = "/cancellations/" + r;

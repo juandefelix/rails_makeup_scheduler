@@ -17,6 +17,7 @@ class CancellationsController < ApplicationController
       else
         # flash[:error] = "An error occurred when trying to notify an absence"
         format.html { render :new }
+        format.js { render :text => "new"}
       end
     end
   end
