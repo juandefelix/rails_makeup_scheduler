@@ -1,5 +1,3 @@
-require 'pry'
-
 class Cancellation < ActiveRecord::Base
   validates :name, :instrument, :date, :start_time, presence: true
   validates :start_time, format: { with: /[0-1][0-9]:\d{2}/i, message: "must follow this format: '(H)H:MM pm' e.g. '01:30 pm, 2:30pm'" }
@@ -11,12 +9,12 @@ class Cancellation < ActiveRecord::Base
     date_and_time = self.date + " " + self.start_time
     date_and_time_array = date_and_time.split(/[\D]/)
 
-    year = "20" + date_and_time_array[2] || "1975"
-    month = date_and_time_array[0] || "01"
-    day = date_and_time_array[1]  || "01"
+    year = date_and_time_array[2].blank? ? "1975" : ("20" + date_and_time_array[2])
+    month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+    day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
     hour = date_and_time_array[3]  || "12"
     minute = date_and_time_array[4]  || "00"
-    # binding.pry
+
     Time.new(year, month, day, hour, minute)
   end
 
