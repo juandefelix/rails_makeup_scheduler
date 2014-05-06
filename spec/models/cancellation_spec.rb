@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Cancellation do
-  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date:"12-3-12", start_time:"12:00pm") }
+
+  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date:"#{future_date}", start_time:"20:30") }
 
   subject { @cancellation }
 
@@ -41,16 +42,17 @@ describe Cancellation do
 # format of some attributes ==========================
 
   describe "when using invalid format for time_start and time_end" do
-    wrong_times = %w[123pm 0123pm 01:23]
-    wrong_times.each do |wrong_time|
-      before { @cancellation.start_time = wrong_time }
+    wrong_times = %w(123pm 0123pm )
+    wrong_times.each do |invalid_time|
+      before { @cancellation.start_time = invalid_time }
       it { should_not be_valid }
     end
   end
 
 
   describe "when using valid formats for time_start and time_end" do
-    valid_times = ['1:23 pm', '02:34 am', '01:23pm', '1:23am', '01:23  pm', '1:23  am']
+
+    valid_times = %w(1:23 02:34 01:23 1:23 01:23)
     valid_times.each do |valid_time|
       before { @cancellation.start_time = valid_time }
       it { should be_valid}
