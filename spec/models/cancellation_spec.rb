@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Cancellation do
 
-  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date:"#{future_date}", start_time:"20:30") }
+  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", date: future_date, start_time:"20:30") }
 
   subject { @cancellation }
 
@@ -58,4 +58,13 @@ describe Cancellation do
       it { should be_valid}
     end
   end
+
+# time validations ==========================
+
+  describe "when submiting a date in the past" do
+    puts past_date
+    before { @cancellation.date = past_date }
+    it { should_not be_valid }
+  end
+
 end
