@@ -1,9 +1,11 @@
 <% if @cancellation.errors.any? %>
   <div class="error_explanation">
     <div class="alert alert-error">
-      Your submission has errors<%#= pluralize(@cancellation.errors.count, 'error')%>
+      Your submission has <%= pluralize(@cancellation.errors.count, 'error')%>
       <ul>
-        <li> <%= @cancellation.errors.full_messages.first %> </li>
+      <% @cancellation.errors.full_messages.each do |message| %>
+        <li> <%= message %> </li>
+      <% end %>
       </ul>
     </div>
   </div>

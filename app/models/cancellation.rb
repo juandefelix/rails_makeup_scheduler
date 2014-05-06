@@ -1,9 +1,20 @@
+require 'pry'
 class Cancellation < ActiveRecord::Base
   validates :name, :instrument, :date, :start_time, presence: true
   validates :start_time, format: { with: /[0-1][0-9]:\d{2}/i, message: "must follow this format: '(H)H:MM pm' e.g. '01:30 pm, 2:30pm'" }
   validates :date, format: { with: /\A[012]?[0-9][-\/][0123]?[0-9][-\/](20)?[0-9]{2}\z/, message: "Invalid date format" }
-  validate :cannot_be_in_the_past
-  validate :less_than_24
+  with_options if: :date_time_valid_format? do |cancellation|
+    cancellation.validate :cannot_be_in_the_past
+    cancellation.validate :less_than_24
+  end
+
+  
+
+  def date_time_valid_format?
+    validate_date = self.date =~ /\A[012]?[0-9][-\/][0123]?[0-9][-\/](20)?[0-9]{2}\z/
+    validate_start_time = self.start_time =~ /[0-1][0-9]:\d{2}/i
+    validate_date && validate_start_time
+  end
 
   def date_and_time
     date_and_time = self.date + " " + self.start_time

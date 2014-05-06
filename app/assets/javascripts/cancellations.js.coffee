@@ -45,5 +45,5 @@ $ ->
         error: -> 
           console.log "error" 
           # $(".alert alert-error")."Your submission has errors"
-          alert "Please, fill in all the fields in the form" 
+          # alert "Please, fill in all the fields in the form" 
         success: (r) -> window.location = "/cancellations/" + r
