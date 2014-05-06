@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 class Cancellation < ActiveRecord::Base
   validates :name, :instrument, :date, :start_time, presence: true
   validates :start_time, format: { with: /[0-2][0-9]:\d{2}/i, message: "must follow this 
