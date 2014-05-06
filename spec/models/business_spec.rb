@@ -34,7 +34,7 @@ describe Business do
 
   describe "when email format is invalid" do
     it "should be invalid" do
-      addresses = %w[business@foo,com business_at_foo.org example.business@foo.
+      addresses = %w[business@foo,com foo@bar..com business_at_foo.org example.business@foo.
                      foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
         @business.email = invalid_address
@@ -50,6 +50,16 @@ describe Business do
         @business.email = valid_address
         expect(@business).to be_valid
       end
+    end
+  end
+
+  describe "email address with mixed case" do
+    let(:mixed_case_email) { "FoOBar@ExampE.com" }
+
+    it "should be saved as all lowercase" do
+      @business.email = mixed_case_email
+      @business.save
+      expect(@business.reload.email).to eq(mixed_case_email.downcase)
     end
   end
 
