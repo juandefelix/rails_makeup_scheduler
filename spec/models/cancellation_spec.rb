@@ -62,9 +62,13 @@ describe Cancellation do
 # time validations ==========================
 
   describe "when submiting a date in the past" do
-    puts past_date
+
     before { @cancellation.date = past_date }
     it { should_not be_valid }
   end
 
+  describe "when submiting a date that is too early" do
+
+    pending("is not yet created")
+  end
 end
