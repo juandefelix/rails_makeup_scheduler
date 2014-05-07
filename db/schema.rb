@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506000218) do
+ActiveRecord::Schema.define(version: 20140507203852) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20140506000218) do
   create_table "cancellations", force: true do |t|
     t.string   "name"
     t.string   "instrument"
-    t.string   "date"
-    t.string   "start_time"
+    t.datetime "start_at",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "end_at"
   end
 
 end

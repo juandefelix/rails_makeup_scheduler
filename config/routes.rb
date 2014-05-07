@@ -1,5 +1,7 @@
 RailsMakeupScheduler::Application.routes.draw do
 
+  match '/cancellations(/:year(/:month))', to: 'cancellations#index', via: 'get', :as => :cancellations, 
+                                          :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   root 'static_pages#home'
   
   match '/help', to: 'static_pages#help', via: 'get'
