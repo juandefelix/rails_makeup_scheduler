@@ -1,5 +1,9 @@
 <% provide :title, "Available Makeups"%>
-<div class="span6 offset3">
+<%= stylesheet_link_tag "event_calendar" %>
+<%= javascript_include_tag "event_calendar" %>
+
+<div class="span10 offset1">
   <h2>Available Makeups</h2>
-  <%= render @cancellations%>
+  <%#= render @cancellations%>
+    <%= raw(event_calendar) %>
 </div>
