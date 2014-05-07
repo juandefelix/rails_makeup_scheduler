@@ -1,4 +1,4 @@
-<% provide(:title, "#{@cancellation.name} #{@cancellation.date}")%>
+<% provide(:title, "#{@cancellation.name}")%>
 
 <div class="span6 offset3 center">
   <h2>Thank you for notifying us your absence!</h2>
@@ -6,9 +6,9 @@
     <br>
     <h4><%= @cancellation.name %></h4>
     <p>
-      <b>Date: </b> <%= @cancellation.date %><br>
+      <b>Date: </b> <%#= @cancellation.date %><br>
       <b>Instrument:</b> <%= @cancellation.instrument %><br>
-      <b>Start time: </b><%= @cancellation.start_time %><br>
+      <b>Start time: </b><%= @cancellation.start_at %><br>
     </p>
   </div>
       <%= link_to "Exit", root_path, id: "exit", class: "btn btn-primary" %>

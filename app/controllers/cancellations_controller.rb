@@ -1,3 +1,5 @@
+require 'pry'
+
 class CancellationsController < ApplicationController
 
   def new
@@ -5,9 +7,9 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    @cancellation = Cancellation.new(cancellation_params)
+    @cancellation = Cancellation.new(name: "Juan Ortiz", instrument: "Guitar", start_at: Time.now)
     
-    # binding.pry
+    
     
     respond_to do |format|    
       if @cancellation.save
@@ -33,20 +35,21 @@ class CancellationsController < ApplicationController
   end
 
   def index
-    @cancellations = Cancellation.all
+    #@cancellations = Cancellation.all
 
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
 
     @shown_month = Date.civil(@year, @month)
-
+# binding.pry
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
+
   end
 
   private
 
     def cancellation_params
       params.require(:cancellation).permit(:name, :instrument, 
-                                           :date, :start_time)
+                                           :start_at)
     end
 end
