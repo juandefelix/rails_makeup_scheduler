@@ -39,7 +39,7 @@ class CancellationsController < ApplicationController
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
 
     @shown_month = Date.civil(@year, @month)
-# binding.pry
+
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
 
   end
@@ -51,16 +51,16 @@ class CancellationsController < ApplicationController
                                            :start_at)
     end
 
-    def get_date_time
-      date_and_time = params[:cancellation][:date] + " " + params[:cancellation][:start_at]
-      date_and_time_array = date_and_time.split(/[\D]/)
+   def get_date_time
+    date_and_time = params[:cancellation][:date] + " " + params[:cancellation][:start_at]
+    date_and_time_array = date_and_time.split(/[\D]/)
 
-      year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
-      month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
-      day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
-      hour = date_and_time_array[3]  || "12"
-      minute = date_and_time_array[4]  || "00"
+    year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
+    month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+    day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
+    hour = date_and_time_array[3]  || "12"
+    minute = date_and_time_array[4]  || "00"
 
-      Time.new(year, month, day, hour, minute)
-    end
+    Time.new(year, month, day, hour, minute)
+  end
 end
