@@ -30,6 +30,23 @@ module CancellationsHelper
     link_to(I18n.localize(month_date, :format => "%B"), {:month => month_date.month, :year => month_date.year})
   end
   
+  def get_time(time_object)
+    time_object.strftime("%I:%M%p")
+  end
+
+  def get_date_time
+    date_and_time = params[:cancellation][:date] + " " + params[:cancellation][:start_at]
+    date_and_time_array = date_and_time.split(/[\D]/)
+
+    year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
+    month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+    day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
+    hour = date_and_time_array[3]  || "12"
+    minute = date_and_time_array[4]  || "00"
+
+    Time.new(year, month, day, hour, minute)
+  end
+
   # custom options for this calendar
   def event_calendar_opts
     { 
@@ -41,11 +58,13 @@ module CancellationsHelper
       :next_month_text => month_link(@shown_month.next_month) + " >>"    }
   end
 
+
   def event_calendar
     # args is an argument hash containing :event, :day, and :options
     calendar event_calendar_opts do |args|
       event = args[:event]
-      %(<a href="/cancellations/#{event.id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+      %(<a href="/cancellations/#{event.id}" title="#{h(event.instrument)}">#{h(event.instrument)}
+        #{h(get_time(event.start_at))}</a>)
     end
   end
 end

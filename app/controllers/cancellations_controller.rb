@@ -7,9 +7,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    @cancellation = Cancellation.new(name: "Juan Ortiz", instrument: "Guitar", start_at: Time.now, end_at: (Time.now + 30.minutes))
-    
-    
+    @cancellation = Cancellation.new(name: params[:cancellation][:name], instrument: params[:cancellation][:instrument], start_at: get_date_time, end_at: (get_date_time + 30.minutes))
     
     respond_to do |format|    
       if @cancellation.save
@@ -51,5 +49,18 @@ class CancellationsController < ApplicationController
     def cancellation_params
       params.require(:cancellation).permit(:name, :instrument, 
                                            :start_at)
+    end
+
+    def get_date_time
+      date_and_time = params[:cancellation][:date] + " " + params[:cancellation][:start_at]
+      date_and_time_array = date_and_time.split(/[\D]/)
+
+      year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
+      month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+      day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
+      hour = date_and_time_array[3]  || "12"
+      minute = date_and_time_array[4]  || "00"
+
+      Time.new(year, month, day, hour, minute)
     end
 end

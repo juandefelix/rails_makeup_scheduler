@@ -8,18 +8,17 @@
       <%= form_for @cancellation, :id => "new_cancellation" do |f| %>
         
 
-
         <%= f.label :name, "Student Name" %>
         <%= f.text_field :name, :value => "Juan Ortiz" %>
 
         <%= f.label :instrument, "Instrument" %>
         <%= f.text_field :instrument, :value => "Guitar" %>
 
-        <%#= f.label :date, "Date" %>
-        <%#= f.text_field :date, placeholder: "mm/dd/yy", :value => "5/5/14"%>
+        <%= f.label :date, "Date" %>
+        <%= f.text_field :date, placeholder: "mm/dd/yy", :value => "#{Time.now.strftime("%m/%d/%y")}"%>
 
-        <%#= f.label :start_time, "Start time" %>
-        <%#= f.select(:start_time, options_for_select(times)) %>
+        <%= f.label :start_at, "Start time" %>
+        <%= f.select(:start_at, options_for_select(times)) %>
         <br><br>
         <%= f.submit "Send", class: "btn btn-primary"%>
 
