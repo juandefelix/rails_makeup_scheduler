@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Cancellation do
 
-  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", start_at:"#{Time.now + 1.day + 30.minutes}", end_at:"#{Time.now + 1.hour}") }
+  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", start_at:"#{Time.now + 1.day + 30.minutes}", end_at:"#{Time.now + 1.day + 1.hour}") }
 
   subject { @cancellation }
 
@@ -37,7 +37,7 @@ describe Cancellation do
 # format of some attributes ==========================
 
   describe "when using invalid format for start_at" do
-    wrong_times = ["1231234", "12341234"]
+    wrong_times = ["12/312/34", "12/341/234"]
     wrong_times.each do |invalid|
       before { @cancellation.start_at = invalid }
       it { should_not be_valid }
@@ -60,13 +60,19 @@ describe Cancellation do
 
   describe "when submiting a date in the past" do
 
-    before { @cancellation.start_at = "#{(Time.now - 1.hour)}" }
+    before do 
+      @cancellation.start_at = "#{(Time.now - 1.hour)}"
+      @cancellation.end_at = "#{(Time.now - 30.minutes)}"
+    end
     it { should_not be_valid }
   end
 
   describe "when submiting a date that is too early" do
 
-    before { @cancellation.start_at = "#{(Time.now - 22.hours)}" }
+    before do
+      @cancellation.start_at = "#{(Time.now - 22.hours)}"
+      @cancellation.end_at = "#{(Time.now - 21.hours - 30.minutes)}"
+    end
     it { should_not be_valid }
   end
 end
