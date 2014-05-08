@@ -37,7 +37,7 @@ describe Cancellation do
 # format of some attributes ==========================
 
   describe "when using invalid format for start_at" do
-    wrong_times = ["123pm", "0123pm"]
+    wrong_times = ["1231234", "12341234"]
     wrong_times.each do |invalid|
       before { @cancellation.start_at = invalid }
       it { should_not be_valid }
