@@ -8,7 +8,7 @@ describe "Cancellation Pages" do
     before { visit cancellation_path(cancellation)}
 
     it { should have_content(cancellation.name) }
-    it { should have_title("#{cancellation.name} #{cancellation.start_at}") }
+    it { should have_title("#{cancellation.start_at}") }
   end
 
   describe "Cancellationa new (Notify and absence page)" do
@@ -52,28 +52,28 @@ describe "Cancellation Pages" do
 
     it { should have_title full_title("Available Makeups") }
     it { should have_content("Available Makeups") }
-    it { should have_content("Name: ") }
-    it { should have_content("Date: ") }
+    # it { should have_content("Name: ") }
+    #it { should have_content("Date: ") }
 
     it "should list each cancellation" do
       Cancellation.all.each do |cancellation|
-        expect(page).to have_content(cancellation.name)
+        expect(page).to have_content(cancellation.instrument)
       end
     end
   end
 
-  describe "delete cancellations" do
-    before do 
-      FactoryGirl.create(:cancellation)
-      visit cancellations_path 
-    end
+  # describe "delete cancellations" do
+  #   before do 
+  #     FactoryGirl.create(:cancellation)
+  #     visit cancellations_path 
+  #   end
 
-    it { should have_link("delete", href: cancellation_path(Cancellation.first) ) }
+  #   it { should have_link("delete", href: cancellation_path(Cancellation.first) ) }
 
-    it "should be able to delete a cancellation" do
-      expect do
-        click_link('delete', match: :first)
-      end.to change(Cancellation, :count).by(-1)
-    end
-  end
+  #   it "should be able to delete a cancellation" do
+  #     expect do
+  #       click_link('delete', match: :first)
+  #     end.to change(Cancellation, :count).by(-1)
+  #   end
+  # end
 end
