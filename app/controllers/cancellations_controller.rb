@@ -7,7 +7,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    @cancellation = Cancellation.new(name: "Juan Ortiz", instrument: "Guitar", start_at: Time.now)
+    @cancellation = Cancellation.new(name: "Juan Ortiz", instrument: "Guitar", start_at: Time.now, end_at: (Time.now + 30.minutes))
     
     
     
@@ -35,7 +35,7 @@ class CancellationsController < ApplicationController
   end
 
   def index
-    #@cancellations = Cancellation.all
+    @cancellations = Cancellation.all
 
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i

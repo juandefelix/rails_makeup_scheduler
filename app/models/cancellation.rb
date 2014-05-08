@@ -1,6 +1,6 @@
 # require 'pry'
 class Cancellation < ActiveRecord::Base
-  has_event_calendar
+  has_event_calendar 
 
 #   validates :name, :instrument, :date, :start_time, presence: true
 #   validates :start_time, format: { with: /[0-2][0-9]:\d{2}/i, message: "must follow this 
@@ -13,7 +13,7 @@ class Cancellation < ActiveRecord::Base
 #     cancellation.validate :in_the_past
 #     cancellation.validate :less_than_24
 #   end
-# # binding.pry
+
 #   def date_and_time
 #     date_and_time = self.date + " " + self.start_time
 #     date_and_time_array = date_and_time.split(/[\D]/)
