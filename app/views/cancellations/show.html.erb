@@ -6,9 +6,9 @@
     <br>
     <h4><%= @cancellation.name %></h4>
     <p>
-      <b>Date: </b> <%#= @cancellation.date %><br>
+      <b>Date: </b> <%= get_date(@cancellation.start_at) %><br>
       <b>Instrument:</b> <%= @cancellation.instrument %><br>
-      <b>Start time: </b><%= @cancellation.start_at %><br>
+      <b>Start time: </b><%= get_time(@cancellation.start_at) %><br>
     </p>
   </div>
       <%= link_to "Exit", root_path, id: "exit", class: "btn btn-primary" %>

@@ -31,7 +31,11 @@ module CancellationsHelper
   end
   
   def get_time(time_object)
-    time_object.strftime("%I:%M%p")
+    time_object.strftime("%I:%M%p").gsub(/\A0/, "")
+  end
+
+   def get_date(time_object)
+    time_object.strftime("%d-%m-%y")
   end
 
   # custom options for this calendar
