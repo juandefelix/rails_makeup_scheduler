@@ -35,7 +35,7 @@ module CancellationsHelper
   end
 
    def get_date(time_object)
-    time_object.strftime("%d-%m-%y")
+    time_object.strftime("%m-%d-%y")
   end
 
   # custom options for this calendar

@@ -22,5 +22,6 @@ module RailsMakeupScheduler
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     I18n.enforce_available_locales = true
+    config.time_zone = "Central Time (US & Canada)"
   end
 end

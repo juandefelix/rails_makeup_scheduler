@@ -15,7 +15,7 @@
         <%= f.text_field :instrument, :value => "Guitar" %>
 
         <%= f.label :date, "Date" %>
-        <%= f.text_field :date, placeholder: "mm/dd/yy", :value => "#{Time.now.strftime("%m/%d/%y")}"%>
+        <%= f.text_field :date, placeholder: "mm/dd/yy", :value => "#{(Time.now + 1.day).strftime("%m/%d/%y")}"%>
 
         <%= f.label :start_at, "Start time" %>
         <%= f.select(:start_at, options_for_select(times)) %>

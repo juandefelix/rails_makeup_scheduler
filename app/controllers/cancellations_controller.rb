@@ -10,7 +10,7 @@ before_action :check_date_format, only: :create
 
   def create
     @cancellation = Cancellation.new(name: params[:cancellation][:name], instrument: params[:cancellation][:instrument], start_at: get_date_time, end_at: (get_date_time + 30.minutes))
-  binding.pry
+  # binding.pry
     respond_to do |format|    
       if @cancellation.save
         flash[:success] = "Successfully created..."
