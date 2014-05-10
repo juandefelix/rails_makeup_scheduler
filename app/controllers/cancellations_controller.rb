@@ -1,4 +1,3 @@
-require 'pry'
 class CancellationsController < ApplicationController
 
 before_action :check_date_format, only: :create
