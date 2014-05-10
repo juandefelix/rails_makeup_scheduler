@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20140507203852) do
   add_index "businesses", ["email"], name: "index_businesses_on_email", unique: true
 
   create_table "cancellations", force: true do |t|
+    t.string   "name"
+    t.string   "instrument"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "start_at"
