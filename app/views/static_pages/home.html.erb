@@ -2,5 +2,8 @@
 <div class="center hero-unit">
   <h1>Makeup Scheduler</h1>
   <p>This application helps to manage lessons cancellations</p>
-  <%= link_to "Nofify an absence", new_cancellation_path, class: "btn btn-primary" %>
+  <div>
+    <%= link_to "Nofify an absence", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
+    <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
+  </div>
 </div>
