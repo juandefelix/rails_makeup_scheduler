@@ -24,26 +24,25 @@
 
 #   notificationDateTime > absenceDateTime
 
-# $ ->
-#   $("#exit").click (event) ->
-#     event.preventDefault()
-#     close_window()
+# $("#exit").click (event) ->
+#   event.preventDefault()
+#   close_window()
 
-#   $("#new_cancellation").submit (event) ->
-#     console.log("in submit")
-#     event.preventDefault()
+# $("#new_cancellation").submit (event) ->
+#   console.log("in submit")
+#   event.preventDefault()
 
-#     # comparing the dates
-#     if validateDateTime
-#       alert "Your absence should be notified at least 24hr. before your class"
-#     else
-#       $.ajax
-#         url: "/cancellations"
-#         type: 'POST'
-#         data: $("form").serialize() 
-#         dataType: 'json'
-#         error: -> 
-#           console.log "error" 
-#           # $(".alert alert-error")."Your submission has errors"
-#           # alert "Please, fill in all the fields in the form" 
-#         success: (r) -> window.location = "/cancellations/" + r
+#   # comparing the dates
+#   if validateDateTime
+#     alert "Your absence should be notified at least 24hr. before your class"
+#   else
+#     $.ajax
+#       url: "/cancellations"
+#       type: 'POST'
+#       data: $("form").serialize() 
+#       dataType: 'json'
+#       error: -> 
+#         console.log "error" 
+#         # $(".alert alert-error")."Your submission has errors"
+#         # alert "Please, fill in all the fields in the form" 
+#       success: (r) -> window.location = "/cancellations/" + r
