@@ -29,6 +29,7 @@
   width: 100%;
   table-layout: fixed;
   margin: 10px 0;
+  border: 10px 0;
 }
 
 .ec-month-name {
