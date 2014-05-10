@@ -1,4 +1,4 @@
-
+require 'pry'
 class CancellationsController < ApplicationController
 
 before_action :check_date_format, only: :create
@@ -53,7 +53,7 @@ before_action :check_date_format, only: :create
     end
 
    def get_date_time
-    date_and_time = params[:cancellation][:date] + " " + params[:cancellation][:start_at]
+    date_and_time = params[:date] + " " + params[:cancellation][:start_at]
     date_and_time_array = date_and_time.split(/[\D]/)
 
     year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
@@ -66,7 +66,7 @@ before_action :check_date_format, only: :create
   end
 
   def check_date_format
-    unless params[:cancellation][:date] =~ /\A[01]?\d[\/-][0-3]?\d[\/-]\d{2}?\d{2}\z/
+    unless params[:date] =~ /\A[01]?\d[\/-][0-3]?\d[\/-]\d{2}?\d{2}\z/
       flash.now[:error] = "Date format not valid"
       @cancellation = Cancellation.new
       render :new
