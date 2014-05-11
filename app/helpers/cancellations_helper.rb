@@ -34,10 +34,22 @@ module CancellationsHelper
     time_object.strftime("%I:%M%p").gsub(/\A0/, "")
   end
 
-   def get_date(time_object)
+  def get_date(time_object)
     time_object.strftime("%m-%d-%y")
   end
 
+  def name_example
+    Faker::Name.name 
+  end
+
+  def instrument_example
+    ["Guitar", "Piano", "Voice", "Clarinet"].sample
+  end
+
+  def formatted_time_now
+    Time.now.strftime("%m/%d/%y")
+  end
+  
   # custom options for this calendar
   def event_calendar_opts
     { 
