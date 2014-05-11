@@ -7,6 +7,7 @@ gem 'bootstrap-sass', '2.3.2.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'event-calendar', :require => 'event_calendar'
+gem 'faker'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -17,7 +18,6 @@ group :development, :test do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
   gem 'pry'
-  gem 'faker'
 end
 
 group :test do
