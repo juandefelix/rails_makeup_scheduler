@@ -41,18 +41,18 @@ validateDateTime = ->
 
 $(document).ready ->   # $(document).on "page:change", -> # this will load the javascript when every page is 'loaded' when using turbolinks
   # comparing the dates
-  $("#new_cancellation").submit (event) ->
-    event.preventDefault()
-    if validateDateTime()
-      alert "Your absence should be notified at least 24hr. before your class"
-    else
-      $.ajax
-        url: "/cancellations"
-        type: 'POST'
-        data: $("form").serialize() 
-        dataType: 'json'
-        error: -> 
-          console.log "error" 
-          # $(".alert alert-error")."Your submission has errors"
-          # alert "Please, fill in all the fields in the form" 
-        success: (r) -> window.location = "/cancellations/" + r
+    # $("#new_cancellation").submit (event) ->
+    #   event.preventDefault()
+    #   if validateDateTime()
+    #     alert "Your absence should be notified at least 24hr. before your class"
+    #   else
+    #     $.ajax
+    #       url: "/cancellations"
+    #       type: 'POST'
+    #       data: $("form").serialize() 
+    #       dataType: 'json'
+    #       error: -> 
+    #         console.log "error" 
+    #         # $(".alert alert-error")."Your submission has errors"
+    #         # alert "Please, fill in all the fields in the form" 
+    #       success: (r) -> window.location = "/cancellations/" + r
