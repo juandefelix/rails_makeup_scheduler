@@ -39,7 +39,7 @@ validateDateTime = ->
 
 
 
-$(document).ready ->   # $(document).on "page:change", -> # this will load the javascript when every page is 'loaded' when using turbolinks
+#$(document).ready ->   # $(document).on "page:change", -> # this will load the javascript when every page is 'loaded' when using turbolinks
   # comparing the dates
     # $("#new_cancellation").submit (event) ->
     #   event.preventDefault()
