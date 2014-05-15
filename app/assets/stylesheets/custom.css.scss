@@ -1,4 +1,9 @@
 @import "bootstrap";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
 
 /* mixins, variables, etc */
 
@@ -140,6 +145,11 @@ aside {
       margin-top: 0px;
     }
   }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
 }
 
 /* forms */
