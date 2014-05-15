@@ -1,24 +1,25 @@
 <%= provide(:title, "Notify an absence")%>
 
-<%= render 'shared/error_messages' %>
+
 <div class="row">
-  <div class="span3 offset4">
-    <h3> Notify an absence </h3>
+  <div class="span6 offset3">
+    <h2> Notify an absence </h2>
 
-    <%= form_for @cancellation, :id => "new_cancellation" do |f| %>
+    <%= form_for(@cancellation) do |f| %>
 
+        <%= render 'shared/error_messages' %>
 
-    <%= f.label :name, "Student Name" %>
-    <%= f.text_field :name, value: "#{name_example}" %>
+        <%= f.label :name, "Student Name" %>
+        <%= f.text_field :name, value: "#{name_example}" %>
 
-    <%= f.label :instrument, "Instrument" %>
-    <%= f.text_field :instrument, placeholder: "e.g., guitar", value: "#{instrument_example}" %>
+        <%= f.label :instrument, "Instrument" %>
+        <%= f.text_field :instrument, placeholder: "e.g., guitar", value: "#{instrument_example}" %>
 
-    <%= label_tag :date %>
-    <%= text_field_tag :date, nil, placeholder: "mm/dd/yy", value: "#{formatted_time_now}" %>
+        <%= label_tag :date %>
+        <%= text_field_tag :date, nil, placeholder: "mm/dd/yy", value: "#{formatted_time_now}" %>
 
-    <%= f.label :start_at, "Start time" %>
-    <%= f.select(:start_at, options_for_select(times)) %>
+        <%= f.label :start_at, "Start time" %>
+        <%= f.select(:start_at, options_for_select(times)) %>
 
     <br><br>
     

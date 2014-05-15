@@ -8,7 +8,7 @@ describe "Cancellation Pages" do
     before { visit cancellation_path(cancellation)}
 
     it { should have_content(cancellation.name) }
-    it { should have_title("#{cancellation.start_at}") }
+    it { should have_title(full_title("#{cancellation.instrument} #{cancellation.start_at.strftime("%m-%d-%y")}")) }
   end
 
   describe "Cancellationa new (Notify and absence page)" do
