@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require turbolinks   #to add turbolinks back type '=' after '//' and remove this comment ('#...')
+//= require bootstrap
+//= require turbolinks
 //= require_tree .
