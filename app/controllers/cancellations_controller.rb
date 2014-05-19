@@ -1,7 +1,7 @@
 class CancellationsController < ApplicationController
 
 before_action :check_date_format, only: :create
-
+before_action :redirect_to_home_if_not_signed_in
   def new
     @cancellation = Cancellation.new
   end
@@ -41,7 +41,6 @@ before_action :check_date_format, only: :create
     @shown_month = Date.civil(@year, @month)
 
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
-
   end
 
   private
@@ -70,5 +69,9 @@ before_action :check_date_format, only: :create
       @cancellation = Cancellation.new
       render :new
     end
+  end
+
+  def redirect_to_home_if_not_signed_in
+    redirect_to root_url if !signed_in?
   end
 end

@@ -2,10 +2,19 @@ require 'spec_helper'
 
 describe "Cancellation Pages" do
   subject { page }
+  let(:user) { FactoryGirl.create(:user) }
 
+  before do
+    visit signin_path
+    fill_in "Email",    with: user.email.upcase
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+  end  
+     
   describe "Cancellation show" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
-    before { visit cancellation_path(cancellation)}
+      
+    before { visit cancellation_path(cancellation) }
 
     it { should have_content(cancellation.name) }
     it { should have_title(full_title("#{cancellation.instrument} #{cancellation.start_at.strftime("%m-%d-%y")}")) }

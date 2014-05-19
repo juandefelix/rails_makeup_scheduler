@@ -9,12 +9,10 @@ To start the rails server, run in your console:
 `rails s`  
 You shold be able to see the home page in your browser typing `localhost:3000/` in your browser.
 
-###Why This Application###
+###About This Application###
 This application was built to help some small business like music schools, to help manage student absences. Currently these absences are notified by phone or email, which takes so much time. With this application, the student notify their absences filling a form in this web application. The administrator will be able to see and manage all the notified absences in one single page instead of several emailes.
 
 
 ####Where I Am####
-Adding javascript to validate user input. A cancellation is not valid if create less than 24hr from the class.
-
 **Need to:**  
- - The cancellation model need to handle empty fields
+ - Need to rewrite the tests for the new signed_in? method.

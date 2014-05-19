@@ -18,10 +18,10 @@ describe "Static Pages" do
     end
 
     describe "after signin in" do
-      before { visit signin_path } 
       let(:user) { FactoryGirl.create(:user) }
       
       before do
+        visit signin_path
         fill_in "Email",    with: user.email.upcase
         fill_in "Password", with: user.password
         click_button "Sign in"
