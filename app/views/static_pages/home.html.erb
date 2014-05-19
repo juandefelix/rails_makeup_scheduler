@@ -3,7 +3,11 @@
   <h1>Makeup Scheduler</h1>
   <p>This application helps to manage lessons cancellations</p>
   <div>
+  <% if signed_in?%>
     <%= link_to "Nofify an Absence", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
     <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
+  <% else %>
+    <%= link_to "Sign in", signin_path, class: "btn btn-primary new-cancellation-button"%>
+  <% end %>
   </div>
 </div>
