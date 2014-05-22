@@ -2,15 +2,17 @@ class Cancellation < ActiveRecord::Base
 
   has_event_calendar 
 
-  validates :start_at, presence: true, format: { with: /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i, 
+  validates :start_at, format: { with: /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i, 
                                  message: "must have the right format" }
-  validates :name, :instrument, :start_at, presence: true
+  validates :name, :instrument, :start_at,:creator_id, presence: true
 
   with_options if: "start_at.present?" do |cancellation|
     cancellation.validate :in_the_past
     cancellation.validate :less_than_24
   end
 
+  belongs_to :creator, class_name: "User"
+  belongs_to :taker, class_name: "User"
 
   
 

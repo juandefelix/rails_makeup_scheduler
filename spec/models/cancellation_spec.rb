@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Cancellation do
 
   before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", 
-                                            start_at:"#{Time.now + 1.day + 30.minutes}", end_at:"#{Time.now + 1.day + 1.hour}") }
+                                            start_at: 25.hours.from_now, end_at: 26.hours.from_now,
+                                            creator_id: 1) }
 
   subject { @cancellation }
 
@@ -13,6 +14,8 @@ describe Cancellation do
   it { should respond_to(:instrument) }
   it { should respond_to(:start_at) }
   it { should respond_to(:end_at) }
+  it { should respond_to(:creator_id) }
+  it { should respond_to(:taker_id) }
 
   it { should be_valid }
 
@@ -34,6 +37,11 @@ describe Cancellation do
     it { should_not be_valid }
   end
 
+  describe "when creator is not present" do
+    before { @cancellation.creator_id = "" }
+    it { should_not be_valid }
+  end
+
 # format of some attributes ==========================
 
   describe "when using invalid format for start_at" do
@@ -41,8 +49,6 @@ describe Cancellation do
       pending "because the cancellation model raises an error before the validations"
       this_should_not_get_executed
     end
-  end
-
   
 
   describe "when using valid formats for start_at" do
