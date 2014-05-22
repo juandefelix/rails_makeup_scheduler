@@ -49,7 +49,7 @@ describe Cancellation do
       pending "because the cancellation model raises an error before the validations"
       this_should_not_get_executed
     end
-  
+  end
 
   describe "when using valid formats for start_at" do
 
@@ -79,5 +79,10 @@ describe Cancellation do
       @cancellation.end_at = "#{(Time.now - 21.hours - 30.minutes)}"
     end
     it { should_not be_valid }
+  end
+
+  it "should have many users" do
+    c = Cancellation.reflect_on_association(:users)
+    c.macro.should == :belongs_to
   end
 end
