@@ -16,10 +16,10 @@
       <%= f.text_field :email, placeholder: "email" %>
 
       <%= f.label :password %>
-      <%= f.text_field :password, placeholder: "password" %>
+      <%= f.password_field :password, placeholder: "password" %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.text_field :password_confirmation, placeholder: "confirmation"  %>
+      <%= f.password_field :password_confirmation, placeholder: "confirmation"  %>
 
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
