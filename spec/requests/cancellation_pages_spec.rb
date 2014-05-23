@@ -12,7 +12,7 @@ describe "Cancellation Pages" do
   end  
      
   describe "Cancellation show" do
-    let(:cancellation) { FactoryGirl.create(:cancellation) }
+    let(:cancellation) { FactoryGirl.create(:cancellation, creator: user) }
       
     before { visit cancellation_path(cancellation) }
 

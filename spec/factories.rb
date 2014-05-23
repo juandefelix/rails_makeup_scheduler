@@ -2,13 +2,14 @@ FactoryGirl.define do
   factory :cancellation do
     name "Roberto Ruiz"
     instrument "Guitar"
-    start_at "#{(Time.now + 1.day + 3.hours).strftime("%Y-%m-%d %H:%M")}"
-    end_at "#{(Time.now + 1.day + 3.hours + 30.minutes).strftime("%Y-%m-%d %H:%M")}"
+    start_at "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}"
+    end_at   "#{26.hours.from_now.strftime("%Y-%m-%d %H:%M")}"
+    association :creator, factory: :user
   end
 
   factory :user do
-    name                  "Example User"
-    email                 "user@example.com"
+    sequence(:name)       { |n| "Person #{n}" }
+    sequence(:email)      { |n| "person#{n}@example.com" }
     password              "foobar"
     password_confirmation "foobar"
   end

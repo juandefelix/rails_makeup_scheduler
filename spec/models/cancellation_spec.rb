@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Cancellation do
 
-  before { @cancellation = Cancellation.new(name: "Luis Solares", instrument:"guitar", 
-                                            start_at: 25.hours.from_now, end_at: 26.hours.from_now,
-                                            creator_id: 1) }
+  let(:user) { FactoryGirl.create :user }
+  before { @cancellation = user.created_cancellations.build(name: "Luis Solares", instrument:"guitar", 
+                                            start_at: 25.hours.from_now, end_at: 26.hours.from_now) }
 
   subject { @cancellation }
 
@@ -16,6 +16,9 @@ describe Cancellation do
   it { should respond_to(:end_at) }
   it { should respond_to(:creator_id) }
   it { should respond_to(:taker_id) }
+  it { should respond_to(:creator) }
+  it { should respond_to(:taker) }
+  its(:creator) { should eq user }
 
   it { should be_valid }
 
@@ -81,8 +84,8 @@ describe Cancellation do
     it { should_not be_valid }
   end
 
-  it "should have many users" do
-    c = Cancellation.reflect_on_association(:users)
-    c.macro.should == :belongs_to
-  end
+  # it "should have many users" do
+  #   c = Cancellation.reflect_on_association(:users)
+  #   c.macro.should == :belongs_to
+  # end
 end

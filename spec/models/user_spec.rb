@@ -1,4 +1,5 @@
 require 'spec_helper'
+# require 'pry'
 
 describe User do
   before { @user = User.new(name: "Example User", email: "user@example.com",
@@ -13,7 +14,9 @@ describe User do
   it { should respond_to :password_confirmation }
   it { should respond_to :remember_token }
   it { should respond_to :authenticate }
-  it { should respond_to :cancellations }
+  it { should respond_to :created_cancellations }
+  it { should respond_to :created_cancellations }
+  it { should respond_to :taken_cancellations }
 
   it { should be_valid }
 
@@ -107,5 +110,29 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "micropost association" do
+
+    before { @user.save }
+    let!(:older_cancellation) do
+      FactoryGirl.create(:cancellation, creator: @user, start_at: 25.hours.from_now)
+    end
+    let!(:newer_cancellation) do
+      FactoryGirl.create(:cancellation, creator: @user, start_at: 26.hours.from_now)
+    end
+
+    it "should have the right cancellations in the right order" do
+      # binding.pry
+      expect(@user.created_cancellations.to_a).to eq [newer_cancellation, older_cancellation]
+    end
+    it "should destroy associated cancellations" do
+      cancellations = @user.created_cancellations.to_a
+      @user.destroy
+      expect(cancellations).not_to be_empty
+      cancellations.each do |cancellation|
+        expect(Cancellation.where(id: cancellation.id)).to be_empty
+      end
+    end
   end
 end

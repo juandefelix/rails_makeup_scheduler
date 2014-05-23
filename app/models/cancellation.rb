@@ -1,4 +1,9 @@
 class Cancellation < ActiveRecord::Base
+  
+  belongs_to :creator, class_name: "User"
+  belongs_to :taker, class_name: "User"
+
+  default_scope -> { order('start_at DESC') }
 
   has_event_calendar 
 
@@ -11,8 +16,6 @@ class Cancellation < ActiveRecord::Base
     cancellation.validate :less_than_24
   end
 
-  belongs_to :creator, class_name: "User"
-  belongs_to :taker, class_name: "User"
 
   
 

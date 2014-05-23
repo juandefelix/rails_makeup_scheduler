@@ -1,3 +1,5 @@
+require 'pry'
+
 class CancellationsController < ApplicationController
 
 before_action :check_date_format, only: :create
@@ -7,7 +9,13 @@ before_action :redirect_to_home_if_not_signed_in
   end
 
   def create
-    @cancellation = Cancellation.new(name: params[:cancellation][:name], instrument: params[:cancellation][:instrument], start_at: get_date_time, end_at: (get_date_time + 30.minutes))
+    # binding.pry
+
+    @cancellation = Cancellation.new(name: params[:cancellation][:name],
+                                     instrument: params[:cancellation][:instrument],
+                                     start_at: get_date_time, 
+                                     end_at: (get_date_time + 30.minutes),
+                                     creator_id: current_user.id)
 
     respond_to do |format|    
       if @cancellation.save
@@ -45,12 +53,11 @@ before_action :redirect_to_home_if_not_signed_in
 
   private
 
-    def cancellation_params
-      params.require(:cancellation).permit(:name, :instrument, 
-                                           :start_at)
-    end
+  def cancellation_params
+      params.require(:cancellation).permit(:name, :instrument, :start_at)
+  end
 
-   def get_date_time
+  def get_date_time
     date_and_time = params[:date] + " " + params[:cancellation][:start_at]
     date_and_time_array = date_and_time.split(/[\D]/)
 
