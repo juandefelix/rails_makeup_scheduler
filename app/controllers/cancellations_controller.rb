@@ -58,7 +58,8 @@ before_action :redirect_to_home_if_not_signed_in
   def update
     @cancellation = Cancellation.find(params[:id])
     # binding.pry
-    @cancellation.update_attributes(taker: current_user)
+    @cancellation.update_attribute(:taker, current_user)
+    flash[:notice] = "Successfully updated"
     redirect_to cancellations_path
   end
 
