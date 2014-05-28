@@ -26,18 +26,7 @@ module CancellationsHelper
       ["8:30 pm", "20:30"] ]
   end
 
-  def month_link(month_date)
-    link_to(I18n.localize(month_date, :format => "%B"), {:month => month_date.month, :year => month_date.year})
-  end
   
-  def get_time(time_object)
-    time_object.strftime("%I:%M%p").gsub(/\A0/, "")
-  end
-
-  def get_date(time_object)
-    time_object.strftime("%m-%d-%y")
-  end
-
   def name_example
     Faker::Name.name 
   end
@@ -51,6 +40,10 @@ module CancellationsHelper
   end
   
   # custom options for this calendar
+  def month_link(month_date)
+    link_to(I18n.localize(month_date, :format => "%B"), {:month => month_date.month, :year => month_date.year})
+  end
+
   def event_calendar_opts
     { 
       :year => @year,
@@ -67,7 +60,9 @@ module CancellationsHelper
     calendar event_calendar_opts do |args|
       event = args[:event]
       %(<a href="/cancellations/#{event.id}/edit" title="#{h(event.instrument)}">#{h(event.instrument)}
-        #{h(get_time(event.start_at))}</a>)
+        #{h(event.get_time)} #{"FREE" if event.available?} </a>) 
+
     end
   end
 end
+

@@ -5,9 +5,9 @@
   <div class="makeup">
       <h4><%= @cancellation.name %></h4>
     <p>
-      <b>Date: </b> <%= get_date(@cancellation.start_at) %><br>
       <b>Instrument:</b> <%= @cancellation.instrument %><br>
-      <b>Start time: </b><%= get_time(@cancellation.start_at) %><br>
+      <b>Date: </b> <%= @cancellation.get_date %><br>
+      <b>Start time: </b><%= @cancellation.get_time %><br>
     </p>
   </div>
 </div>
