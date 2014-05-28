@@ -66,7 +66,7 @@ module CancellationsHelper
     # args is an argument hash containing :event, :day, and :options
     calendar event_calendar_opts do |args|
       event = args[:event]
-      %(<a href="/cancellations/#{event.id}" title="#{h(event.instrument)}">#{h(event.instrument)}
+      %(<a href="/cancellations/#{event.id}/edit" title="#{h(event.instrument)}">#{h(event.instrument)}
         #{h(get_time(event.start_at))}</a>)
     end
   end

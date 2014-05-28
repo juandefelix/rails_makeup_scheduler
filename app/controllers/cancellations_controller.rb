@@ -19,7 +19,7 @@ before_action :redirect_to_home_if_not_signed_in
 
     respond_to do |format|    
       if @cancellation.save
-        flash[:success] = "Successfully created..."
+        flash[:success] = "Successfully notified..."
         format.html { redirect_to @cancellation }
         format.js { render :json => @cancellation.id  }
       else
@@ -49,6 +49,17 @@ before_action :redirect_to_home_if_not_signed_in
     @shown_month = Date.civil(@year, @month)
 
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
+  end
+
+  def edit
+    @cancellation = Cancellation.find(params[:id])
+  end
+
+  def update
+    @cancellation = Cancellation.find(params[:id])
+    # binding.pry
+    @cancellation.update_attributes(taker: current_user)
+    redirect_to cancellations_path
   end
 
   private

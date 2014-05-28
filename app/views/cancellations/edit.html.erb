@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="span6 offset3">
+    <h4><%= @cancellation.instrument %></h4>
+    <h4><%= get_time @cancellation%></h4>
+    <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
+  </div>
+</div>
