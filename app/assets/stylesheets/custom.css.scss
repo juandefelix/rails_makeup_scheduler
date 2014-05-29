@@ -208,3 +208,15 @@ input {
 .hero-unit {
   border: 1px solid #D5D5D5;
 }
+
+.table_container {
+  margin-top: 40px;
+
+  table {
+    margin-top: 20px;
+
+    tr, td, th {
+      text-align: center;
+    }
+  }
+}
