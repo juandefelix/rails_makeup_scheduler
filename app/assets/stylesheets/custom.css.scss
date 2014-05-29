@@ -201,10 +201,16 @@ input {
   text-align: center;
 }
 
-.new-cancellation-button {
-  margin: 0px 55px;
-}
-
 .hero-unit {
   border: 1px solid #D5D5D5;
+}
+
+.new-cancellation-button {
+  margin: 0px auto;
+}
+
+#home_button_container {
+  width: 45%;
+  // text-align: center;
+  margin: 0 auto;
 }

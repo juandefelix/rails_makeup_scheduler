@@ -2,12 +2,12 @@
 <div class="center hero-unit">
   <h1>Makeup Scheduler</h1>
   <p>This application helps to manage lessons cancellations</p>
-  <div>
+  <div id="home_button_container">
   <% if signed_in?%>
     <%= link_to "Nofify an Absence", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
     <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
   <% else %>
-    <%= link_to "Sign in", signin_path, class: "btn btn-primary new-cancellation-button"%>
+    <%= link_to "Sign in", signin_path, class: "btn btn-primary btn-block new-cancellation-button"%>
   <% end %>
   </div>
 </div>
