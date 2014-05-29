@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     # binding.pry
     redirect_to root_path unless signed_in?
     @user = User.find(params[:id])
+    @created = @user.created_cancellations
+    @taken = @user.taken_cancellations
   end
 
   def create
