@@ -1,5 +1,3 @@
-require 'pry'
-
 class CancellationsController < ApplicationController
 
 before_action :check_date_format, only: :create
@@ -9,8 +7,6 @@ before_action :redirect_to_home_if_not_signed_in
   end
 
   def create
-    # binding.pry
-
     @cancellation = Cancellation.new(name: params[:cancellation][:name],
                                      instrument: params[:cancellation][:instrument],
                                      start_at: get_date_time, 
@@ -58,39 +54,44 @@ before_action :redirect_to_home_if_not_signed_in
   def update
     @cancellation = Cancellation.find(params[:id])
     # binding.pry
-    @cancellation.update_attribute(:taker, current_user)
-    flash[:notice] = "Successfully updated"
-    redirect_to cancellations_path
+    unless @cancellation.creator_same_as current_user
+      @cancellation.update_attribute(:taker, current_user)
+      flash[:notice] = "Successfully updated"
+      redirect_to cancellation_path
+    else
+      flash[:error] = "You can not do a makeup of a lesson that you cancelled"
+      redirect_to cancellation_path
+    end
   end
 
   private
 
-  def cancellation_params
-      params.require(:cancellation).permit(:name, :instrument, :start_at)
-  end
-
-  def get_date_time
-    date_and_time = params[:date] + " " + params[:cancellation][:start_at]
-    date_and_time_array = date_and_time.split(/[\D]/)
-
-    year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
-    month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
-    day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
-    hour = date_and_time_array[3]  || "12"
-    minute = date_and_time_array[4]  || "00"
-
-    Time.local(year, month, day, hour, minute)
-  end
-
-  def check_date_format
-    unless params[:date] =~ /\A[01]?\d[\/-][0-3]?\d[\/-]\d{2}?\d{2}\z/
-      flash.now[:error] = "Date format not valid"
-      @cancellation = Cancellation.new
-      render :new
+    def cancellation_params
+        params.require(:cancellation).permit(:name, :instrument, :start_at)
     end
-  end
 
-  def redirect_to_home_if_not_signed_in
-    redirect_to root_url if !signed_in?
-  end
+    def get_date_time
+      date_and_time = params[:date] + " " + params[:cancellation][:start_at]
+      date_and_time_array = date_and_time.split(/[\D]/)
+
+      year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
+      month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+      day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
+      hour = date_and_time_array[3]  || "12"
+      minute = date_and_time_array[4]  || "00"
+
+      Time.local(year, month, day, hour, minute)
+    end
+
+    def check_date_format
+      unless params[:date] =~ /\A[01]?\d[\/-][0-3]?\d[\/-]\d{2}?\d{2}\z/
+        flash.now[:error] = "Date format not valid"
+        @cancellation = Cancellation.new
+        render :new
+      end
+    end
+
+    def redirect_to_home_if_not_signed_in
+      redirect_to root_url if !signed_in?
+    end
 end
