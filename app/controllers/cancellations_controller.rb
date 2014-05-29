@@ -1,10 +1,12 @@
 class CancellationsController < ApplicationController
 
-before_action :check_date_format, only: :create
-before_action :redirect_to_home_if_not_signed_in
+  before_action :check_date_format, only: :create
+  before_action :redirect_to_home_if_not_signed_in
+
   def new
     @cancellation = Cancellation.new
   end
+
 
   def create
     @cancellation = Cancellation.new(name: params[:cancellation][:name],
@@ -25,6 +27,7 @@ before_action :redirect_to_home_if_not_signed_in
       end
     end
   end
+
   
   def destroy
     Cancellation.find(params[:id]).destroy
@@ -32,9 +35,11 @@ before_action :redirect_to_home_if_not_signed_in
     redirect_to cancellations_url
   end
 
+
   def show
     @cancellation = Cancellation.find(params[:id])
   end
+
 
   def index
     @cancellations = Cancellation.all
@@ -54,9 +59,14 @@ before_action :redirect_to_home_if_not_signed_in
   def update
     @cancellation = Cancellation.find(params[:id])
     # binding.pry
-    @cancellation.update_attribute(:taker, current_user)
-    flash[:notice] = "Successfully updated"
-    redirect_to cancellations_path
+    unless @cancellation.creator_same_as current_user
+      @cancellation.update_attribute(:taker, current_user)
+      flash[:notice] = "Successfully updated"
+      redirect_to current_user
+    else
+      flash[:error] = "You can not do a makeup of a lesson that you cancelled"
+      render :show
+    end
   end
 
   private

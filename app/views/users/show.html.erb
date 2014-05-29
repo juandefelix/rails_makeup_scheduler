@@ -10,3 +10,39 @@
     </section>
   </aside>
 </div>
+
+<% unless @user.created_cancellations.blank? %>
+
+  <h3 class="center">Absences and Makeups</h3>
+
+  <div class="center span5 offset2 table_container">
+    <table class="table table-striped table-hover table-bordered">
+      <tr>
+        <th>n.</th>
+        <th>Absence</th>
+      </tr>
+      <% @user.created_cancellations.each_with_index do |created, index|%>  
+          <tr>
+            <td><b><%= "#{index + 1}"%></b></td>
+            <td><%= "#{created.get_date} #{created.get_time}"%></td>
+          </tr>
+      <% end %>
+
+    </table>
+  </div>
+
+  <div class="center span3 table_container">
+    <table class="table table-striped table-hover table-bordered">
+      <tr>
+        <th>Makeup</th>
+      </tr>
+      <% @user.taken_cancellations.each do |taken|%>  
+        <tr>
+          <td><%= "#{taken.get_date} #{taken.get_time}"%></td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+
+<% end %>

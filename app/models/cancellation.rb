@@ -23,7 +23,6 @@ class Cancellation < ActiveRecord::Base
     self.start_at.to_s =~ /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i
   end
 
-
   def in_the_past
     errors[:base]= "Date and time can not be in the past"     if self.start_at < Time.now
   end
@@ -43,5 +42,9 @@ class Cancellation < ActiveRecord::Base
 
   def available?
     !self.creator_id.nil? && self.taker_id.nil?
+  end
+
+  def creator_same_as(user)
+    creator_id == user.id
   end
 end

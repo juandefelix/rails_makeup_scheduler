@@ -209,8 +209,25 @@ input {
   margin: 0px auto;
 }
 
+<<<<<<< HEAD
 #home_button_container {
   width: 45%;
   // text-align: center;
   margin: 0 auto;
+=======
+.hero-unit {
+  border: 1px solid #D5D5D5;
+}
+
+.table_container {
+  margin-top: 40px;
+
+  table {
+    margin-top: 20px;
+
+    tr, td, th {
+      text-align: center;
+    }
+  }
+>>>>>>> cancellations
 }
