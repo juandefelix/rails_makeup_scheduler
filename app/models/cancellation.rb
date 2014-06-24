@@ -16,6 +16,8 @@ class Cancellation < ActiveRecord::Base
     cancellation.validate :less_than_24
   end
 
+  resourcify
+
 
   # Instance methods  
 

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   before_save { email.downcase! }
   before_create :create_remember_token
 

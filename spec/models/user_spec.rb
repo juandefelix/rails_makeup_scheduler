@@ -17,6 +17,8 @@ describe User do
   it { should respond_to :created_cancellations }
   it { should respond_to :created_cancellations }
   it { should respond_to :taken_cancellations }
+  it { should respond_to :has_role? }
+  it { should respond_to :add_role }
 
   it { should be_valid }
 
@@ -109,10 +111,11 @@ describe User do
 
   describe "remember token" do
     before { @user.save }
+
     its(:remember_token) { should_not be_blank }
   end
 
-  describe "micropost association" do
+  describe "cancellations association" do
 
     before { @user.save }
     let!(:older_cancellation) do
@@ -123,7 +126,6 @@ describe User do
     end
 
     it "should have the right cancellations in the right order" do
-      # binding.pry
       expect(@user.created_cancellations.to_a).to eq [newer_cancellation, older_cancellation]
     end
     it "should destroy associated cancellations" do
@@ -135,4 +137,14 @@ describe User do
       end
     end
   end
+
+  describe "with roles" do
+
+    before { @user.add_role :admin }
+
+    it 'should have the associated role' do
+      expect(@user.has_role? :admin).to be_true
+    end
+  end
+
 end

@@ -136,6 +136,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    rolify (3.4.0)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -218,6 +219,7 @@ DEPENDENCIES
   pry
   rails (= 4.0.4)
   rails_12factor (= 0.0.2)
+  rolify
   rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.1)
   sdoc

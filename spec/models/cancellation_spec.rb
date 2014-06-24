@@ -19,7 +19,7 @@ describe Cancellation do
   it { should respond_to(:taker_id) }
   it { should respond_to(:creator) }
   it { should respond_to(:taker) }
-  # it { should respond_to(:date_time_valid_format?)}
+
   its(:creator) { should eq user }
   its(:get_time) { should be_present }
   its(:get_date) { should be_present }
@@ -121,6 +121,7 @@ describe Cancellation do
   end
 end
 
+  
 
 =begin
   -How can we test the availability with contexts?
