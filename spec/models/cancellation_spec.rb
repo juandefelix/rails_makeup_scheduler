@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Cancellation do
 
   let(:user) { FactoryGirl.create :user }
+  let(:another_user) { FactoryGirl.create :user }
   before { @cancellation = user.created_cancellations.build(name: "Luis Solares", instrument:"guitar", 
                                             start_at: 25.hours.from_now, end_at: 26.hours.from_now) }
 
@@ -18,7 +19,11 @@ describe Cancellation do
   it { should respond_to(:taker_id) }
   it { should respond_to(:creator) }
   it { should respond_to(:taker) }
+  # it { should respond_to(:date_time_valid_format?)}
   its(:creator) { should eq user }
+  its(:get_time) { should be_present }
+  its(:get_date) { should be_present }
+  its(:available?) { should be_present }
 
   it { should be_valid }
 
@@ -57,10 +62,11 @@ describe Cancellation do
   describe "when using valid formats for start_at" do
 
     valid_times = ["#{(Time.now + 1.day).strftime("%Y-%m-%d %H:%M")}", "#{(Time.now + 2.days).strftime("%Y-%m-%d %H:%M")}"]
-    # binding.pry
     valid_times.each do |valid_time|
       before { @cancellation.start_at = valid_time }
-      it { should be_valid}
+      it { should be_valid }
+      its(:get_time) { should be_present }
+      its(:get_date) { should be_present }
     end
   end
 
@@ -88,4 +94,38 @@ describe Cancellation do
   #   c = Cancellation.reflect_on_association(:users)
   #   c.macro.should == :belongs_to
   # end
+
+  # availability =============================
+
+  describe "its availability" do
+    it "is true when there's not a taker" do
+      expect(@cancellation.available?).to be_true
+    end
+
+    it "is false when there's a taker" do
+      @cancellation.taker = another_user
+      expect(@cancellation.available?).to be_false
+    end
+  end
+
+  # creator_same_as user =============================
+
+  describe "creator_same_as method works" do
+    it "is returns true when creator == user" do
+      expect(@cancellation.creator_same_as user).to be_true
+    end
+
+    it "is returns false when creator != user" do
+      expect(@cancellation.creator_same_as another_user).to be_false
+    end
+  end
 end
+
+
+=begin
+  -How can we test the availability with contexts?
+  -What's the scope of a before block?
+
+  
+=end
+
