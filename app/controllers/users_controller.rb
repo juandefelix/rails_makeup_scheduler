@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
     redirect_to root_path unless signed_in?
     @user = User.find(params[:id])
     @created = @user.created_cancellations
