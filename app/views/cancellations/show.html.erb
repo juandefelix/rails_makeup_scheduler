@@ -5,16 +5,7 @@
     <h2>Thank you for notifying us your absence!</h2>
   <% end %>
   
-  <div class="makeup">
-    <% if params[:action] == "show"%>
-      <h4><%= @cancellation.name %></h4>
-    <% end %>  
-    <p>
-      <b>Instrument:</b> <%= @cancellation.instrument %><br>
-      <b>Date: </b> <%= @cancellation.get_date %><br>
-      <b>Start time: </b><%= @cancellation.get_time %><br>
-    </p>
-  </div>
+  <%= render "cancellation"%>
 </div>
 
 <%= javascript_include_tag "cancellations" %>

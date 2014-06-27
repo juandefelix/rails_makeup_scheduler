@@ -1,3 +1,6 @@
+include ApplicationHelper
+
+
 def full_title(page_title)
   base_title = "Makeup Scheduler"
   return base_title if page_title.empty?
@@ -10,4 +13,19 @@ end
 
 def past_date
   (Time.now - 1.day).strftime("%m/%d/%y")
+end
+
+
+def sign_in(user, options={})
+  if options[:no_capybara]
+    # Sign in when not using Capybara
+    remember_token = User.new_remember_token
+    cookies[:remember_token] = remember_token
+    user.update_attribute(:remember_token, User.hash(remember_token))
+  else
+    visit signin_path
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+  end
 end

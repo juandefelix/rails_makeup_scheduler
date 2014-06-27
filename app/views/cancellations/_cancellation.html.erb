@@ -1,6 +1,9 @@
 <div class="makeup">
-  <p><b>Date: <%#= cancellation.date %></b></p> 
-  <p><b>Name: </b><%= cancellation.name %></p>
-  <p>Instrument: <b><%#= cancellation.instrument.capitalize %></b> at <b><%= cancellation.start_at %></b></p>
-  <%= link_to "delete", cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
+  <% if params[:action] == "show"%>
+    <p><b>Name: </b><%= @cancellation.name %></p>
+  <% end %>
+  <p><b>Instrument: </b><%= @cancellation.instrument.capitalize %></p>
+  <p><b>Time: </b><%= @cancellation.get_time %></p>
+  <p><b>Date: </b><%= @cancellation.get_date %></p>
+
 </div>

@@ -1,5 +1,4 @@
 require 'spec_helper'
-# require 'pry'
 
 describe User do
   before { @user = User.new(name: "Example User", email: "user@example.com",
@@ -138,7 +137,7 @@ describe User do
     end
   end
 
-  describe "with roles" do
+  describe "with a role" do
 
     before { @user.add_role :admin }
 

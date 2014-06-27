@@ -20,6 +20,7 @@ group :development, :test do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
   gem 'pry'
+  gem 'debugger'
 end
 
 group :test do

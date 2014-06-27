@@ -69,6 +69,10 @@ class CancellationsController < ApplicationController
     end
   end
 
+  def destroy
+    
+  end
+
   private
 
     def cancellation_params

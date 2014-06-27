@@ -1,15 +1,11 @@
 <div class="row">
   <div class="center span6 offset3">
-    <div class="makeup">
-      <h4><%= @cancellation.instrument %></h4>
-      <p>
-      <b>Instrument:</b> <%= @cancellation.instrument %><br>
-      <b>Date: </b> <%= @cancellation.get_date %><br>
-      <b>Start time: </b><%= @cancellation.get_time %><br>
-    </p>
-    </div>
-      <% if @cancellation.available? %>
-        <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
-      <% end %>
+    <%= render "cancellation" %>
+    <% if @cancellation.available? %>
+      <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
+    <% end %>
+    <% if can? :destroy, @cancellation %> 
+      <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
+    <% end %>
   </div>
 </div>

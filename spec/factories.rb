@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :cancellation do
-    name "Roberto Ruiz"
-    instrument "Guitar"
+    name Faker::Name.name
+    instrument ["Guitar", "Piano", "Voice", "Clarinet", "Drums"].sample
     start_at "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}"
     end_at   "#{26.hours.from_now.strftime("%Y-%m-%d %H:%M")}"
     association :creator, factory: :user
