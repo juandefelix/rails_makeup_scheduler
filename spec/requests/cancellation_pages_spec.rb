@@ -86,7 +86,7 @@ describe "Cancellation Pages" do
     it { should have_link("delete cancellation", href: cancellation_path(cancellation) ) }
 
     it "should be able to delete a cancellation" do
-      expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by(-1)
+      expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by -1
     end
   end
 end

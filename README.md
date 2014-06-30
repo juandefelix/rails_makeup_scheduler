@@ -17,8 +17,6 @@ This application was built to help some small business like music schools, to he
 Users signup, signin and logout is already implemented and tested.  
 Wrote association between Users and Cancellations. A user can create and 'take' many cancellations. A cancellation wil have a creator and a 'taker'. Wrote tests for a user creating cancellations. There are **missing tests for a User taking cancellations (makeups)**.  
 A user can only create absences if it is signed out. The cancellations will have the same `creator` as the `user.id`
-Added `rolify` gem. A user can have a role.
 **Need to:**  
  - Need to rewrite the tests for the new signed_in? method.
  - Write tests for a user taking a cancellation.
- - Add `cancan` gem to allow user with different roles to do different actions
