@@ -10,10 +10,10 @@ describe "Cancellation Pages" do
     fill_in "Password", with: user.password
     click_button "Sign in"
   end  
-     
+
   describe "Cancellation show" do
     let(:cancellation) { FactoryGirl.create(:cancellation, creator: user) }
-      
+
     before { visit cancellation_path(cancellation) }
 
     it { should have_content(cancellation.name) }
@@ -38,6 +38,7 @@ describe "Cancellation Pages" do
       end
     end
 
+
     describe "with valid information" do
       before do
         fill_in "Student Name", with: "Joe Shidel"
@@ -47,42 +48,48 @@ describe "Cancellation Pages" do
       end
 
       it "should create a user " do
-        expect{ click_button submit }.to change(Cancellation, :count).by(1)
+        expect{ click_button submit }.to change(Cancellation, :count).by 1
       end
     end
   end
 
   describe "Cancellations index page" do
     before do 
-      FactoryGirl.create(:cancellation)
-      FactoryGirl.create(:cancellation, name: "Doris")
+      3.times do
+        # the cancellations will be destroyed after this test
+        FactoryGirl.create(:cancellation)
+      end
+
       visit cancellations_path 
     end
 
     it { should have_title full_title("Available Makeups") }
     it { should have_content("Available Makeups") }
-    # it { should have_content("Name: ") }
-    #it { should have_content("Date: ") }
 
     it "should list each cancellation" do
       Cancellation.all.each do |cancellation|
+        # it {should have_content(cancellation.instrument) } this syntax doesn't work
         expect(page).to have_content(cancellation.instrument)
       end
     end
   end
 
-  # describe "delete cancellations" do
-  #   before do 
-  #     FactoryGirl.create(:cancellation)
-  #     visit cancellations_path 
-  #   end
+  describe "delete cancellations" do
 
-  #   it { should have_link("delete", href: cancellation_path(Cancellation.first) ) }
+    let(:cancellation) { FactoryGirl.create(:cancellation) }
 
-  #   it "should be able to delete a cancellation" do
-  #     expect do
-  #       click_link('delete', match: :first)
-  #     end.to change(Cancellation, :count).by(-1)
-  #   end
-  # end
+    before do 
+      user.add_role :admin
+      visit edit_cancellation_path cancellation
+    end
+
+    it { should have_link("delete cancellation", href: cancellation_path(cancellation) ) }
+
+    it "should be able to delete a cancellation" do
+      expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by(-1)
+    end
+  end
 end
+
+# questions:
+# - what is the scope of FactoryGirl:create:cancellation. Do they exist after the 'describe' block is closed?

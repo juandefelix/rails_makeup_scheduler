@@ -70,7 +70,10 @@ class CancellationsController < ApplicationController
   end
 
   def destroy
+    @cancellation = Cancellation.find_by(id: params[:id])
     
+    @cancellation.destroy
+    redirect_to cancellations_path
   end
 
   private
