@@ -20,4 +20,4 @@ A user can only create absences if it is signed in. The cancellations will have 
 A user with admin privileges is allowed to delete cancellations.
 **Need to:**  
  - Need to rewrite the tests for the new signed_in? method.
- - Write tests for a user taking a cancellation.
+ - Write acceptance tests for a user taking a cancellation.

@@ -30,7 +30,8 @@ describe Cancellation do
 # presence of attributes ===============================
 
   describe "when name is not present" do
-    before { @cancellation.name = ""}
+
+    before { @cancellation.name = "" }
     it { should_not be_valid }
   end
 
@@ -97,26 +98,38 @@ describe Cancellation do
 
   # availability =============================
 
+  # describe "its availability" do
+  #   it "equals true when there's not a taker" do
+  #     expect(@cancellation.available?).to be_true
+  #   end
+
+  #   it "equals false when there's already a taker" do
+  #     @cancellation.taker = another_user
+  #     expect(@cancellation.available?).to be_false
+  #   end
+  # end
+
   describe "its availability" do
-    it "is true when there's not a taker" do
-      expect(@cancellation.available?).to be_true
+    context "equals true when there's not a taker" do
+      it { should be_available }
     end
 
-    it "is false when there's a taker" do
-      @cancellation.taker = another_user
-      expect(@cancellation.available?).to be_false
+    context "equals false when there's already a taker" do
+     before { @cancellation.taker = another_user}
+     it  { should_not be_available }
     end
   end
 
+
   # creator_same_as user =============================
 
-  describe "creator_same_as method works" do
-    it "is returns true when creator == user" do
-      expect(@cancellation.creator_same_as user).to be_true
+  describe "#creator_same_as" do
+    context "returns true when creator == user" do
+      specify { expect(@cancellation.creator_same_as user).to be_true }
     end
 
-    it "is returns false when creator != user" do
-      expect(@cancellation.creator_same_as another_user).to be_false
+    context "returns false when creator != user" do
+      specify { expect(@cancellation.creator_same_as another_user).to be_false }
     end
   end
 end
