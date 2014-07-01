@@ -115,8 +115,8 @@ describe Cancellation do
     end
 
     context "equals false when there's already a taker" do
-     before { @cancellation.taker = another_user}
-     it  { should_not be_available }
+      before { @cancellation.taker = another_user}
+      it  { should_not be_available }
     end
   end
 

@@ -117,9 +117,11 @@ describe User do
   describe "cancellations association" do
 
     before { @user.save }
+
     let!(:older_cancellation) do
       FactoryGirl.create(:cancellation, creator: @user, start_at: 25.hours.from_now)
     end
+
     let!(:newer_cancellation) do
       FactoryGirl.create(:cancellation, creator: @user, start_at: 26.hours.from_now)
     end
@@ -127,6 +129,7 @@ describe User do
     it "should have the right cancellations in the right order" do
       expect(@user.created_cancellations.to_a).to eq [newer_cancellation, older_cancellation]
     end
+
     it "should destroy associated cancellations" do
       cancellations = @user.created_cancellations.to_a
       @user.destroy
