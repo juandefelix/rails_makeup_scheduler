@@ -78,20 +78,17 @@ describe "Cancellation Pages" do
       end
     end
 
-    # it 'test' do
-    #   save_and_open_page
-    #   puts page.html
-    # end
   end
 
   describe 'A user taking a cancellation' do
-    let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user, start_at: "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}") }
+    let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
 
     before do
       visit edit_cancellation_path cancellation
     end
 
     it { should have_content "Instrument: #{cancellation.instrument}" }
+    it { should have_link "Take this spot" }
 
     describe 'in the present day or in the future' do
       before { click_link "Take this spot"}
@@ -100,16 +97,27 @@ describe "Cancellation Pages" do
     end
 
     describe 'in the past' do
-      let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
+      # let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
+      @cancellation = Cancellation.new(name: Faker::Name.name, instrument: "Guitar", start_at: "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}", creator_id: 1)
+      @cancellation.start_at = "#{1.day.ago.strftime("%Y-%m-%d %H:%M")}"
 
       before do
-        cancellation.start_at = "#{1.hour.ago.strftime("%Y-%m-%d %H:%M")}"
-        visit edit_cancellation_path Cancellation.last
-        click_link "Take this spot"
+        puts "\n\n\n\n#{cancellation.start_at}\n\n\n\n"
+        puts "\n\n\n\n#{cancellation.start_at}\n\n\n\n"
+        cancellation.save
+        visit edit_cancellation_path @cancellation
       end
-      it { should have_content "this date has passed" }
+
+      it 'test' do
+      #   puts cancellation.start_at
+
+        puts page.html
+      end
+
+      it { should_not have_link "Take this spot" }
     end
   end
+
 
 
   describe "delete cancellations" do
