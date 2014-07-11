@@ -1,9 +1,13 @@
+<% provide :title, "Edit | #{@cancellation.start_at}"%>
 <div class="row">
   <div class="center span6 offset3">
     <%= render "cancellation" %>
-    <% if @cancellation.available? %>
+
+    <% if @cancellation.available? && !@cancellation.in_the_past?%>
       <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
     <% end %>
+
+
     <% if can? :destroy, @cancellation %> 
       <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
     <% end %>

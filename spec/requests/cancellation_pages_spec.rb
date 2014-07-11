@@ -3,8 +3,9 @@ require 'spec_helper'
 describe "Cancellation Pages" do
   subject { page }
   let(:user) { FactoryGirl.create(:user) }
+  let(:another_user) { FactoryGirl.create(:user) }
 
-  before do
+  before do # a user is signed in
     visit signin_path
     fill_in "Email",    with: user.email.upcase
     fill_in "Password", with: user.password
@@ -48,37 +49,74 @@ describe "Cancellation Pages" do
       end
 
       it "should create a user " do
-        expect{ click_button submit }.to change(Cancellation, :count).by 1
+        expect { click_button submit }.to change(Cancellation, :count).by 1
       end
     end
   end
 
   describe "Cancellations index page" do
     before do 
-      3.times do
-        # the cancellations will be destroyed after this test
-        FactoryGirl.create(:cancellation)
-      end
-
+      2.times { FactoryGirl.create(:cancellation) }
+      FactoryGirl.create(:cancellation, instrument: "Clarinet", creator: another_user )
       visit cancellations_path 
     end
 
-    it { should have_title full_title("Available Makeups") }
-    it { should have_content("Available Makeups") }
+    describe "should have the right content and title" do
+      it { should have_title full_title("Available Makeups") }
+      it { should have_content("Available Makeups") }
+      it { should have_content "Clarinet #{25.hours.from_now.strftime("%-I:%M%p")}" }
+    end
 
-    it "should list each cancellation" do
+    it "should have the right number" do
+      expect(Cancellation.count).to eq 3
+    end
+
+    describe "should list each cancellation" do
       Cancellation.all.each do |cancellation|
-        # it {should have_content(cancellation.instrument) } this syntax doesn't work
-        expect(page).to have_content(cancellation.instrument)
+        it { should have_content(cancellation.instrument) } 
+        it { have_selector('a') }
       end
+    end
+
+    # it 'test' do
+    #   save_and_open_page
+    #   puts page.html
+    # end
+  end
+
+  describe 'A user taking a cancellation' do
+    let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user, start_at: "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}") }
+
+    before do
+      visit edit_cancellation_path cancellation
+    end
+
+    it { should have_content "Instrument: #{cancellation.instrument}" }
+
+    describe 'in the present day or in the future' do
+      before { click_link "Take this spot"}
+
+      it { should have_content "#{user.name}"}      
+    end
+
+    describe 'in the past' do
+      let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
+
+      before do
+        cancellation.start_at = "#{1.hour.ago.strftime("%Y-%m-%d %H:%M")}"
+        visit edit_cancellation_path Cancellation.last
+        click_link "Take this spot"
+      end
+      it { should have_content "this date has passed" }
     end
   end
 
-  describe "delete cancellations" do
 
+  describe "delete cancellations" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
 
-    before do 
+    before do
+      cancellation.save
       user.add_role :admin
       visit edit_cancellation_path cancellation
     end
@@ -93,3 +131,4 @@ end
 
 # questions:
 # - what is the scope of FactoryGirl:create:cancellation. Do they exist after the 'describe' block is closed?
+#   - No, it does not exist after exiting the 'before' block   

@@ -4,10 +4,10 @@ describe Cancellation do
 
   let(:user) { FactoryGirl.create :user }
   let(:another_user) { FactoryGirl.create :user }
-  before { @cancellation = user.created_cancellations.build(name: "Luis Solares", instrument:"guitar", 
+  let (:cancellation) { user.created_cancellations.build(name: "Luis Solares", instrument:"guitar", 
                                             start_at: 25.hours.from_now, end_at: 26.hours.from_now) }
 
-  subject { @cancellation }
+  subject { cancellation }
 
 # respond_to attributes ===============================
 
@@ -15,12 +15,13 @@ describe Cancellation do
   it { should respond_to(:instrument) }
   it { should respond_to(:start_at) }
   it { should respond_to(:end_at) }
-  it { should respond_to(:creator_id) }
+  it { should respond_to(:creator_id) } # redundant
   it { should respond_to(:taker_id) }
   it { should respond_to(:creator) }
   it { should respond_to(:taker) }
 
   its(:creator) { should eq user }
+  # test for taker
   its(:get_time) { should be_present }
   its(:get_date) { should be_present }
   its(:available?) { should be_present }
@@ -31,23 +32,24 @@ describe Cancellation do
 
   describe "when name is not present" do
 
-    before { @cancellation.name = "" }
+    before { cancellation.name = "" }
     it { should_not be_valid }
   end
 
+
   describe "when instrument is not present" do
-    before { @cancellation.instrument = " "}
+    before { cancellation.instrument = " "}
     it { should_not be_valid }
   end
 
 
   describe "when start_time is not present" do
-    before { @cancellation.start_at = "" }
+    before { cancellation.start_at = "" }
     it { should_not be_valid }
   end
 
   describe "when creator is not present" do
-    before { @cancellation.creator_id = "" }
+    before { cancellation.creator_id = "" }
     it { should_not be_valid }
   end
 
@@ -64,7 +66,7 @@ describe Cancellation do
 
     valid_times = ["#{(Time.now + 1.day).strftime("%Y-%m-%d %H:%M")}", "#{(Time.now + 2.days).strftime("%Y-%m-%d %H:%M")}"]
     valid_times.each do |valid_time|
-      before { @cancellation.start_at = valid_time }
+      before { cancellation.start_at = valid_time }
       it { should be_valid }
       its(:get_time) { should be_present }
       its(:get_date) { should be_present }
@@ -76,8 +78,8 @@ describe Cancellation do
   describe "when submiting a date in the past" do
 
     before do 
-      @cancellation.start_at = "#{(Time.now - 1.hour)}"
-      @cancellation.end_at = "#{(Time.now - 30.minutes)}"
+      cancellation.start_at = "#{(Time.now - 1.hour)}"
+      cancellation.end_at = "#{(Time.now - 30.minutes)}"
     end
     it { should_not be_valid }
   end
@@ -85,8 +87,8 @@ describe Cancellation do
   describe "when submiting a date that is too early" do
 
     before do
-      @cancellation.start_at = "#{(Time.now - 22.hours)}"
-      @cancellation.end_at = "#{(Time.now - 21.hours - 30.minutes)}"
+      cancellation.start_at = "#{(Time.now - 22.hours)}"
+      cancellation.end_at = "#{(Time.now - 21.hours - 30.minutes)}"
     end
     it { should_not be_valid }
   end
@@ -115,7 +117,7 @@ describe Cancellation do
     end
 
     context "equals false when there's already a taker" do
-      before { @cancellation.taker = another_user}
+      before { cancellation.taker = another_user}
       it  { should_not be_available }
     end
   end
@@ -125,11 +127,11 @@ describe Cancellation do
 
   describe "#creator_same_as" do
     context "returns true when creator == user" do
-      specify { expect(@cancellation.creator_same_as user).to be_true }
+      specify { expect(cancellation.creator_same_as user).to be_true }
     end
 
     context "returns false when creator != user" do
-      specify { expect(@cancellation.creator_same_as another_user).to be_false }
+      specify { expect(cancellation.creator_same_as another_user).to be_false }
     end
   end
 end

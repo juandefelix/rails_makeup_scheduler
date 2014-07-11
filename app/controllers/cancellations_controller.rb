@@ -58,11 +58,14 @@ class CancellationsController < ApplicationController
 
   def update
     @cancellation = Cancellation.find(params[:id])
-    # binding.pry
-    unless @cancellation.creator_same_as current_user
+
+    if !@cancellation.creator_same_as current_user
       @cancellation.update_attribute(:taker, current_user)
       flash[:notice] = "Successfully updated"
       redirect_to current_user
+    elsif @cancellation.in_the_past?
+      flash[:error] = "this date has passed. Please, select another date"
+      redirect_to cancellations_path
     else
       flash[:error] = "You can not do a makeup of a lesson that you cancelled"
       render :show

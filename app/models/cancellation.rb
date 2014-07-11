@@ -29,6 +29,10 @@ class Cancellation < ActiveRecord::Base
     errors[:base]= "Date and time can not be in the past"     if self.start_at < Time.now
   end
 
+  def in_the_past?
+    self.start_at < Time.now
+  end
+
   def less_than_24
     one_day_after = Time.now + 1.day
     errors[:base] = "Please, notify your absence within 24hr." if  start_at < one_day_after
