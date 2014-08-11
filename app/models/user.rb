@@ -3,16 +3,26 @@ class User < ActiveRecord::Base
   before_save { email.downcase! }
   before_create :create_remember_token
 
-  validates :name, :email, presence: true
+  validates :name, :email, :provider, presence: true
   validates :name, length: { in: 4..50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6 }
+  validates :uid, presence: true, uniqueness: { case_sensitive: false }
+  # validates :password, length: { minimum: 6 }
 
-  has_secure_password
+  # has_secure_password
 
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id, dependent: :destroy
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id, dependent: :destroy
+
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.email = auth["info"]["email"]
+    end
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

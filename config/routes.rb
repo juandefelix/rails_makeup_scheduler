@@ -10,12 +10,12 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/about',  to: 'static_pages#about',  via: 'get'
   # match '/signup', to: 'users#new',           via: 'get'
   # match '/signin', to: 'sessions#new',        via: 'get'
-  match '/auth/facebook/callback', to: 'session#new', via: 'get'
+  match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
   resources :cancellations
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
