@@ -22,9 +22,9 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_to root_url, :notice => "Signed in!"
     else
-      flash.now[:error] = "Invalid password/email combination"
+      flash.now[:error] = "Something went wrong, try again"
       # render :new
-      render :text, "No User"
+      redirect_to root_url
     end
   end
 

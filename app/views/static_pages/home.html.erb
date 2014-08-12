@@ -7,7 +7,9 @@
     <%= link_to "Nofify an Absence", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
     <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
   <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", class: "btn btn-primary", id: 'sign-in'%>
+    <div id='sign-in-button'>
+      <%= link_to "", "/auth/facebook", class: 'inner'%>
+    </div>
   <% end %>
   </div>
 </div>

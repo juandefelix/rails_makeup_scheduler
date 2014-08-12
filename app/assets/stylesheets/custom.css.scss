@@ -177,6 +177,32 @@ input {
   @extend .error;
 }
 
+#sign-in-button {
+  // outline: 1px solid red;
+  background: url('facebook-button.png');
+
+  width: 202px;
+  display: inline-block;
+  vertical-align: top;
+  font: 0/0 serif;
+  color: transparent;
+
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  background-position: 50% 25%;
+  background-repeat: no-repeat;
+
+  // margin-top: 80px;
+
+  .inner {
+    padding-top: 22.77%;
+    display: block;
+    height: 0
+  }
+}
+
+
 /* Cancellation index and show */
 
 .makeup { 
