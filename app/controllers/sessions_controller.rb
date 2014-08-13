@@ -1,10 +1,13 @@
-class SessionsController < ApplicationController
+  require 'pry'
+
+  class SessionsController < ApplicationController
   def new
 
   end
 
   def create
-
+    # redirect_to root_url, :error => "This application needs you to login with Facebook"
+    # binding.pry
     # PREVIOUS SESSIONS#CREATE BEFORE IMPLEMENTING THE FACEBOOK AUTHENTICATION
     # 
     # user = User.find_by(email: params[:session][:email].downcase)
@@ -26,6 +29,11 @@ class SessionsController < ApplicationController
       # render :new
       redirect_to root_url
     end
+  end
+
+  def failure
+    flash[:error] = "This application needs you to login with Facebook"
+    redirect_to root_url
   end
 
   def destroy
