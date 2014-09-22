@@ -11,9 +11,13 @@ module RailsMakeupScheduler
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
+        ENV[key.to_s] = value unless value.kind_of? Hash
       end if File.exists?(env_file)
     end
+
+    CONFIG = YAML.load(File.read(File.expand_path('../school_codes.yml', __FILE__)))
+    CONFIG.merge! CONFIG.fetch(Rails.env, {})
+    CONFIG.symbolize_keys!
 
 
     # Settings in config/environments/* take precedence over those specified here.
