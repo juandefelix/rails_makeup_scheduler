@@ -11,10 +11,13 @@ config.merge! config.fetch(Rails.env, {})
 config.each do |key, value|
   ENV[key] = value.to_s unless value.kind_of? Hash
 end
+
+CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__))).symbolize_keys!
+
 module RailsMakeupScheduler
   class Application < Rails::Application
 
-    # CONFIG = YAML.load(File.read(File.expand_path('../school_codes.yml', __FILE__)))
+    # CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__)))
     # CONFIG.merge! CONFIG.fetch(Rails.env, {})
     # CONFIG.symbolize_keys!
 

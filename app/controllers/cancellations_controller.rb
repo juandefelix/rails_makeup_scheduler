@@ -1,6 +1,7 @@
 class CancellationsController < ApplicationController
 
   before_action :check_date_format, only: :create
+  before_action :check_school_code, only: :create
   before_action :redirect_to_home_if_not_signed_in
 
   def new
@@ -108,5 +109,12 @@ class CancellationsController < ApplicationController
 
     def redirect_to_home_if_not_signed_in
       redirect_to root_url if !signed_in?
+    end
+
+    def check_school_code
+      unless params[:school_code]==CONFIG[:school_code]
+        # flash[:error] = 'School Code is not correct' 
+        redirect_to new_cancellation_path, flash: { error: 'School Code is not correct' }
+      end
     end
 end
