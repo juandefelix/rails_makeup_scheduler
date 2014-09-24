@@ -1,4 +1,8 @@
 module CancellationsHelper
+  # ------------------------------#
+  # new cancellation form helpers #
+  # ----------------------------- #
+
   def times
     [ ["9:00 am", "09:00"], 
       ["9:30 am", "09:30"], 
@@ -26,6 +30,41 @@ module CancellationsHelper
       ["8:30 pm", "20:30"] ]
   end
 
+  def last_name_used
+    name = current_user.created_cancellations.order(:created_at).last.try(:name)
+    name.nil? ? current_user.name : name
+  end
+
+  def last_instrument_used
+    current_user.created_cancellations.last.try(:instrument) || ""
+  end
+
+  def next_hour_available
+    times[times_array_index][1]
+  end
+
+  def eval_time
+    h = Time.now.hour
+    m = Time.now.min
+    eval_hour = (h - 9) * 2 + 1
+    eval_minute = m / 30
+    eval_hour + eval_minute
+  end
+
+  def times_array_index
+    return 0 if eval_time < 0
+    return 0 if eval_time > 23
+    eval_time
+  end
+
+  def next_date_formatted
+    next_date_available.strftime("%m/%d/%y")
+  end
+
+  def next_date_available
+    return (day + 2.days) if eval_time > 23
+    Time.now.beginning_of_day + 1.day
+  end
   
   def name_example
     Faker::Name.name 

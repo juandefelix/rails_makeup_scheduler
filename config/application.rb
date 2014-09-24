@@ -6,14 +6,20 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+config = YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
+config.merge! config.fetch(Rails.env, {})
+config.each do |key, value|
+  ENV[key] = value.to_s unless value.kind_of? Hash
+end
+
+CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__))).symbolize_keys!
+
 module RailsMakeupScheduler
   class Application < Rails::Application
-    config.before_configuration do
-      env_file = File.join(Rails.root, 'config', 'local_env.yml')
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
-      end if File.exists?(env_file)
-    end
+
+    # CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__)))
+    # CONFIG.merge! CONFIG.fetch(Rails.env, {})
+    # CONFIG.symbolize_keys!
 
 
     # Settings in config/environments/* take precedence over those specified here.
