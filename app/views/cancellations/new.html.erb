@@ -10,17 +10,16 @@
         <%= render 'shared/error_messages' %>
 
         <%= f.label :name, "Student Name" %>
-        <%= f.text_field :name, placeholder: "STUDENT NAME", value: "#{current_user.created_cancellations.last.name}" %>
+        <%= f.text_field :name, placeholder: "STUDENT NAME", value: "#{last_name_used}" %>
 
         <%= f.label :instrument, "Instrument" %>
-        <%= f.text_field :instrument, placeholder: "INSTRUMENT", value: "#{current_user.created_cancellations.last.instrument}" %>
+        <%= f.text_field :instrument, placeholder: "INSTRUMENT", value: "#{last_instrument_used}" %>
 
         <%= label_tag :date, "Absence Date" %>
-        <%= text_field_tag :date, nil, placeholder: "ABSENCE DATE (mm/dd/yy)", value: "#{}" %>
+        <%= text_field_tag :date, nil, placeholder: "ABSENCE DATE (mm/dd/yy)", value: next_date_formatted %>
 
         <%= f.label :start_at, "Start time" %>
-        <%= f.select(:start_at, options_for_select(times)) %>
-
+        <%= f.select(:start_at, options_for_select(times, next_hour_available)) %>
         <%= label_tag(:school_code, "School Code:") %>
         <%= text_field_tag(:school_code) %>
 
