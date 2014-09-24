@@ -18,7 +18,6 @@
 # Ignore other unneeded files.
 database.yml
 doc/
-/config/school_code.yml
 *.swp
 *~
 .project
