@@ -62,7 +62,7 @@ module CancellationsHelper
   end
 
   def next_date_available
-    return (day + 2.days) if eval_time > 23
+    return (Time.now.beginning_of_day + 2.days) if eval_time > 23
     Time.now.beginning_of_day + 1.day
   end
   
