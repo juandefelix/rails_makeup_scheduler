@@ -1,6 +1,5 @@
 class CancellationsController < ApplicationController
 
-
   before_action :check_date_format, only: :create
   before_action :check_school_code, only: :create
   before_action :redirect_to_home_if_not_signed_in
@@ -65,6 +64,9 @@ class CancellationsController < ApplicationController
       @cancellation.update_attribute(:taker, current_user)
       flash.now[:notice] = "Successfully updated"
       redirect_to current_user
+    elsif current_user.exceeded_makeups?
+      flash.now[:error] = "Makeups exceed number of cancelllations"
+      redirect_to cancellations_path
     elsif @cancellation.in_the_past?
       flash.now[:error] = "this date has passed. Please, select another date"
       redirect_to cancellations_path

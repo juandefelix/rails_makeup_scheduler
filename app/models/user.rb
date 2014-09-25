@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def exceeded_makeups?
+    taken_cancellations.count >= created_cancellations.count
+  end
+
   private
 
     def create_remember_token
