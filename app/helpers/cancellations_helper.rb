@@ -5,38 +5,40 @@ module CancellationsHelper
 
   def times
     [ ["9:00 am", "09:00"], 
-      ["9:30 am", "09:30"], 
-      ["10:00 am", "10:00"], 
-      ["10:30 am", "10:30"], 
-      ["11:00 am", "11:00"], 
-      ["11:30 am", "11:30"], 
-      ["12:00 pm", "12:00"], 
-      ["12:30 pm", "12:30"], 
-      ["1:00 pm", "13:00"], 
-      ["1:30 pm", "13:30"], 
-      ["2:00 pm", "14:00"], 
-      ["2:30 pm", "14:30"], 
-      ["3:00 pm", "15:00"], 
-      ["3:30 pm", "15:30"], 
-      ["4:00 pm", "16:00"], 
-      ["4:30 pm", "16:30"], 
-      ["5:00 pm", "17:00"], 
-      ["5:30 pm", "17:30"], 
-      ["6:00 pm", "18:00"], 
-      ["6:30 pm", "18:30"], 
-      ["7:00 pm", "19:00"], 
-      ["7:30 pm", "19:30"], 
-      ["8:00 pm", "20:00"], 
-      ["8:30 pm", "20:30"] ]
+    ["9:30 am", "09:30"], 
+    ["10:00 am", "10:00"], 
+    ["10:30 am", "10:30"], 
+    ["11:00 am", "11:00"], 
+    ["11:30 am", "11:30"], 
+    ["12:00 pm", "12:00"], 
+    ["12:30 pm", "12:30"], 
+    ["1:00 pm", "13:00"], 
+    ["1:30 pm", "13:30"], 
+    ["2:00 pm", "14:00"], 
+    ["2:30 pm", "14:30"], 
+    ["3:00 pm", "15:00"], 
+    ["3:30 pm", "15:30"], 
+    ["4:00 pm", "16:00"], 
+    ["4:30 pm", "16:30"], 
+    ["5:00 pm", "17:00"], 
+    ["5:30 pm", "17:30"], 
+    ["6:00 pm", "18:00"], 
+    ["6:30 pm", "18:30"], 
+    ["7:00 pm", "19:00"], 
+    ["7:30 pm", "19:30"], 
+    ["8:00 pm", "20:00"], 
+    ["8:30 pm", "20:30"] ]
   end
 
   def last_name_used
+    binding.pry
     name = current_user.created_cancellations.order(:created_at).last.try(:name)
-    name.nil? ? current_user.name : name
+    params[:cancellation][:name] || name || current_user.name
   end
 
   def last_instrument_used
-    current_user.created_cancellations.last.try(:instrument) || ""
+    last_cancellation_instrument = current_user.created_cancellations.last.try(:instrument)
+    params[:cancellation][:name] || last_cancellation_instrument  || ""
   end
 
   def next_hour_available
@@ -91,10 +93,10 @@ module CancellationsHelper
       :month_name_text => I18n.localize(@shown_month, :format => "%B %Y"),
       :previous_month_text => "<< " + month_link(@shown_month.prev_month),
       :next_month_text => month_link(@shown_month.next_month) + " >>"    }
-  end
+    end
 
 
-  def event_calendar
+    def event_calendar
     # args is an argument hash containing :event, :day, and :options
     calendar event_calendar_opts do |args|
       event = args[:event]

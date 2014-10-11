@@ -21,6 +21,7 @@ group :development, :test do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'byebug'
   gem 'timecop'
 end
@@ -29,6 +30,7 @@ group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'launchy'
 end
 
 # Use SCSS for stylesheets

@@ -21,3 +21,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        start_at: "Start time"
+    errors:
+      models:
+        user:
+          attributes:
+            start_at:
+              blank: "is required"
