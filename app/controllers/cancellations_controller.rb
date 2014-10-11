@@ -3,6 +3,7 @@ class CancellationsController < ApplicationController
   before_action :check_date_format, only: :create
   before_action :check_school_code, only: :create
   before_action :redirect_to_home_if_not_signed_in
+  before_action :find_cancellation, except: [:new, :create, :index]
 
   def new
     @cancellation = Cancellation.new
@@ -29,16 +30,8 @@ class CancellationsController < ApplicationController
     end
   end
 
-  
-  def destroy
-    Cancellation.find(params[:id]).destroy
-    flash[:success] = "Absence deleted from your list."
-    redirect_to cancellations_url
-  end
-
 
   def show
-    @cancellation = Cancellation.find(params[:id])
   end
 
 
@@ -53,12 +46,13 @@ class CancellationsController < ApplicationController
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
   end
 
+
   def edit
     @cancellation = Cancellation.find(params[:id])
   end
 
+
   def update
-    @cancellation = Cancellation.find(params[:id])
     if @cancellation.creator_same_as current_user
       flash.now[:error] = "You can not do a makeup of a lesson that you cancelled"
       render :show
@@ -75,14 +69,19 @@ class CancellationsController < ApplicationController
     end
   end
 
+
   def destroy
-    @cancellation = Cancellation.find_by(id: params[:id])
-    
     @cancellation.destroy
+    flash[:success] = "Absence deleted from your list."
     redirect_to cancellations_path
   end
 
+
   private
+
+    def find_cancellation
+      @cancellation = Cancellation.find(params[:id])
+    end
 
     def cancellation_params
         params.require(:cancellation).permit(:name, :instrument, :start_at)
@@ -102,11 +101,16 @@ class CancellationsController < ApplicationController
     end
 
     def check_date_format
-      unless params[:date] =~ /\A[01]?\d[\/-][0-3]?\d[\/-]\d{2}?\d{2}\z/
+      # binding.pry
+      unless valid_date?(params[:date], "%m/%d/%Y") || valid_date?(params[:date], "%m-%d-%Y")
         flash.now[:error] = "Date format not valid"
         @cancellation = Cancellation.new
         render :new
       end
+    end
+
+    def valid_date?( str, format )
+      Date.strptime(str,format) rescue false
     end
 
     def redirect_to_home_if_not_signed_in
