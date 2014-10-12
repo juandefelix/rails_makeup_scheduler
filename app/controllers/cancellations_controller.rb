@@ -84,7 +84,7 @@ class CancellationsController < ApplicationController
     end
 
     def cancellation_params
-        params.require(:cancellation).permit(:name, :instrument, :start_at)
+      params.require(:cancellation).permit(:name, :instrument, :start_at)
     end
 
     def get_date_time
@@ -118,7 +118,7 @@ class CancellationsController < ApplicationController
     end
 
     def check_school_code
-      unless params[:school_code]==CONFIG[:school_code]
+      unless params[:school_code] == CONFIG[:school_code]
         redirect_to new_cancellation_path, flash: { error: 'School Code is not correct' }
       end
     end

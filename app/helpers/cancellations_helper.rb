@@ -31,14 +31,19 @@ module CancellationsHelper
   end
 
   def last_name_used
-    binding.pry
-    name = current_user.created_cancellations.order(:created_at).last.try(:name)
-    params[:cancellation][:name] || name || current_user.name
+    # 'name' takes the earliest cancellation in the latest day. 
+    # We want the latest cancellatio in the lastest dat
+    name = current_user.created_cancellations.order(:created_at).first.try(:name)
+    new_cancellation_field(:name) || name || current_user.name
+  end
+
+  def new_cancellation_field(symbol)
+    params[:cancellation] ? params[:cancellation][symbol] : nil
   end
 
   def last_instrument_used
-    last_cancellation_instrument = current_user.created_cancellations.last.try(:instrument)
-    params[:cancellation][:name] || last_cancellation_instrument  || ""
+    last_cancellation_instrument = current_user.created_cancellations.first.try(:instrument)
+    new_cancellation_field(:instrument) || last_cancellation_instrument  || ""
   end
 
   def next_hour_available
