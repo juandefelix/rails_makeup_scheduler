@@ -8,9 +8,9 @@ FactoryGirl.define do
   end
 
   factory :user do
-    sequence(:name)       { |n| "Person #{n}" }
-    sequence(:email)      { |n| "person#{n}@example.com" }
-    uid '1234'
+    sequence(:name)  { |n| "Person #{n}" }
+    sequence(:email) { |n| "person#{n}@example.com" }
+    sequence(:uid)   { |n| "#{n}" }
     provider "facebook"
   end
 end

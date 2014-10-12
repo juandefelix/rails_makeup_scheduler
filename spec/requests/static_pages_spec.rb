@@ -21,10 +21,10 @@ describe "Static Pages" do
       let(:user) { FactoryGirl.create(:user) }
       
       before do
-        visit signin_path
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
+        sign_in
+        # fill_in "Email",    with: user.email.upcase
+        # fill_in "Password", with: user.password
+        # click_button "Sign in"
       end     
 
       it { should_not have_link("Sign in") }
@@ -38,8 +38,8 @@ describe "Static Pages" do
   describe "Help Page" do
     before { visit help_path }
   
-    it { should have_content('Help') }
-    it { should have_title(full_title('Help')) }
+    xit { should have_content('Help') }
+    xit { should have_title(full_title('Help')) }
   end
 
   describe "About" do

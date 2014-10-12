@@ -7,8 +7,7 @@ describe "Facebook Authentication" do
 
   describe "signin" do  
     before do
-      # request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
-       sign_in user
+      sign_in user
     end
 
     describe "a test user" do

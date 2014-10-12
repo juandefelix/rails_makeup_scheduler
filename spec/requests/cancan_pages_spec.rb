@@ -3,19 +3,18 @@ require 'spec_helper'
 describe "User with admin permission" do
 
   subject { page }
-
-  let(:user) { FactoryGirl.create(:user) }
+  # let(:user) { FactoryGirl.create(:user) }
   let(:cancellation) { FactoryGirl.create(:cancellation) }
 
   before do 
-    user.add_role :admin
-    sign_in user
+    sign_in
+    @user.add_role :admin
   end
 
   describe "has access to users link" do
 
     before do  
-      visit user_path user
+      visit user_path @user
     end
 
     it { should have_content "Users"}  
@@ -35,17 +34,17 @@ describe "User without admin permission" do
 
   subject { page }
 
-  let(:user) { FactoryGirl.create(:user) }
+  # let(:user) { FactoryGirl.create(:user) }
   let(:cancellation) { FactoryGirl.create(:cancellation) }
 
   before do 
-    sign_in user
+    sign_in
   end
 
   describe "does not have access to users link" do
 
     before do  
-      visit user_path user
+      visit user_path @user
     end
 
     it { should_not have_content "Users"}  

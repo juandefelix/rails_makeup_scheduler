@@ -2,18 +2,16 @@ require 'spec_helper'
 
 describe "Cancellation Pages" do
   subject { page }
-  let(:user) { FactoryGirl.create(:user) }
   let(:another_user) { FactoryGirl.create(:user) }
 
-  before do # a user is signed in
-    visit signin_path
-    fill_in "Email",    with: user.email.upcase
-    fill_in "Password", with: user.password
-    click_button "Sign in"
+  before do
+    sign_in
   end  
 
   describe "Cancellation show" do
-    let(:cancellation) { FactoryGirl.create(:cancellation, creator: user) }
+    let(:cancellation) do
+      FactoryGirl.create(:cancellation, creator: User.first)
+    end
 
     before { visit cancellation_path(cancellation) }
 
@@ -45,6 +43,7 @@ describe "Cancellation Pages" do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
         fill_in "Date", with: "12/4/14"
+        fill_in "School Code", with: "#{CONFIG[:school_code]}"
         select "3:30 pm", :from => "Start time" 
       end
 
@@ -93,26 +92,16 @@ describe "Cancellation Pages" do
     describe 'in the present day or in the future' do
       before { click_link "Take this spot"}
 
-      it { should have_content "#{user.name}"}      
+      it { should have_content "#{OmniAuth.config.mock_auth[:facebook][:info][:name]}" }
     end
 
     describe 'in the past' do
-      # let(:cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
-      @cancellation = Cancellation.new(name: Faker::Name.name, instrument: "Guitar", start_at: "#{25.hours.from_now.strftime("%Y-%m-%d %H:%M")}", creator_id: 1)
-      @cancellation.start_at = "#{1.day.ago.strftime("%Y-%m-%d %H:%M")}"
+      let(:past_cancellation) { FactoryGirl.create(:cancellation, creator: another_user) }
 
       before do
-        puts "\n\n\n\n#{cancellation.start_at}\n\n\n\n"
-        puts "\n\n\n\n#{cancellation.start_at}\n\n\n\n"
-        cancellation.save
-        visit edit_cancellation_path @cancellation
-      end
-
-      it 'test' do
-      #   puts cancellation.start_at
-
-        puts page.html
-      end
+        past_cancellation.update_attribute(:start_at, "#{25.hours.ago.strftime("%Y-%m-%d %H:%M")}")
+        visit edit_cancellation_path past_cancellation
+      end 
 
       it { should_not have_link "Take this spot" }
     end
@@ -124,8 +113,7 @@ describe "Cancellation Pages" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
 
     before do
-      cancellation.save
-      user.add_role :admin
+      @user.add_role :admin
       visit edit_cancellation_path cancellation
     end
 
