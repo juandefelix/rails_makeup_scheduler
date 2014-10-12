@@ -3,12 +3,12 @@
   <div class="center span6 offset3">
     <%= render "cancellation" %>
 
-    <% if @cancellation.available? && !@cancellation.in_the_past?%>
+    <% if @cancellation.available? && !@cancellation.in_the_past? && !@cancellation.creator_same_as(current_user) %>
       <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
     <% end %>
 
 
-    <% if can? :destroy, @cancellation %> 
+    <% if can? :destroy, @cancellation%> 
       <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
     <% end %>
   </div>

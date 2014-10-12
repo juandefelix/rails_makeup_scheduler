@@ -10,7 +10,7 @@ describe "Cancellation Pages" do
 
   describe "Cancellation show" do
     let(:cancellation) do
-      FactoryGirl.create(:cancellation, creator: User.first)
+      FactoryGirl.create(:cancellation, creator: @user)
     end
 
     before { visit cancellation_path(cancellation) }
@@ -101,6 +101,16 @@ describe "Cancellation Pages" do
       before do
         past_cancellation.update_attribute(:start_at, "#{25.hours.ago.strftime("%Y-%m-%d %H:%M")}")
         visit edit_cancellation_path past_cancellation
+      end 
+
+      it { should_not have_link "Take this spot" }
+    end
+
+    describe 'created by himself' do
+      let(:cancellation) { FactoryGirl.create(:cancellation, creator: @user) }
+
+      before do
+        visit edit_cancellation_path cancellation
       end 
 
       it { should_not have_link "Take this spot" }
