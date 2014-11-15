@@ -33,7 +33,7 @@ module CancellationsHelper
   def last_name_used
     # 'name' takes the earliest cancellation in the latest day. 
     # We want the latest cancellatio in the lastest dat
-    name = current_user.created_cancellations.order(:created_at).first.try(:name)
+    name = current_user.created_cancellations.last.try(:name)
     new_cancellation_field(:name) || name || current_user.name
   end
 
