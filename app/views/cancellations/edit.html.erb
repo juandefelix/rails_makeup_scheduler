@@ -9,6 +9,19 @@
 
 
     <% if can? :destroy, @cancellation%> 
+
+      <%= form_for(@cancellation, method: 'put') do |f| %>
+
+        <%= render 'shared/error_messages' %>
+
+        <%= f.label :instrument, "Change Instrument" %>
+        <%= f.text_field :instrument %>
+
+        <br><br>
+    
+        <%= f.submit "Send", class: "btn btn-primary", id: "new"%>
+      <% end %>
+
       <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
     <% end %>
   </div>

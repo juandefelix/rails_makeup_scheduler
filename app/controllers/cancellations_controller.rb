@@ -42,7 +42,7 @@ class CancellationsController < ApplicationController
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
 
     @shown_month = Date.civil(@year, @month)
-
+      binding.pry
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
   end
 
@@ -53,19 +53,23 @@ class CancellationsController < ApplicationController
 
 
   def update
-    if @cancellation.creator_same_as current_user
-      flash.now[:error] = "You can not do a makeup of a lesson that you cancelled"
-      render :show
-    elsif current_user.exceeded_makeups?
-      flash[:error] = "Makeups will exceed number of cancellations"
-      redirect_to current_user
-    elsif @cancellation.in_the_past?
-      flash.now[:error] = "this date has passed. Please, select another date"
-      redirect_to cancellations_path
+    if current_user.has_role?(:admin)
+      @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
+      redirect_to cancellations_path, notice: "Successfully updated"
     else
-      @cancellation.update_attribute(:taker, current_user)
-      flash.now[:notice] = "Successfully updated"
-      redirect_to current_user
+      if @cancellation.creator_same_as current_user
+        flash.now[:error] = "You can not do a makeup of a lesson that you cancelled"
+        render :show
+      elsif current_user.exceeded_makeups?
+        flash[:error] = "Makeups will exceed number of cancellations"
+        redirect_to current_user
+      elsif @cancellation.in_the_past?
+        flash.now[:error] = "this date has passed. Please, select another date"
+        redirect_to cancellations_path
+      else
+        @cancellation.update_attribute(:taker, current_user)
+        redirect_to current_user, notice: "Successfully updated"
+      end
     end
   end
 
@@ -75,7 +79,6 @@ class CancellationsController < ApplicationController
     flash[:success] = "Absence deleted from your list."
     redirect_to cancellations_path
   end
-
 
   private
 
