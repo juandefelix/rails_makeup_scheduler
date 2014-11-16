@@ -7,14 +7,14 @@
       <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
     <% end %>
 
-
+    <br><br>
     <% if can? :destroy, @cancellation%> 
 
-      <%= form_for(@cancellation, method: 'put') do |f| %>
+      <%= form_for(@cancellation, url: {action: "admin_update"}) do |f| %>
 
         <%= render 'shared/error_messages' %>
 
-        <%= f.label :instrument, "Change Instrument" %>
+        <%= f.label :instrument, "Admin Change Instrument" %>
         <%= f.text_field :instrument %>
 
         <br><br>
