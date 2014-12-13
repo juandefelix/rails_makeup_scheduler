@@ -1,12 +1,8 @@
-@import "bootstrap";
-
-/* mixins, variables, etc. */
-
-$grayMediumLight: #eaeaea;
+// @import "bootstrap";
 
 /* mixins, variables, etc */
 
-$grayMediumLight: #eaeaea;
+$gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -58,7 +54,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  // color: $gray-light;
 }
 
 p {
@@ -69,19 +65,23 @@ p {
 /* header */
 
 #logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
+  // float: left;
+  // margin-right: 10px;
+  // font-size: 1.25em;
   color: #fff;
   // text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  line-height: 1;
+  // letter-spacing: -1px;
+  // font-weight: bold;
+  // line-height: 1;
   &:hover {
     color: #fff;
     text-decoration: none;
   }
+}
+
+#brand {
+  color: #fff;
+  font-weight: bold;
 }
 
 /* footer */
@@ -91,7 +91,7 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
-  color: $grayLight;
+  // color: $gray-light;
   a {
     color: #555;
     &:hover {
@@ -126,7 +126,7 @@ footer {
 aside {
   section{
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    // border-top: 1px solid $gray-lighter;
     &:first-child {
       border: 0;
       padding-top: 0;
