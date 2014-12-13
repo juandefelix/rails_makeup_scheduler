@@ -2,7 +2,7 @@
 <div class="jumbotron" id="home-jumbotron">
   <h2>Bucktown Music<br/>Makeup Scheduler</h2>
   <p>This application was designed to help you manage lesson cancellations</p>
-    <div id="home_button_container">
+    <div id="home-button-container">
       <% if signed_in?%>
         <%= link_to "Absence Notification", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
         <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
