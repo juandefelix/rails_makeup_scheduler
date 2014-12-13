@@ -64,6 +64,11 @@ p {
 
 /* header */
 
+#brand-logo{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
 #logo {
   // float: left;
   // margin-right: 10px;
@@ -228,17 +233,13 @@ input {
 }
 
 #home_button_container {
-  width: 45%;
+  // width: 45%;
   // text-align: center;
   margin: 0 auto;
 }
 
 #sign-in {
   width: 50%;
-}
-
-.hero-unit {
-  border: 1px solid #D5D5D5;
 }
 
 .table_container {
