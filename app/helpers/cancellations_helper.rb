@@ -110,5 +110,10 @@ module CancellationsHelper
 
     end
   end
+
+  def taken_time(user, index)
+    cancellation = user.taken_cancellations[index]
+    "#{cancellation.get_date} #{cancellation.get_time}" if cancellation
+  end
 end
 
