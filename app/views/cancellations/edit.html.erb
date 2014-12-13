@@ -1,6 +1,6 @@
 <% provide :title, "Edit | #{@cancellation.start_at}"%>
 <div class="row">
-  <div class="center span6 offset3">
+  <div class="col-sm-6 col-sm-offset-3">
     <%= render "cancellation" %>
 
     <% if @cancellation.available? && !@cancellation.in_the_past? && !@cancellation.creator_same_as(current_user) %>
