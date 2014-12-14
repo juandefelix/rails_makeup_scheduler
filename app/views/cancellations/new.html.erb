@@ -5,27 +5,34 @@
   <div class="col-sm-4 col-sm-offset-4">
     <h1> Notify an absence </h1>
 
-    <%= form_for(@cancellation) do |f| %>
+    <%= form_for @cancellation, html: { role: 'form' } do |f| %>
 
         <%= render 'shared/error_messages' %>
+        <div class="form-group">
+            <%= f.label :name, "Student Name" %>
+            <%= f.text_field :name, placeholder: "STUDENT NAME", value: "#{last_name_used}", class: 'form-control'  %>
+        </div>
 
-        <%= f.label :name, "Student Name" %>
-        <%= f.text_field :name, placeholder: "STUDENT NAME", value: "#{last_name_used}" %>
+        <div class="form-group">
+            <%= f.label :instrument, "Instrument" %>
+            <%= f.text_field :instrument, placeholder: "INSTRUMENT", value: "#{last_instrument_used}", class: 'form-control' %>
+        </div>
 
-        <%= f.label :instrument, "Instrument" %>
-        <%= f.text_field :instrument, placeholder: "INSTRUMENT", value: "#{last_instrument_used}" %>
+        <div class="form-group">
+            <%= label_tag :date, "Absence Date" %>
+            <%= text_field_tag :date, nil, placeholder: "ABSENCE DATE (mm/dd/yy)", value: next_date_formatted, class: 'form-control' %>
+        </div>
 
-        <%= label_tag :date, "Absence Date" %>
-        <%= text_field_tag :date, nil, placeholder: "ABSENCE DATE (mm/dd/yy)", value: next_date_formatted %>
-
-        <%= f.label :start_at, "Start time" %>
-        <%= f.select(:start_at, options_for_select(times, next_hour_available)) %>
-        <%= label_tag(:school_code, "School Code:") %>
-        <%= text_field_tag(:school_code) %>
-
-        <br><br>
+        <div class="form-group">
+            <%= f.label :start_at, "Start time" %>
+            <%= f.select(:start_at, options_for_select(times, next_hour_available), {}, class: 'form-control' ) %>
+        </div>
+        <div class="form-group">
+            <%= label_tag :school_code, "School Code:" %>
+            <%= text_field_tag :school_code, nil, class: 'form-control' %>
+        </div>
     
-    <%= f.submit "Send", class: "btn btn-primary", id: "new"%>
+    <%= f.submit "Send", class: "btn btn-primary", id: "new-button"%>
 
 
     <% end %>
