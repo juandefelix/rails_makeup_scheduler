@@ -23,7 +23,7 @@ class CancellationsController < ApplicationController
         format.html { redirect_to @cancellation }
         format.js { render :json => @cancellation.id  }
       else
-        flash[:error] = "An error occurred when trying to notify an absence"
+        flash[:danger] = "An error occurred when trying to notify an absence"
         format.html { render :new }
         format.js { render :text => "new"}
       end
@@ -53,23 +53,23 @@ class CancellationsController < ApplicationController
 
   def update
     if @cancellation.creator_same_as current_user
-      flash.now[:error] = "You can not do a makeup of a lesson that you cancelled"
+      flash.now[:damger] = "You can not do a makeup of a lesson that you cancelled"
       render :show
     elsif current_user.exceeded_makeups?
-      flash[:error] = "Makeups will exceed number of cancellations"
+      flash[:damger] = "Makeups will exceed number of cancellations"
       redirect_to current_user
     elsif @cancellation.in_the_past?
-      flash.now[:error] = "this date has passed. Please, select another date"
+      flash.now[:danger] = "this date has passed. Please, select another date"
       redirect_to cancellations_path
     else
       @cancellation.update_attribute(:taker, current_user)
-      redirect_to current_user, notice: "Successfully updated"
+      redirect_to current_user, warning: "Successfully updated"
     end
   end
 
   def admin_update
     @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    redirect_to cancellations_path, notice: "Successfully updated"
+    redirect_to cancellations_path, warning: "Successfully updated"
   end
 
   def destroy
@@ -104,7 +104,7 @@ class CancellationsController < ApplicationController
     def check_date_format
       # binding.pry
       unless valid_date?(params[:date], "%m/%d/%Y") || valid_date?(params[:date], "%m-%d-%Y")
-        flash.now[:error] = "Date format not valid"
+        flash.now[:danger] = "Date format not valid"
         @cancellation = Cancellation.new
         render :new
       end
@@ -120,7 +120,7 @@ class CancellationsController < ApplicationController
 
     def check_school_code
       unless params[:school_code] == CONFIG[:school_code]
-        redirect_to new_cancellation_path, flash: { error: 'School Code is not correct' }
+        redirect_to new_cancellation_path, flash: { danger: 'School Code is not correct' }
       end
     end
 end

@@ -23,16 +23,16 @@
     user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
     if user
       sign_in user
-      redirect_to root_url, :notice => "Signed in!"
+      redirect_to root_url, :warning => "Signed in!"
     else
-      flash.now[:error] = "Something went wrong, try again"
+      flash.now[:danger] = "Something went wrong, try again"
       # render :new
       redirect_to root_url
     end
   end
 
   def failure
-    flash[:error] = "This application needs you to login with Facebook"
+    flash[:danger] = "This application needs you to login with Facebook"
     redirect_to root_url
   end
 
