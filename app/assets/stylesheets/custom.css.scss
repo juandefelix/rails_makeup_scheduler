@@ -70,14 +70,7 @@ p {
 }
 
 #logo {
-  // float: left;
-  // margin-right: 10px;
-  // font-size: 1.25em;
   color: #fff;
-  // text-transform: uppercase;
-  // letter-spacing: -1px;
-  // font-weight: bold;
-  // line-height: 1;
   &:hover {
     color: #fff;
     text-decoration: none;
@@ -243,5 +236,12 @@ aside {
     tr, td, th {
       text-align: center;
     }
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (max-width: 768px) {
+  #logo {
+    padding-left: 15px;
   }
 }
