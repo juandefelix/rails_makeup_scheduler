@@ -67,11 +67,6 @@ class CancellationsController < ApplicationController
     end
   end
 
-  def admin_update
-    @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    redirect_to cancellations_path, warning: "Successfully updated"
-  end
-
   def destroy
     @cancellation.destroy
     flash[:success] = "Absence deleted from your list."
