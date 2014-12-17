@@ -1,5 +1,10 @@
 RailsMakeupScheduler::Application.routes.draw do
 
+  get "users/index"
+  get "users/show"
+  get "users/edit"
+  get "users/update"
+  get "users/delete"
   get "cancellations/show"
   get "cancellations/new"
   get "cancellations/create"
