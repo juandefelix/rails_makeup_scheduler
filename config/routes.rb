@@ -1,5 +1,11 @@
 RailsMakeupScheduler::Application.routes.draw do
 
+  get "cancellations/show"
+  get "cancellations/new"
+  get "cancellations/create"
+  get "cancellations/edit"
+  get "cancellations/update"
+  get "cancellations/index"
   root 'static_pages#home'
 
   
@@ -13,14 +19,12 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  resources :cancellations do
-    member  do
-      patch 'admin' => 'cancellations#admin_update', as: :admin
-    end    
-  end
-
   resources :users
   resources :sessions, only: [:create, :destroy]
+
+  namespace :admin do
+   resources :cancellations, :users
+ end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
