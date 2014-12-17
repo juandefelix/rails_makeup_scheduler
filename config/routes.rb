@@ -1,30 +1,15 @@
 RailsMakeupScheduler::Application.routes.draw do
-
-  get "users/index"
-  get "users/show"
-  get "users/edit"
-  get "users/update"
-  get "users/delete"
-  get "cancellations/show"
-  get "cancellations/new"
-  get "cancellations/create"
-  get "cancellations/edit"
-  get "cancellations/update"
-  get "cancellations/index"
   root 'static_pages#home'
-
+  match '/help',   to: 'static_pages#help',   via: 'get'
+  match '/about',  to: 'static_pages#about',  via: 'get'
   
   match '/cancellations(/:year(/:month))', to: 'cancellations#index', via: 'get', :as => :cancellations, 
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   
-  match '/help',   to: 'static_pages#help',   via: 'get'
-  match '/about',  to: 'static_pages#about',  via: 'get'
-  # match '/signup', to: 'users#new',           via: 'get'
-  # match '/signin', to: 'sessions#new',        via: 'get'
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  resources :users
+  resources :users, :cancellations
   resources :sessions, only: [:create, :destroy]
 
   namespace :admin do
