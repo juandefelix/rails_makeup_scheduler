@@ -1,6 +1,7 @@
 class Admin::CancellationsController < ApplicationController
   def index
   end
+  
   def show
   end
 
@@ -18,9 +19,6 @@ class Admin::CancellationsController < ApplicationController
     redirect_to cancellations_path, warning: "Successfully updated"
   end
 
-
-  end
-
-  def index
+  def destroy
   end
 end

@@ -14,7 +14,7 @@ describe "Static Pages" do
     describe "without signing in" do
       it { should have_link("Sign in") }
       it { should_not have_link("Available Makeups")}
-      it { should_not have_link("Notify an Absence")}
+      it { should_not have_link("Absence Notification")}
     end
 
     describe "after signin in" do
@@ -29,7 +29,7 @@ describe "Static Pages" do
 
       it { should_not have_link("Sign in") }
       it { should have_link("Available Makeups")}
-      it { should have_link("Notify an Absence")}
+      it { should have_link("Absence Notification")}
     end
 
 

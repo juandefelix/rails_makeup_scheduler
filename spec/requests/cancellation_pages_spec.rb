@@ -6,24 +6,28 @@ describe "Cancellation Pages" do
 
   before do
     sign_in
+    @user = User.first
   end  
 
   describe "Cancellation show" do
-    let(:cancellation) do
-      FactoryGirl.create(:cancellation, creator: @user)
-    end
+
+    let(:cancellation) { FactoryGirl.create(:cancellation, creator: @user) }
 
     before { visit cancellation_path(cancellation) }
 
-    it { should have_content(cancellation.name) }
+    it do 
+      puts "********\nUSER:#{@user.id}"
+      should have_content(cancellation.name) 
+    end
+    
     it { should have_title(full_title("#{cancellation.instrument} #{cancellation.start_at.strftime("%m-%d-%y")}")) }
   end
 
   describe "Cancellationa new (Notify and absence page)" do
     before { visit new_cancellation_path }
     
-    it { should have_title "Notify an absence"}
-    it { should have_title(full_title("Notify an absence")) }
+    it { should have_title "Absence Notification"}
+    it { should have_title(full_title("Absence Notification")) }
   end
 
   describe "Create an absence" do

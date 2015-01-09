@@ -29,11 +29,11 @@ end
 #   end
 # end
 
-def admin_sign_in
-  FactoryGirl.create(:admin, provider: 'facebook', uid: '1337', name: 'Juan Ortiz')
-  visit '/auth/facebook'
-end
+# def admin_sign_in
+  # FactoryGirl.create(:admin, provider: 'facebook', uid: '1337', name: 'Juan Ortiz')
+  # sign_in
+# end
 
-def sign_in
+def sign_in(user=nil)
   visit '/auth/facebook'
 end
