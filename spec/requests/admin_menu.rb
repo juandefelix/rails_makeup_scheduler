@@ -3,8 +3,6 @@ require 'spec_helper'
 describe "Admin Menu" do
 
   subject { page }
-  let(:user) { FactoryGirl.create(:user)}
-  let(:admin) { FactoryGirl.create(:admin)}
 
   describe "signing in a non admin user" do
     before do 
@@ -23,13 +21,19 @@ describe "Admin Menu" do
       admin_sign_in
     end
 
-    it 'has the user name' do
+    it 'has the right user name' do
       should have_content "Juan Ortiz"
+      should_not have_content "Luis Ortiz"
     end
 
     it "has the admin menu" do
       should have_content "Admin Section" 
     end
 
+    it "has the link in the admin menu" do
+      should have_content "All Users" 
+      should have_content "Notification on behalf of a student" 
+      should have_content "Admin Calendar" 
+    end
   end
 end

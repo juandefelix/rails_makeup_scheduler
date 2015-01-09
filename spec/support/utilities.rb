@@ -30,9 +30,8 @@ end
 # end
 
 def admin_sign_in
+  FactoryGirl.create(:admin, provider: 'facebook', uid: '1337', name: 'Juan Ortiz')
   visit '/auth/facebook'
-  User.find_by_provider_and_uid('facebook', '1337').add_role :admin
-  visit root_path
 end
 
 def sign_in
