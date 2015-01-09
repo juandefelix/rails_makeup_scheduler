@@ -12,6 +12,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "person#{n}@example.com" }
     sequence(:uid)   { |n| "#{n}" }
     provider "facebook"
+
+    factory :admin do
+      after(:create) {|user| user.add_role(:admin)}
+    end
   end
 end
 
