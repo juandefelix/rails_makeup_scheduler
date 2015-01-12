@@ -97,10 +97,9 @@ module CancellationsHelper
       :event_strips => @event_strips,
       :month_name_text => I18n.localize(@shown_month, :format => "%B %Y"),
       :previous_month_text => "< " + month_link(@shown_month.prev_month),
-      :next_month_text => month_link(@shown_month.next_month) + " >"    }
-      # :link_to_day_action => true
+      :next_month_text => month_link(@shown_month.next_month) + " >"
+    }
     end
-
 
     def event_calendar
     # args is an argument hash containing :event, :day, and :options
