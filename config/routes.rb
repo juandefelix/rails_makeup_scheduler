@@ -5,6 +5,9 @@ RailsMakeupScheduler::Application.routes.draw do
   
   match '/cancellations(/:year(/:month))', to: 'cancellations#index', via: 'get', :as => :cancellations, 
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  match '/cancellations(/:year/:month/:day)', to: 'admin/cancellations#day', via: 'get', 
+                                          :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
@@ -14,7 +17,7 @@ RailsMakeupScheduler::Application.routes.draw do
 
   namespace :admin do
    resources :cancellations, :users
- end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
