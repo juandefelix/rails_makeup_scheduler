@@ -35,7 +35,10 @@ describe "Admin Pages" do
     it "has the link in the admin menu" do
       should have_content "All Users" 
       should have_content "Notification on behalf of a student" 
-      should have_content "Admin Calendar" 
+    end
+
+    it "has the Admin Calendat link" do
+      should have_content "Admin Calendar", href: admin_cancellations_path
     end
   end
 end

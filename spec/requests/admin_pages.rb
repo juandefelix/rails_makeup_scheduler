@@ -29,4 +29,20 @@ describe "Admin Pages" do
 
     it { should_not have_link('delete', href: user_path(admin)) }
   end
+
+  describe "Admin Calendar" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:admin) { FactoryGirl.create(:admin) }
+
+    before do
+      sign_in admin
+      user
+      click_link "Admin Calendar"
+    end
+
+    it "should have the right content" do
+      page.should have_css('h1', :text => "Admin Calendar")
+      page.should_not have_css('h1', :text => "Available Makeups")
+    end
+  end
 end
