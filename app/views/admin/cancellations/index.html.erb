@@ -1,2 +1,8 @@
-<h1>Admin::Cancellations#index</h1>
-<p>Find me in app/views/admin/cancellations/index.html.erb</p>
+<% provide :title, "Admin Calendar"%>
+<%= stylesheet_link_tag "event_calendar" %>
+<%= javascript_include_tag "event_calendar" %>
+
+<div class="col-lg-10 col-lg-offset-1">
+  <h1>Admin Calendar</h1>
+    <%= raw(admin_event_calendar) %>
+</div>
