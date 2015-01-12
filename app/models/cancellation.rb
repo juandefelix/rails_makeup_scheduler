@@ -1,4 +1,4 @@
-  class Cancellation < ActiveRecord::Base
+class Cancellation < ActiveRecord::Base
   
   belongs_to :creator, class_name: "User"
   belongs_to :taker, class_name: "User"
@@ -18,6 +18,13 @@
 
   resourcify
 
+
+  def self.by_day(year, month, day)
+    date = DateTime.new(year, month, day)
+    beginning_of_day = date.beginning_of_day
+    end_of_day = date.end_of_day
+    where("start_at >= ? and start_at <= ?", beginning_of_day, end_of_day)
+  end
 
   # Instance methods  
 
