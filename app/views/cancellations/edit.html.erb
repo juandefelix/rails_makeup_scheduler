@@ -1,6 +1,6 @@
 <% provide :title, "Edit | #{@cancellation.start_at}"%>
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
+  <div class="col-sm-4 col-sm-offset-4 makeup">
     <%= render "cancellation" %>
 
     <% if @cancellation.available? && !@cancellation.in_the_past? && !@cancellation.creator_same_as(current_user) %>
@@ -8,21 +8,5 @@
     <% end %>
 
     <br><br>
-    <% if can? :destroy, @cancellation%> 
-
-      <%= form_for(@cancellation, url: {action: "admin_update"}) do |f| %>
-
-        <%= render 'shared/error_messages' %>
-
-        <%= f.label :instrument, "Admin Change Instrument" %>
-        <%= f.text_field :instrument %>
-
-        <br><br>
-    
-        <%= f.submit "Send", class: "btn btn-primary", id: "new"%>
-      <% end %>
-
-      <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"} %>
-    <% end %>
   </div>
 </div>
