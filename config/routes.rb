@@ -6,7 +6,7 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/cancellations', to: 'cancellations#index', via: 'get', :as => :cancellations, 
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
-  match '/admin/cancellations', to: 'admin/cancellations#index', via: 'get', :as => :admin_cancellations
+  match '/admin/cancellations/:year/:month', to: 'admin/cancellations#index', via: 'get', :as => :admin_cancellations
                   
   match '/admin/cancellations/:year/:month/:day', to: 'admin/cancellations#day', via: 'get', :as => :day_admin_cancellations,
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
