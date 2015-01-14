@@ -3,10 +3,12 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/help',   to: 'static_pages#help',   via: 'get'
   match '/about',  to: 'static_pages#about',  via: 'get'
   
-  match '/cancellations(/:year(/:month))', to: 'cancellations#index', via: 'get', :as => :cancellations, 
+  match '/cancellations', to: 'cancellations#index', via: 'get', :as => :cancellations, 
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
-  match '/cancellations(/:year/:month/:day)', to: 'admin/cancellations#day', via: 'get', 
+  match '/admin/cancellations', to: 'admin/cancellations#index', via: 'get', :as => :admin_cancellations
+                  
+  match '/admin/cancellations/:year/:month/:day', to: 'admin/cancellations#day', via: 'get', :as => :day_admin_cancellations,
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
