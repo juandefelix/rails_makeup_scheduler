@@ -1,8 +1,8 @@
 <%= provide(:title, "Edit Cancellation")%>
 
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-    <h1>Edit Cancellation</h1>
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5">
+    <h1>Edit / Delete Cancellation</h1>
       <%= form_for @cancellation, html: { role: 'form' } do |f| %>
 
         <%= render 'shared/error_messages' %>
@@ -12,10 +12,8 @@
           <%= f.text_field :instrument, class: 'form-control' %>
         </div>
 
-        <br><br>
-
-        <%= f.submit "Send", class: "btn btn-primary new-button", id: "new"%>
+        <%= f.submit "Send", class: "btn btn-primary edit-btn", id: "new"%>
       <% end %>
-      <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"}, id: "delete-link" %>
+      <%= link_to "delete cancellation", @cancellation, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-danger edit-btn"%>
   </div>
 </div>
