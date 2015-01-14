@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :check_admin_role
+  
   def index
     @users = User.all.order :name
   end

@@ -1,4 +1,5 @@
 class Admin::CancellationsController < ApplicationController
+  before_action :check_admin_role
   def index
     @cancellations = Cancellation.all
 
