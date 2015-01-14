@@ -8,6 +8,7 @@
     <%= form_for @cancellation, html: { role: 'form' } do |f| %>
 
         <%= render 'shared/error_messages' %>
+
         <div class="form-group">
             <%= f.label :name, "Student Name" %>
             <%= f.text_field :name, placeholder: "STUDENT NAME", value: "#{last_name_used}", class: 'form-control'  %>
@@ -27,6 +28,7 @@
             <%= f.label :start_at, "Start time" %>
             <%= f.select(:start_at, options_for_select(times, next_hour_available), {}, class: 'form-control' ) %>
         </div>
+        
         <div class="form-group">
             <%= label_tag :school_code, "School Code:" %>
             <%= text_field_tag :school_code, nil, class: 'form-control' %>

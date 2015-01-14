@@ -47,7 +47,6 @@ class CancellationsController < ApplicationController
 
 
   def edit
-    @cancellation = Cancellation.find(params[:id])
   end
 
 
