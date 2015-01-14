@@ -244,7 +244,9 @@ aside {
   }
 }
 
-#delete-link {}
+.user-link {
+  font-weight: bold;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media screen and (max-width: 768px) {
