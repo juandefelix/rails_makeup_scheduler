@@ -1,5 +1,6 @@
 class Admin::CancellationsController < ApplicationController
   before_action :check_admin_role
+  before_action :find_cancellation, only: [:edit, :update, :destroy]
   def index
     @cancellations = Cancellation.all
 
@@ -26,20 +27,38 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def new
+    @cancellation = Cancellation.new
   end
 
   def create
+    user_name = User.find(params[:user_id]).name
+    @cancellation = Cancellation.new(name: user_name,
+                                     instrument: params[:cancellation][:instrument],
+                                     start_at: get_date_time, 
+                                     end_at: (get_date_time + 30.minutes),
+                                     creator_id: params[:user_id])
+
+    if @cancellation.save
+      flash[:success] = "Succesfully notified..."
+      redirect_to admin_cancellations_path
+    else
+      flash[:danger] = "An error occurred when trying to notify an absence"
+      render :new
+    end
   end
 
   def edit
-    @cancellation = Cancellation.find params[:id]
   end
 
   def update
     @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    redirect_to cancellations_path, warning: "Successfully updated"
+    flash[:success] = "Successfully updated"
+    redirect_to admin_cancellations_path
   end
 
   def destroy
+    @cancellation.destroy
+    flash[:success] = "Absence deleted from your list."
+    redirect_to admin_cancellations_path
   end
 end

@@ -1,2 +1,42 @@
-<h1>Admin::Cancellations#new</h1>
-<p>Find me in app/views/admin/cancellations/new.html.erb</p>
+<%= provide(:title, "Notification on behalf of a student")%>
+
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <h1> Notification on behalf of a student </h1>
+
+    <%= form_for [:admin, @cancellation], html: { role: 'form' } do |f| %>
+
+        <%= render 'shared/error_messages' %>
+
+        <div class="form-group">
+            <%= label_tag :user_id, "User" %>
+            <%= select_tag(:user_id, options_for_select(all_users), class: 'form-control') %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :instrument, "Instrument" %>
+            <%= f.text_field :instrument, placeholder: "INSTRUMENT", value: "#{last_instrument_used}", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+            <%= label_tag :date, "Absence Date" %>
+            <%= text_field_tag :date, nil, placeholder: "ABSENCE DATE (mm/dd/yy)", value: next_date_formatted, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :start_at, "Start time" %>
+            <%= f.select(:start_at, options_for_select(times, next_hour_available), {}, class: 'form-control' ) %>
+        </div>
+
+        <div class="form-group">
+            <%= label_tag :school_code, "School Code:" %>
+            <%= text_field_tag :school_code, nil, class: 'form-control' %>
+        </div>
+    
+    <%= f.submit "Send", class: "btn btn-primary new-button" %>
+
+
+    <% end %>
+  </div>
+</div>
