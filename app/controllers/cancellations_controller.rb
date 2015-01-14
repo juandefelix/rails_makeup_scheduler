@@ -74,10 +74,6 @@ class CancellationsController < ApplicationController
 
   private
 
-    def find_cancellation
-      @cancellation = Cancellation.find(params[:id])
-    end
-
     def cancellation_params
       params.require(:cancellation).permit(:name, :instrument, :start_at)
     end
