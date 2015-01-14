@@ -4,10 +4,10 @@ describe "Admin Pages" do
 
   subject { page }
 
-  describe "All Users" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:admin) { FactoryGirl.create(:admin) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:admin) }
 
+  describe "All Users" do
     before do
       sign_in admin
       user
@@ -31,16 +31,13 @@ describe "Admin Pages" do
   end
 
   describe "Admin Calendar" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:admin) { FactoryGirl.create(:admin) }
-
     before do
       sign_in admin
-      user
       click_link "Admin Calendar"
     end
 
     it "should have the right content" do
+      # save_and_open_page
       page.should have_css('h1', :text => "Admin Calendar")
       page.should_not have_css('h1', :text => "Available Makeups")
     end
