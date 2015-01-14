@@ -16,7 +16,6 @@ describe "Cancellation Pages" do
     before { visit cancellation_path(cancellation) }
 
     it do 
-      puts "********\nUSER:#{@user.id}"
       should have_content(cancellation.name) 
     end
     
@@ -46,7 +45,7 @@ describe "Cancellation Pages" do
       before do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
-        fill_in "Date", with: "12/4/14"
+        fill_in "Date", with: 2.days.from_now.strftime("%-m/%d/%y")
         fill_in "School Code", with: "#{CONFIG[:school_code]}"
         select "3:30 pm", :from => "Start time" 
       end
@@ -121,14 +120,12 @@ describe "Cancellation Pages" do
     end
   end
 
-
-
   describe "delete cancellations" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
 
     before do
       @user.add_role :admin
-      visit edit_cancellation_path cancellation
+      visit edit_admin_cancellation_path cancellation
     end
 
     it { should have_link("delete cancellation", href: cancellation_path(cancellation) ) }
