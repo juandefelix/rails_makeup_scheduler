@@ -1,14 +1,10 @@
 <%= provide(:title, "Edit Cancellation")%>
 
+<h1>Edit / Delete Cancellation</h1>
 <div class="row">
   <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5">
-    <h1>Edit / Delete Cancellation</h1>
+      <%= render "cancellations/cancellation" %>
       <%= form_for [:admin, @cancellation], html: { role: 'form' } do |f| %>
-
-        <p><b>Name: </b><%= @cancellation.name %></p>
-
-    <p><b>Time: </b><%= @cancellation.get_time %></p>
-    <p><b>Date: </b><%= @cancellation.get_date %></p>
 
         <%= render 'shared/error_messages' %>
 

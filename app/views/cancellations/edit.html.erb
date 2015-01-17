@@ -1,12 +1,11 @@
 <% provide :title, "Edit | #{@cancellation.start_at}"%>
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4 makeup">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5">
+    <h1>Absence</h1>
     <%= render "cancellation" %>
 
     <% if @cancellation.available? && !@cancellation.in_the_past? && !@cancellation.creator_same_as(current_user) %>
       <%= link_to "Take this spot", cancellation_path, method: :patch, class: "btn btn-primary" %>
     <% end %>
-
-    <br><br>
   </div>
 </div>
