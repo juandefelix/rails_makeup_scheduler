@@ -2,13 +2,11 @@ class Admin::CancellationsController < ApplicationController
   before_action :check_admin_role
   before_action :find_cancellation, only: [:edit, :update, :destroy]
   def index
-    @cancellations = Cancellation.all
-
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
 
     @shown_month = Date.civil(@year, @month)
-    @event_strips = Cancellation.event_strips_for_month(@shown_month)
+    @event_strips = Cancellation.reorder(:start_at).event_strips_for_month(@shown_month)
 
     # To restrict what events are included in the result you can pass additional find options like this:
     #
