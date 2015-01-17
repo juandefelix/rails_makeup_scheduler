@@ -9,9 +9,13 @@ module Admin::CancellationsHelper
       :month => @month,
       :event_strips => @event_strips,
       :month_name_text => I18n.localize(@shown_month, :format => "%B %Y"),
-      :previous_month_text => "< " + month_link(@shown_month.prev_month),
-      :next_month_text => month_link(@shown_month.next_month) + " >",
-      :link_to_day_action => "day"
+      :previous_month_text => "<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>   #{month_link(@shown_month.prev_month)}",
+      :next_month_text => "#{month_link(@shown_month.next_month)}   <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>",
+      :link_to_day_action => "day",
+      :event_height => 34,
+      :event_padding_top => 7,
+      :day_names_height => 22,
+      :day_nums_height => 22
     }
   end
 
@@ -19,7 +23,7 @@ module Admin::CancellationsHelper
     # args is an argument hash containing :event, :day, and :options
     calendar admin_event_calendar_opts do |args|
       event = args[:event]
-      %(<a href="#{edit_admin_cancellation_path(event.id)}" title="#{h(event.instrument)}">#{h(event.instrument)} #{h(event.get_time)} #{"RESERV" unless event.available?}</a>) 
+      %(<a href="#{edit_admin_cancellation_path(event.id)}" title="#{h(event.instrument)}">#{h(event.instrument)} #{h(event.get_time)} #{"RESERVED" unless event.available?}</a>) 
     end
   end
 

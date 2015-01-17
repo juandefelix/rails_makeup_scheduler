@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+# Setting up ENV variables
 config = YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
 config.merge! config.fetch(Rails.env, {})
 config.each do |key, value|
