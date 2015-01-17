@@ -41,7 +41,7 @@ class CancellationsController < ApplicationController
 
     @shown_month = Date.civil(@year, @month)
     # binding.pry
-    @event_strips = Cancellation.reorder(:start_at).event_strips_for_month(@shown_month)
+    @event_strips = Cancellation.event_strips_for_month(@shown_month)
   end
 
 
