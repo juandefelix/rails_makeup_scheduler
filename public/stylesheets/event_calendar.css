@@ -51,7 +51,7 @@
 /* Containers */
 .ec-body {
   position: relative;
-  border-right: 1px solid #303030;
+  /*border-right: 1px solid #303030;*/
   white-space: nowrap;
 }
 
