@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/juandefelix/event_calendar.git
+  revision: 0ba30e33dfe801b3d91252a2bf76018a29faf4f9
+  specs:
+    event-calendar (2.3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,7 +66,6 @@ GEM
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    event-calendar (2.3.3)
     execjs (2.0.2)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -245,7 +250,7 @@ DEPENDENCIES
   capybara (= 2.1.0)
   childprocess (= 0.3.6)
   coffee-rails (~> 4.0.1)
-  event-calendar
+  event-calendar!
   factory_girl_rails (= 4.2.1)
   faker
   guard-rspec (= 2.5.0)
