@@ -84,6 +84,11 @@ module CancellationsHelper
   def formatted_time_now
     Time.now.strftime("%m/%d/%y")
   end
+
+  def taken_time(user, index)
+    cancellation = user.taken_cancellations[index]
+    "#{cancellation.get_date} #{cancellation.get_time}" if cancellation
+  end
   
   # custom options for this calendar
   def month_link(month_date)
@@ -110,13 +115,7 @@ module CancellationsHelper
     calendar event_calendar_opts do |args|
       event = args[:event]
       %(<a href="/cancellations/#{event.id}/edit" title="#{h(event.instrument)}">#{h(event.instrument)} #{h(event.get_time)} #{"RESERVED" unless event.available?}</a>) 
-
     end
-  end
-
-  def taken_time(user, index)
-    cancellation = user.taken_cancellations[index]
-    "#{cancellation.get_date} #{cancellation.get_time}" if cancellation
   end
 end
 
