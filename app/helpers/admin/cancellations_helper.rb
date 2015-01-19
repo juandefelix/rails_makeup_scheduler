@@ -35,7 +35,6 @@ module Admin::CancellationsHelper
   end
 
   def taker_of(cancellation)
-    return '' unless cancellation.taker
-    cancellation.taker.name
+    cancellation.taker ? cancellation.taker.name : ''
   end
 end

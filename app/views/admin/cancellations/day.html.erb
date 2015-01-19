@@ -17,7 +17,7 @@
             <td><%= cancellation.get_time %></td>
             <td><%= cancellation.instrument.capitalize %></td>
             <td><%= cancellation.creator.name %></td>
-            <td><%= cancellation.taker.name %></td>
+            <td><%= taker_of cancellation  %></td>
           </tr>
       <% end %>
     </table>
