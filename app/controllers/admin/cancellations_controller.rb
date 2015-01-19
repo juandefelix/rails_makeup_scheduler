@@ -1,5 +1,6 @@
 class Admin::CancellationsController < ApplicationController
   before_action :check_admin_role
+  before_action :check_school_code, only: :create
   before_action :find_cancellation, only: [:edit, :update, :destroy]
 
   def index
