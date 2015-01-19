@@ -1,6 +1,7 @@
 class Admin::CancellationsController < ApplicationController
   before_action :check_admin_role
   before_action :find_cancellation, only: [:edit, :update, :destroy]
+
   def index
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
@@ -40,12 +41,13 @@ class Admin::CancellationsController < ApplicationController
       flash[:success] = "Succesfully notified..."
       redirect_to admin_cancellations_path
     else
-      flash[:danger] = "An error occurred when trying to notify an absence"
+      flash[:danger] = "An error occurred when trying to notify an absence."
       render :new
     end
   end
 
   def edit
+    flash[:warning] = "Cancellation already taken. Make sure yo want to modify or delete it." if @cancellation.taker
   end
 
   def update

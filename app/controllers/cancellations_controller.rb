@@ -92,7 +92,6 @@ class CancellationsController < ApplicationController
     end
 
     def check_date_format
-      # binding.pry
       unless valid_date?(params[:date], "%m/%d/%Y") || valid_date?(params[:date], "%m-%d-%Y")
         flash.now[:danger] = "Date format not valid"
         @cancellation = Cancellation.new
