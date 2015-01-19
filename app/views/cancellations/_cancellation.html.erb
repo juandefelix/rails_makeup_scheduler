@@ -1,3 +1,4 @@
+<div class="cancellation">
   <% if  current_user.has_role?(:admin) %>
     <h4><b>Name: </b><%= @cancellation.name %></h4>
   <% end %>
@@ -7,3 +8,4 @@
   <h4><b>Instrument: </b><%= @cancellation.instrument.capitalize %></h4>
   <h4><b>Date: </b><%= @cancellation.get_date %></p>
   <h4><b>Time: </b><%= @cancellation.get_time %></h4>
+</div>

@@ -33,7 +33,7 @@ class Cancellation < ActiveRecord::Base
   end
 
   def in_the_past
-    errors[:base]= "Date and time can not be in the past"     if self.start_at < Time.now
+    errors[:base]= "Date and time can not be in the past" if self.start_at < Time.now
   end
 
   def in_the_past?
