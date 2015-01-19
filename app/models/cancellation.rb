@@ -3,7 +3,7 @@ class Cancellation < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   belongs_to :taker, class_name: "User"
 
-  default_scope -> { order('start_at DESC') }
+  default_scope -> { order('start_at ASC') }
 
   has_event_calendar 
 

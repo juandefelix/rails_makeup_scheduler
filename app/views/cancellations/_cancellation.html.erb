@@ -1,9 +1,9 @@
-  <% if params[:action] == "show" || current_user.has_role?(:admin) %>
-    <p><b>Name: </b><%= @cancellation.name %></p>
+  <% if  current_user.has_role?(:admin) %>
+    <h4><b>Name: </b><%= @cancellation.name %></h4>
   <% end %>
-  <% if current_user.has_role?(:admin) && @cancellation.taker.try(:name) %>
-    <p><b>Makeup: </b><%= @cancellation.taker.name %></p>
+  <% if current_user.has_role?(:admin) && @cancellation.taker %>
+    <h4><b>Makeup: </b><%= @cancellation.taker.name %></h4>
   <% end %>
-  <p><b>Instrument: </b><%= @cancellation.instrument.capitalize %></p>
-  <p><b>Time: </b><%= @cancellation.get_time %></p>
-  <p><b>Date: </b><%= @cancellation.get_date %></p>
+  <h4><b>Instrument: </b><%= @cancellation.instrument.capitalize %></h4>
+  <h4><b>Date: </b><%= @cancellation.get_date %></p>
+  <h4><b>Time: </b><%= @cancellation.get_time %></h4>

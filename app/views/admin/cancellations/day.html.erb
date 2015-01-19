@@ -1,6 +1,7 @@
 <h1 class="center">Cancellations for <%=formatted_time%></h1>
 
 <% unless @cancellations.blank? %>
+<div class='container-fluid'>
   <div class="col-sm-6 col-sm-offset-3 table_container">
     <table class="table table-striped table-hover table-bordered">
       <tr>
@@ -21,4 +22,5 @@
       <% end %>
     </table>
   </div>
+</div>
 <% end %>

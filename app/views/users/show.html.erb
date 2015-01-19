@@ -22,13 +22,13 @@
         <th>Absence</th>
         <th>Makeup</th>
       </tr>
-      <% @user.created_cancellations.each_with_index do |created, index|%>  
-          <tr>
-            <td><b><%= "#{index + 1}"%></b></td>
-            <td><%= "#{created.get_date} #{created.get_time}"%></td>
-            <td><%= taken_time(@user, index)%></td>
-          </tr>
-      <% end %>
+    <% @user.created_cancellations.each_with_index do |created, index|%>  
+      <tr>
+        <td><b><%= "#{index + 1}"%></b></td>
+        <td><%= "#{created.get_date} #{created.get_time}"%></td>
+        <td><%= taken_time(@user, index)%></td>
+      </tr>
+    <% end %>
     </table>
   </div>
 <% end %>

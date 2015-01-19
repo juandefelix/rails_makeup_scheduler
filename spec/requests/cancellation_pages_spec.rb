@@ -126,9 +126,10 @@ describe "Cancellation Pages" do
     before do
       @user.add_role :admin
       visit edit_admin_cancellation_path cancellation
+      # save_and_open_page
     end
 
-    it { should have_link("delete cancellation", href: cancellation_path(cancellation) ) }
+    it { should have_link("delete cancellation", href: admin_cancellation_path(cancellation) ) }
 
     it "should be able to delete a cancellation" do
       expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by -1
