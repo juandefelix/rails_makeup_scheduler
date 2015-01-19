@@ -244,15 +244,15 @@ aside {
   font-weight: bold;
 }
 
+.cancellation {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media screen and (max-width: 768px) {
   #logo {
     padding-left: 15px;
   }
 
-}
-@media screen and (max-width: 1200px) {
-  .cancellation {
-    text-align: center;
-  }
 }
