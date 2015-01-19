@@ -1,9 +1,9 @@
 class CancellationsController < ApplicationController
 
-  before_action :check_date_format, only: :create
-  before_action :check_school_code, only: :create
   before_action :redirect_to_home_if_not_signed_in
   before_action :find_cancellation, except: [:new, :create, :index]
+  before_action :check_date_format, only: :create
+  before_action :check_school_code, only: :create
 
   def new
     @cancellation = Cancellation.new
@@ -38,16 +38,17 @@ class CancellationsController < ApplicationController
   def index
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
-
     @shown_month = Date.civil(@year, @month)
-    # binding.pry
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
-  end
 
+    respond_to do |format|
+      format.html
+      format.js { render :index }
+    end
+  end
 
   def edit
   end
-
 
   def update
     if @cancellation.creator_same_as current_user
@@ -99,7 +100,7 @@ class CancellationsController < ApplicationController
       end
     end
 
-    def valid_date?( str, format )
+    def valid_date?(str, format)
       Date.strptime(str,format) rescue false
     end
 
