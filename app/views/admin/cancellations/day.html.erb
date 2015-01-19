@@ -1,26 +1,28 @@
+<%= provide :title, "Cancellations for #{formatted_time}" %>
+
 <h1 class="center">Cancellations for <%=formatted_time%></h1>
 
 <% unless @cancellations.blank? %>
-<div class='container-fluid'>
-  <div class="col-sm-6 col-sm-offset-3 table_container">
-    <table class="table table-striped table-hover table-bordered">
-      <tr>
-        <th>n.</th>
-        <th>Time</th>
-        <th>Instrument</th>
-        <th>Absence</th>
-        <th>Makeup</th>
-      </tr>
-      <%@cancellations.each_with_index do |cancellation, index|%>  
-          <tr>
-            <td><b><%= "#{index + 1}"%></b></td>
-            <td><%= cancellation.get_time %></td>
-            <td><%= cancellation.instrument.capitalize %></td>
-            <td><%= cancellation.creator.name %></td>
-            <td><%= taker_of cancellation  %></td>
-          </tr>
-      <% end %>
-    </table>
+  <div class='container-fluid'>
+    <div class="col-sm-6 col-sm-offset-3 table_container">
+      <table class="table table-striped table-hover table-bordered">
+        <tr>
+          <th>n.</th>
+          <th>Time</th>
+          <th>Instrument</th>
+          <th>Absence</th>
+          <th>Makeup</th>
+        </tr>
+        <%@cancellations.each_with_index do |cancellation, index|%>  
+            <tr>
+              <td><b><%= "#{index + 1}"%></b></td>
+              <td><%= cancellation.get_time %></td>
+              <td><%= cancellation.instrument.capitalize %></td>
+              <td><%= cancellation.creator.name %></td>
+              <td><%= taker_of cancellation  %></td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
 <% end %>
