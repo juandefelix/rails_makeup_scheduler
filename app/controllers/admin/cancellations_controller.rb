@@ -14,13 +14,19 @@ class Admin::CancellationsController < ApplicationController
     #
     # @event_strips = Event.event_strips_for_month(@shown_month, :include => :some_relation, :conditions => 'some_relations.some_column = true')
     #
+
+    respond_to do |format|
+      format.html
+      format.js { render :index }
+    end
   end
 
   def day
     year = params[:year].to_i
     month = params[:month].to_i
     day = params[:day].to_i
-    @cancellations = Cancellation.by_day(year, month, day).reorder(:start_at)
+    
+    @cancellations = Cancellation.by_day(year, month, day)
   end
   
   def show
@@ -48,6 +54,7 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def edit
+    # binding.pry   
     flash[:warning] = "Cancellation already taken. Make sure yo want to modify or delete it." if @cancellation.taker
   end
 
