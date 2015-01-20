@@ -53,37 +53,6 @@
 
 // refreshing the calendar with AJAX and setInterval()
 
-// var refreshInterval;
-
-// function getCalendar(){
-//   $.ajax({
-//     url: '/cancellations',
-//     dataType: 'script' 
-//   })
-// }  
-
-// function updateCalendar(){
-//   refreshInterval = setInterval(getCalendar, 60000) 
-// };
-
-// function refreshCalendar(){
-//   $(document).on('page:change', function(){
-//     var hasCalendar = $('div').is('#calendar-page');
-//     console.log($('div'));
-//     if(hasCalendar){
-//       updateCalendar();
-//     } else {
-//       console.log("in false")
-//       clearInterval(refreshInterval);
-//     } 
-//   })
-// }
-// refreshCalendar();
-
-
-// object notation
-
-
 var pageRefresher = function($, css, url){
   var self = {};
   var myTimeInterval;
@@ -128,17 +97,8 @@ calendarRefresher.refreshPage()
 var adminCalendarRefresher = pageRefresher($, "#admin-calendar-page", "/admin/cancellations")
 adminCalendarRefresher.refreshPage()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$(document).on('page:change', function(){
+  $(function() {
+    $("#form-date").datepicker({ dateFormat: "mm/dd/y", minDate: 0 })
+  });
+})
