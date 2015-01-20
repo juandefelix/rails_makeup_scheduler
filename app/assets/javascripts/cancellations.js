@@ -53,28 +53,92 @@
 
 // refreshing the calendar with AJAX and setInterval()
 
-var refreshInterval;
+// var refreshInterval;
 
-function getCalendar(){
-  $.ajax({
-    url: '/cancellations',
-    dataType: 'script' 
-  })
-}  
+// function getCalendar(){
+//   $.ajax({
+//     url: '/cancellations',
+//     dataType: 'script' 
+//   })
+// }  
 
-function updateCalendar(){
-  refreshInterval = setInterval(getCalendar, 60000) 
-};
+// function updateCalendar(){
+//   refreshInterval = setInterval(getCalendar, 60000) 
+// };
 
-function refreshCalendar(){
-  $(document).on('page:change', function(){
-    var hasCalendar = $('div').is('#calendar-page');
-    if(hasCalendar){
-      updateCalendar();
+// function refreshCalendar(){
+//   $(document).on('page:change', function(){
+//     var hasCalendar = $('div').is('#calendar-page');
+//     console.log($('div'));
+//     if(hasCalendar){
+//       updateCalendar();
+//     } else {
+//       console.log("in false")
+//       clearInterval(refreshInterval);
+//     } 
+//   })
+// }
+// refreshCalendar();
+
+
+// object notation
+
+
+var pageRefresher = function($, css, url){
+  var self = {};
+  var myTimeInterval;
+
+  self.getContent = function(){
+    $.ajax({
+      url: url,
+      dataType: 'script' 
+    }).done(function(){
+      console.log(css + ' success');
+    }).fail(function() {
+    console.log( "error" );
+    })
+  }; 
+
+  self.updateHtml = function(){
+    myTimeInterval = setInterval(self.getContent, 60000) 
+  };
+
+  self.toggleAjax = function(){
+
+    var hasElement = $('div').is(css)
+
+    if(hasElement){
+      self.updateHtml();
     } else {
-      console.log("in false")
-      clearInterval(refreshInterval);
+      clearInterval(myTimeInterval);
     } 
-  })
-}
-refreshCalendar();
+  };
+
+  return {
+    refreshPage:function(css, url){
+      $(document).on('page:change', self.toggleAjax);
+    }
+  };
+
+}; // end object
+
+var calendarRefresher = pageRefresher($, "#calendar-page", "/cancellations")
+calendarRefresher.refreshPage()
+
+var adminCalendarRefresher = pageRefresher($, "#admin-calendar-page", "/admin/cancellations")
+adminCalendarRefresher.refreshPage()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
