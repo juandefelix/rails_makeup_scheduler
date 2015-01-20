@@ -45,26 +45,27 @@
 //     #         # $(".alert alert-error")."Your submission has errors"
 //     #         # alert "Please, fill in all the fields in the form" 
 //     #       success: (r) -> window.location = "/cancellations/" + r
-
 // var hasCalendar = $( "div" ).hasClass("ec-calendar")
 
 var getCalendar = function(){
   $.ajax({
-      url: 'cancellations',
+      url: '/cancellations',
       dataType: 'script' 
     })
   }  
 
 var updateCalendar = function(){
   setInterval(function(){
+    console.log("Time non admin")
     getCalendar();
-  }, 10000) 
+  }, 60000) 
 };
 
 $(document).on('page:change', function(){
-  var hasCalendar = $('div').hasClass('ec-calendar');
+  var hasCalendar = $('h1').is('#calendar-page');
 
   if(hasCalendar){
+
     updateCalendar();
   }
 })

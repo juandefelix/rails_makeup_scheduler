@@ -2,23 +2,24 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
-var getCalendar = function(){
+var getAdminCalendar = function(){
   $.ajax({
-      url: 'cancellations',
+      url: '/admin/cancellations',
       dataType: 'script' 
     })
   }  
 
-var updateCalendar = function(){
+var updateAdminCalendar = function(){
   setInterval(function(){
-    getCalendar();
-  }, 10000) 
+    console.log("Time!");
+    getAdminCalendar();
+  }, 60000) 
 };
 
 $(document).on('page:change', function(){
-  var hasCalendar = $('div').hasClass('ec-calendar');
-
-  if(hasCalendar){
-    updateCalendar();
+  var hasAdminCalendar = $('h1').is('#admin-calendar-page');
+  console.log(hasAdminCalendar)
+  if(hasAdminCalendar){
+    updateAdminCalendar();
   }
 })
