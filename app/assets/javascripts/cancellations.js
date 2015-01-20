@@ -1,6 +1,6 @@
 // # Place all the behaviors and hooks related to the matching controller here.
 // # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://coffeescript.org/
+
 
 // # close_window = (url) ->
 // #   newWindow = window.open '', '_self', ''
@@ -47,25 +47,34 @@
 //     #       success: (r) -> window.location = "/cancellations/" + r
 // var hasCalendar = $( "div" ).hasClass("ec-calendar")
 
-var getCalendar = function(){
-  $.ajax({
-      url: '/cancellations',
-      dataType: 'script' 
-    })
-  }  
 
-var updateCalendar = function(){
-  setInterval(function(){
-    console.log("Time non admin")
-    getCalendar();
-  }, 60000) 
+
+
+
+// refreshing the calendar with AJAX and setInterval()
+
+var refreshInterval;
+
+function getCalendar(){
+  $.ajax({
+    url: '/cancellations',
+    dataType: 'script' 
+  })
+}  
+
+function updateCalendar(){
+  refreshInterval = setInterval(getCalendar, 60000) 
 };
 
-$(document).on('page:change', function(){
-  var hasCalendar = $('h1').is('#calendar-page');
-
-  if(hasCalendar){
-
-    updateCalendar();
-  }
-})
+function refreshCalendar(){
+  $(document).on('page:change', function(){
+    var hasCalendar = $('div').is('#calendar-page');
+    if(hasCalendar){
+      updateCalendar();
+    } else {
+      console.log("in false")
+      clearInterval(refreshInterval);
+    } 
+  })
+}
+refreshCalendar();
