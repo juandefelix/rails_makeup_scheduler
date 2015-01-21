@@ -23,7 +23,7 @@ module Admin::CancellationsHelper
     # args is an argument hash containing :event, :day, and :options
     calendar admin_event_calendar_opts do |args|
       event = args[:event]
-      %(<a href="#{edit_admin_cancellation_path(event.id)}" title="#{h(event.instrument)}">#{h(event.instrument)} #{h(event.get_time)} #{"RESERVED" unless event.available?}</a>) 
+      %(<a href="#{edit_admin_cancellation_path(event.id)}" title="#{h(event.instrument)}">#{h(event.instrument.capitalize)} #{h(event.get_time)} #{"RESERVED" unless event.available?}</a>) 
     end
   end
 

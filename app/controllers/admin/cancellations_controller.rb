@@ -39,7 +39,7 @@ class Admin::CancellationsController < ApplicationController
   def create
     user_name = User.find(params[:user_id]).name
     @cancellation = Cancellation.new(name: user_name,
-                                     instrument: params[:cancellation][:instrument],
+                                     instrument: params[:cancellation][:instrument].capitalize,
                                      start_at: get_date_time, 
                                      end_at: (get_date_time + 30.minutes),
                                      creator_id: params[:user_id])
