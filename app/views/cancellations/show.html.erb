@@ -1,11 +1,10 @@
 <% provide(:title, "#{@cancellation.instrument} #{@cancellation.start_at.strftime("%m-%d-%y")}")%>
 
-<div class="col-sm-6 col-sm-offset-3">
-  <% if params[:action] == "show"%>
-    <h2>Thank you for notifying us your absence!</h2>
-  <% end %>
-  
-  <%= render "cancellation"%>
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5 cancellation">
+    <h1>Thank you for notifying us!</h1>
+    <%= render "cancellation"%>
+  </div>
 </div>
 
 <%= javascript_include_tag "cancellations" %>

@@ -6,7 +6,7 @@ gem 'rails', '4.0.4'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
-gem 'event-calendar', :require => 'event_calendar'
+gem 'event-calendar', :require => 'event_calendar', :git => 'https://github.com/juandefelix/event_calendar.git'
 gem 'faker'
 gem 'rolify'
 gem 'cancan'
@@ -23,7 +23,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'byebug'
-  gem 'timecop'
 end
 
 group :test do
@@ -46,6 +45,7 @@ gem 'coffee-rails', '~> 4.0.1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

@@ -3,4 +3,31 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery
   include SessionsHelper
+
+  def check_admin_role
+    redirect_to root_url unless signed_in? && current_user.has_role?(:admin)
+  end
+
+  def get_date_time
+    date_and_time = params[:date] + " " + params[:cancellation][:start_at]
+    date_and_time_array = date_and_time.split(/[\D]/)
+
+    year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
+    month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
+    day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
+    hour = date_and_time_array[3]  || "12"
+    minute = date_and_time_array[4]  || "00"
+
+    Time.local(year, month, day, hour, minute)
+  end
+  
+  def find_cancellation
+    @cancellation = Cancellation.find(params[:id])
+  end
+
+  def check_school_code
+      unless params[:school_code] == CONFIG[:school_code]
+        redirect_to new_cancellation_path, flash: { danger: 'School Code is not correct' }
+      end
+    end
 end

@@ -15,16 +15,25 @@ def past_date
   (Time.now - 1.day).strftime("%m/%d/%y")
 end
 
+# this was created with the for the initial version of the app based on Michael Hartl's tutorial
+# def sign_in(options={})
+#   if options[:no_capybara]
+#     # Sign in when not using Capybara
+#     remember_token = User.new_remember_token
+#     cookies[:remember_token] = remember_token
+#     user.update_attribute(:remember_token, User.hash(remember_token))
+#   else
+#     visit root_path
+#     visit "/auth/facebook"
+#     @user = User.first
+#   end
+# end
 
-def sign_in(options={})
-  if options[:no_capybara]
-    # Sign in when not using Capybara
-    remember_token = User.new_remember_token
-    cookies[:remember_token] = remember_token
-    user.update_attribute(:remember_token, User.hash(remember_token))
-  else
-    visit root_path
-    visit "/auth/facebook"
-    @user = User.first
-  end
+# def admin_sign_in
+  # FactoryGirl.create(:admin, provider: 'facebook', uid: '1337', name: 'Juan Ortiz')
+  # sign_in
+# end
+
+def sign_in(user=nil)
+  visit '/auth/facebook'
 end

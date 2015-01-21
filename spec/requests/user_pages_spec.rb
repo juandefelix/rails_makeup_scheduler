@@ -17,6 +17,7 @@ describe "User pages" do
 
     before do 
       sign_in
+      @user = User.first
       visit user_path @user
     end
 
@@ -24,7 +25,7 @@ describe "User pages" do
     it { should have_content @user.name }
   end
 
-  describe "signup page" do
+  describe "signup page" do #no signup page since Facebook sign in
     before { visit signup_path }
 
     xit { should have_content "Sign up"}

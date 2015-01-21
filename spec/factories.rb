@@ -12,6 +12,14 @@ FactoryGirl.define do
     sequence(:email) { |n| "person#{n}@example.com" }
     sequence(:uid)   { |n| "#{n}" }
     provider "facebook"
+
+    # the :admin factory creates a User with the attributes expected in the test env. to sign in with facebook
+    factory :admin do
+      name "Juan Ortiz"
+      uid "1337"
+      provider "facebook"
+      after(:create) {|user| user.add_role(:admin)}
+    end
   end
 end
 

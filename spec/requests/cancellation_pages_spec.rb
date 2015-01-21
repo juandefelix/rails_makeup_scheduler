@@ -6,24 +6,27 @@ describe "Cancellation Pages" do
 
   before do
     sign_in
+    @user = User.first
   end  
 
   describe "Cancellation show" do
-    let(:cancellation) do
-      FactoryGirl.create(:cancellation, creator: @user)
-    end
+
+    let(:cancellation) { FactoryGirl.create(:cancellation, creator: @user) }
 
     before { visit cancellation_path(cancellation) }
 
-    it { should have_content(cancellation.name) }
+    it do 
+      should have_content(cancellation.name) 
+    end
+    
     it { should have_title(full_title("#{cancellation.instrument} #{cancellation.start_at.strftime("%m-%d-%y")}")) }
   end
 
   describe "Cancellationa new (Notify and absence page)" do
     before { visit new_cancellation_path }
     
-    it { should have_title "Notify an absence"}
-    it { should have_title(full_title("Notify an absence")) }
+    it { should have_title "Absence Notification"}
+    it { should have_title(full_title("Absence Notification")) }
   end
 
   describe "Create an absence" do
@@ -42,7 +45,7 @@ describe "Cancellation Pages" do
       before do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
-        fill_in "Date", with: "12/4/14"
+        fill_in "Date", with: 2.days.from_now.strftime("%-m/%d/%y")
         fill_in "School Code", with: "#{CONFIG[:school_code]}"
         select "3:30 pm", :from => "Start time" 
       end
@@ -117,17 +120,16 @@ describe "Cancellation Pages" do
     end
   end
 
-
-
   describe "delete cancellations" do
     let(:cancellation) { FactoryGirl.create(:cancellation) }
 
     before do
       @user.add_role :admin
-      visit edit_cancellation_path cancellation
+      visit edit_admin_cancellation_path cancellation
+      # save_and_open_page
     end
 
-    it { should have_link("delete cancellation", href: cancellation_path(cancellation) ) }
+    it { should have_link("delete cancellation", href: admin_cancellation_path(cancellation) ) }
 
     it "should be able to delete a cancellation" do
       expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by -1

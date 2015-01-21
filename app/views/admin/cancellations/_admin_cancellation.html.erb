@@ -1,0 +1,11 @@
+<%= form_for [:admin, @cancellation], html: { role: 'form' } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :instrument, "New Instrument" %>
+    <%= f.text_field :instrument, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Send", class: "btn btn-primary edit-btn", id: "new"%>
+<% end %>
+
+<%= link_to "delete cancellation", admin_cancellation_path, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-danger edit-btn"%>

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// home page
+
 #home-jumbotron {
   text-align: center;
   border: 1px solid #D5D5D5;
@@ -17,5 +19,30 @@
 #home-button-container {
   a {
     margin-bottom: 10px;
+  }
+}
+
+#sign-in-button {
+  // outline: 1px solid red;
+  background: url('facebook-button.png');
+
+  width: 202px;
+  display: inline-block;
+  vertical-align: top;
+  font: 0/0 serif;
+  color: transparent;
+
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  background-position: 50% 25%;
+  background-repeat: no-repeat;
+
+  // margin-top: 80px;
+
+  .inner {
+    padding-top: 22.77%;
+    display: block;
+    height: 0
   }
 }

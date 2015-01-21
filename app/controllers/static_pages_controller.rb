@@ -7,4 +7,9 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+
+  def fallback
+    flash[:danger] = "That URL doesn't exist"
+    redirect_to root_path
+  end
 end

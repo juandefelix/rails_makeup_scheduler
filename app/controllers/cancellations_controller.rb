@@ -1,9 +1,9 @@
 class CancellationsController < ApplicationController
 
-  before_action :check_date_format, only: :create
-  before_action :check_school_code, only: :create
   before_action :redirect_to_home_if_not_signed_in
   before_action :find_cancellation, except: [:new, :create, :index]
+  # before_action :check_date_format, only: :create
+  before_action :check_school_code, only: :create
 
   def new
     @cancellation = Cancellation.new
@@ -36,20 +36,19 @@ class CancellationsController < ApplicationController
 
 
   def index
-    @cancellations = Cancellation.all
-
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
-
     @shown_month = Date.civil(@year, @month)
     @event_strips = Cancellation.event_strips_for_month(@shown_month)
-  end
 
+    respond_to do |format|
+      format.html
+      format.js { render :index }
+    end
+  end
 
   def edit
-    @cancellation = Cancellation.find(params[:id])
   end
-
 
   def update
     if @cancellation.creator_same_as current_user
@@ -67,11 +66,6 @@ class CancellationsController < ApplicationController
     end
   end
 
-  def admin_update
-    @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    redirect_to cancellations_path, warning: "Successfully updated"
-  end
-
   def destroy
     @cancellation.destroy
     flash[:success] = "Absence deleted from your list."
@@ -80,29 +74,11 @@ class CancellationsController < ApplicationController
 
   private
 
-    def find_cancellation
-      @cancellation = Cancellation.find(params[:id])
-    end
-
     def cancellation_params
       params.require(:cancellation).permit(:name, :instrument, :start_at)
     end
 
-    def get_date_time
-      date_and_time = params[:date] + " " + params[:cancellation][:start_at]
-      date_and_time_array = date_and_time.split(/[\D]/)
-
-      year = date_and_time_array[2].blank? ? "2000" : ("20" + date_and_time_array[2])
-      month = date_and_time_array[0].blank? ? "01" : date_and_time_array[0]
-      day = date_and_time_array[1].blank? ? "01" : date_and_time_array[1]
-      hour = date_and_time_array[3]  || "12"
-      minute = date_and_time_array[4]  || "00"
-
-      Time.local(year, month, day, hour, minute)
-    end
-
     def check_date_format
-      # binding.pry
       unless valid_date?(params[:date], "%m/%d/%Y") || valid_date?(params[:date], "%m-%d-%Y")
         flash.now[:danger] = "Date format not valid"
         @cancellation = Cancellation.new
@@ -110,7 +86,7 @@ class CancellationsController < ApplicationController
       end
     end
 
-    def valid_date?( str, format )
+    def valid_date?(str, format)
       Date.strptime(str,format) rescue false
     end
 

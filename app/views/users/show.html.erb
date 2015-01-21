@@ -1,10 +1,10 @@
 <% provide :title, @user.name %>
 
 <div class="row ">
-  <aside class="col-sm-col-4 hidden-xs">
+  <aside class="col-sm-col-4 ">
     <section></section>
       <h1>
-        <%= gravatar_for @user %>
+        <%#= gravatar_for @user %>
         <%= @user.name %> 
       </h1>
     </section>
@@ -13,22 +13,22 @@
 
 <% unless @user.created_cancellations.blank? %>
 
-  <h3 class="center">Absences and Makeups</h3>
 
-  <div class="col-sm-6 col-sm-offset-3 table_container">
+  <div class="center col-sm-6 col-sm-offset-3 table-container">
+    <h2>Absences and Makeups</h2>
     <table class="table table-striped table-hover table-bordered">
       <tr>
         <th>n.</th>
         <th>Absence</th>
         <th>Makeup</th>
       </tr>
-      <% @user.created_cancellations.each_with_index do |created, index|%>  
-          <tr>
-            <td><b><%= "#{index + 1}"%></b></td>
-            <td><%= "#{created.get_date} #{created.get_time}"%></td>
-            <td><%= taken_time(@user, index)%></td>
-          </tr>
-      <% end %>
+    <% @user.created_cancellations.each_with_index do |created, index|%>  
+      <tr>
+        <td><b><%= "#{index + 1}"%></b></td>
+        <td><%= "#{created.get_date} #{created.get_time}"%></td>
+        <td><%= taken_time(@user, index)%></td>
+      </tr>
+    <% end %>
     </table>
   </div>
 <% end %>

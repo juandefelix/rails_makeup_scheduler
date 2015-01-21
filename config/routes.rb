@@ -1,26 +1,28 @@
 RailsMakeupScheduler::Application.routes.draw do
-
   root 'static_pages#home'
-
+  match '/help',   to: 'static_pages#help',   via: 'get'
+  match '/about',  to: 'static_pages#about',  via: 'get'
   
   match '/cancellations(/:year(/:month))', to: 'cancellations#index', via: 'get', :as => :cancellations, 
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  match '/admin/cancellations(/:year(/:month))', to: 'admin/cancellations#index', via: 'get', :as => :admin_cancellations, 
+                                          :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+                  
+  match '/admin/cancellations/:year/:month/:day', to: 'admin/cancellations#day', via: 'get', :as => :day_admin_cancellations,
+                                          :constraints => {:year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/}
   
-  match '/help',   to: 'static_pages#help',   via: 'get'
-  match '/about',  to: 'static_pages#about',  via: 'get'
-  # match '/signup', to: 'users#new',           via: 'get'
-  # match '/signin', to: 'sessions#new',        via: 'get'
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  resources :cancellations do
-    member  do
-      patch 'admin' => 'cancellations#admin_update', as: :admin
-    end    
+  resources :users, :cancellations
+  resources :sessions, only: [:create, :destroy]
+
+  namespace :admin do
+   resources :cancellations, :users
   end
 
-  resources :users
-  resources :sessions, only: [:create, :destroy]
+  get '*fallback', to: 'static_pages#fallback'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
