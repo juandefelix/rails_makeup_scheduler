@@ -1,3 +1,16 @@
 // Place all the styles related to the Cancellations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Cancellation new form calendar
+
+div.ui-datepicker{
+ font-size:10px;
+}
+
+/* Cancellation index and show */
+
+.cancellation {
+  margin-bottom: 50px;
+  text-align: center;
+}

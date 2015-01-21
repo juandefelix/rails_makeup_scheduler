@@ -4,7 +4,7 @@
 
 
 
-/* sidebar */
+/* user show sidebar */
 
 aside {
   section{
@@ -28,3 +28,15 @@ aside {
     }
   }
 }
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+// admin user show
+
+.user-link {
+  font-weight: bold;
+}
+
