@@ -54,18 +54,25 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def edit
-    # binding.pry   
-    flash[:warning] = "Cancellation already taken. Make sure yo want to modify or delete it." if @cancellation.taker
+    flash.now[:warning] = "Cancellation already taken!! Make sure yo want to modify or delete it." if @cancellation.taker
   end
 
   def update
-    @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    flash[:success] = "Successfully updated"
-    redirect_to admin_cancellations_path
+    if params[:cancellation]
+      @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
+      flash[:success] = "Successfully updated"
+      redirect_to admin_cancellations_path
+    else
+      user = @cancellation.taker
+      user.taken_cancellations.delete @cancellation
+      flash[:success] = "Makeup available"
+      redirect_to edit_admin_cancellation @cancellation
+    end
   end
 
   def destroy
-    @cancellation.destroy
+    user = @cancellation.creator
+    user.created_cancellations.destroy @cancellation.
     flash[:success] = "Absence deleted from your list."
     redirect_to admin_cancellations_path
   end
