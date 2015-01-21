@@ -1,10 +1,12 @@
 <%= provide :title, "Cancellations for #{formatted_time}" %>
 
-<h1 class="center">Cancellations for <%=formatted_time%></h1>
+<div class='container-fluid'>
+  <div class="col-sm-6 col-sm-offset-3 table-container">
+    <h1 class="center">Cancellations for <%=formatted_time%></h1>
 
-<% unless @cancellations.blank? %>
-  <div class='container-fluid'>
-    <div class="col-sm-6 col-sm-offset-3 table-container">
+<% if @cancellations.blank? %>
+  <h2>Sorry, no cancellations today</h2>
+<% else %>
       <table class="table table-striped table-hover table-bordered">
         <tr>
           <th>n.</th>
