@@ -58,21 +58,25 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def update
-    if params[:cancellation]
+    if params[:cancellation] && params && params[:cancellation][:instrument].present? 
       @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
       flash[:success] = "Successfully updated"
-      redirect_to admin_cancellations_path
+      if params[:cancellation][:instrument].blank?
+        redirect_to edit_admin_cancellation_path @cancellation, flash[:danger] = "Instrument can't be empty"
+      else
+        redirect_to admin_cancellations_path
+      end
     else
       user = @cancellation.taker
       user.taken_cancellations.delete @cancellation
       flash[:success] = "Makeup available"
-      redirect_to edit_admin_cancellation @cancellation
+      redirect_to edit_admin_cancellation_path @cancellation
     end
   end
 
   def destroy
     user = @cancellation.creator
-    user.created_cancellations.destroy @cancellation.
+    user.created_cancellations.destroy @cancellation
     flash[:success] = "Absence deleted from your list."
     redirect_to admin_cancellations_path
   end
