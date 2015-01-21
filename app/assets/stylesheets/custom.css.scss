@@ -59,7 +59,7 @@ h2 {
   }
 }
 
-/* shared templates
+/* shared templates */
 
 .error-explanation {
   color: #f00;
@@ -87,27 +87,43 @@ h2 {
 
 /* footer */
 
-footer {
-  clear: both;
-  margin-top: 45px;
-  padding-top: 5px;
+// // footer {
+//   clear: both;
+//   margin-top: 45px;
+//   padding-top: 5px;
+//   // color: $gray-light;
+//   a {
+//     color: #555;
+//     &:hover {
+//       color: #222;
+//     }
+//   }
+//   small {
+//     float: left;
+//   }
+//   ul {
+//     float: right;
+//     list-style: none;
+//     &:li {
+//       float: left;
+//       margin-left: 10px;
+//     }
+//   }
+// }
+
+#footer {
   border-top: 1px solid #eaeaea;
-  // color: $gray-light;
-  a {
-    color: #555;
-    &:hover {
-      color: #222;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    &:li {
-      float: left;
-      margin-left: 10px;
+  min-height: 30px;
+  .container-fluid {
+    ul {
+      list-style: none;
+      li {
+        padding-top: 4px;
+        a {
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
+      }
     }
   }
 }
@@ -117,5 +133,4 @@ footer {
   #logo {
     padding-left: 15px;
   }
-
 }
