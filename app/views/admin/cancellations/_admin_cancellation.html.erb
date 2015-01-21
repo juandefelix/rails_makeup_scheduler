@@ -10,10 +10,10 @@
 
 <% if @cancellation.taker == nil %>
   <%= link_to admin_cancellation_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger edit-btn" do %>
-    delete cancellation <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
+    Delete cancellation <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
   <% end %>
 <% else %>
   <%= link_to admin_cancellation_path, method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-warning edit-btn" do %>
-    make it available <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
+    Make it available <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
   <% end %>
 <% end %>
