@@ -45,9 +45,10 @@ h2 {
   @include box_sizing;
 }
 
-tables
+// tables
 
 .table-container {
+  margin-top: 40px;
 
   table {
     margin-top: 20px;
