@@ -1,5 +1,5 @@
 <% if @cancellation.errors.any? %>
-  <div id="error_explanation">
+  <div id="error-explanation">
     <div class="alert alert-danger">
       Your submission has <%= pluralize(@cancellation.errors.count, 'error')%>
       <ul>

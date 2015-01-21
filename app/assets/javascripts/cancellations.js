@@ -99,6 +99,6 @@ adminCalendarRefresher.refreshPage()
 
 $(document).on('page:change', function(){
   $(function() {
-    $("#form-date").datepicker({ dateFormat: "mm/dd/y", minDate: 0 })
+    $(".form-date").datepicker({ dateFormat: "mm/dd/y", minDate: 1 })
   });
 })
