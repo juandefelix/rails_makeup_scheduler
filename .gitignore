@@ -27,4 +27,4 @@ doc/
 .DS_Store
 .idea
 .secret
-.rvmrc
+.rvmrc.env
