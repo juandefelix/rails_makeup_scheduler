@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
 
   # has_secure_password
 
-  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id, dependent: :destroy
-  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id, dependent: :destroy
+  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
+  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
   def self.create_with_omniauth(auth)
     create! do |user|

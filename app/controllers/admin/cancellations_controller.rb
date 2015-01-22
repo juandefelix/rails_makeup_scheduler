@@ -39,7 +39,7 @@ class Admin::CancellationsController < ApplicationController
   def create
     user_name = User.find(params[:user_id]).name
     @cancellation = Cancellation.new(name: user_name,
-                                     instrument: params[:cancellation][:instrument],
+                                     instrument: params[:cancellation][:instrument].capitalize,
                                      start_at: get_date_time, 
                                      end_at: (get_date_time + 30.minutes),
                                      creator_id: params[:user_id])
@@ -54,18 +54,29 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def edit
-    # binding.pry   
     flash.now[:warning] = "Cancellation already taken!! Make sure yo want to modify or delete it." if @cancellation.taker
   end
 
   def update
-    @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
-    flash[:success] = "Successfully updated"
-    redirect_to admin_cancellations_path
+    if params[:cancellation] && params && params[:cancellation][:instrument].present? 
+      @cancellation.update_attribute(:instrument, params[:cancellation][:instrument])
+      flash[:success] = "Successfully updated"
+      if params[:cancellation][:instrument].blank?
+        redirect_to edit_admin_cancellation_path @cancellation, flash[:danger] = "Instrument can't be empty"
+      else
+        redirect_to admin_cancellations_path
+      end
+    else
+      user = @cancellation.taker
+      user.taken_cancellations.delete @cancellation
+      flash[:success] = "Makeup available"
+      redirect_to edit_admin_cancellation_path @cancellation
+    end
   end
 
   def destroy
-    @cancellation.destroy
+    user = @cancellation.creator
+    user.created_cancellations.destroy @cancellation
     flash[:success] = "Absence deleted from your list."
     redirect_to admin_cancellations_path
   end
