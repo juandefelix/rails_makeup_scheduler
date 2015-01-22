@@ -7,13 +7,13 @@ require 'rails/all'
 Bundler.require(:default, Rails.env)
 
 # Setting up ENV variables
-config = YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
-config.merge! config.fetch(Rails.env, {})
-config.each do |key, value|
-  ENV[key] = value.to_s unless value.kind_of? Hash
-end
+# config = YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
+# config.merge! config.fetch(Rails.env, {})
+# config.each do |key, value|
+#   ENV[key] = value.to_s unless value.kind_of? Hash
+# end
 
-CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__))).symbolize_keys!
+# CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__))).symbolize_keys!
 
 module RailsMakeupScheduler
   class Application < Rails::Application

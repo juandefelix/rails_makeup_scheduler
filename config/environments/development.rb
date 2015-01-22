@@ -26,4 +26,13 @@ RailsMakeupScheduler::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.before_configuration do
+    config = YAML.load(File.read(File.expand_path('../../local_env.yml', __FILE__)))
+    config.merge! config.fetch(Rails.env, {})
+    config.each do |key, value|
+      ENV[key] = value.to_s unless value.kind_of? Hash
+    end
+    CONFIG = YAML.load(File.read(File.expand_path('../../school_code.yml', __FILE__))).symbolize_keys!
+  end
 end
