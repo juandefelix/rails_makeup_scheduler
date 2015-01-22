@@ -77,4 +77,8 @@ RailsMakeupScheduler::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.before_configuration do
+    CONFIG = {}
+    CONFIG[:school_code] = ENV[:school_code]
+  end
 end
