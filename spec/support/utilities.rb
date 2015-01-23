@@ -21,7 +21,7 @@ end
 
 def load_yaml_from(file, key)
   env_file = File.join(Rails.root, 'config', file)
-  YAML.load(File.open(env_file))[key]
+  YAML.load(File.open(env_file)).fetch(key)
 end
 
 # this was created with the for the initial version of the app based on Michael Hartl's tutorial
