@@ -37,9 +37,9 @@ RailsMakeupScheduler::Application.configure do
   # Speed up tests by lowering bcrypt's cost function.
   ActiveModel::SecurePassword.min_cost = true
 
-  ENV['SCHOOL_CODE'] = YAML.load(File.read(File.expand_path('../../school_code.yml', __FILE__))).values[0]
 
   config.before_configuration do
+    ENV['SCHOOL_CODE'] = YAML.load(File.read(File.expand_path('../../school_code.yml', __FILE__))).values[0]
     config = YAML.load(File.read(File.expand_path('../../local_env.yml', __FILE__)))
     config.merge! config.fetch(Rails.env, {})
     config.each do |key, value|
