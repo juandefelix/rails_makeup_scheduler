@@ -1,6 +1,6 @@
 class Admin::CancellationsController < ApplicationController
   before_action :check_admin_role
-  before_action :check_school_code, only: :create
+  before_action :admin_check_school_code, only: :create
   before_action :find_cancellation, only: [:edit, :update, :destroy]
 
   def index
@@ -79,5 +79,14 @@ class Admin::CancellationsController < ApplicationController
     user.created_cancellations.destroy @cancellation
     flash[:success] = "Absence deleted from your list."
     redirect_to admin_cancellations_path
+  end
+
+  private
+
+
+  def admin_check_school_code
+    unless params[:school_code] == ENV['school_code']
+      redirect_to new_admin_cancellation_path, flash: { danger: 'School Code is not correct' }
+    end
   end
 end
