@@ -31,14 +31,13 @@ module RailsMakeupScheduler
 
     config.time_zone = 'Central Time (US & Canada)'
 
-    unless Rails.env.production?
-      config.before_configuration do
-        env_file = File.join(Rails.root, 'config', 'school_code.yml')
-        YAML.load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value }
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'school_code.yml')
+      YAML.load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value }
 
-        env_file = File.join(Rails.root, 'config', 'local_env.yml')
-        YAML.load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value }
-      end
-    end
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value }
+    end unless Rails.env.production?
+
   end
 end
