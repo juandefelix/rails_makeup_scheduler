@@ -15,6 +15,15 @@ def past_date
   (Time.now - 1.day).strftime("%m/%d/%y")
 end
 
+def sign_in(user=nil)
+  visit '/auth/facebook'
+end
+
+def load_yaml_from(file, key)
+  env_file = File.join(Rails.root, 'config', file)
+  YAML.load(File.open(env_file))[key]
+end
+
 # this was created with the for the initial version of the app based on Michael Hartl's tutorial
 # def sign_in(options={})
 #   if options[:no_capybara]
@@ -33,7 +42,3 @@ end
   # FactoryGirl.create(:admin, provider: 'facebook', uid: '1337', name: 'Juan Ortiz')
   # sign_in
 # end
-
-def sign_in(user=nil)
-  visit '/auth/facebook'
-end
