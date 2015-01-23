@@ -24,10 +24,4 @@ class ApplicationController < ActionController::Base
   def find_cancellation
     @cancellation = Cancellation.find(params[:id])
   end
-
-  def check_school_code
-      unless params[:school_code] == CONFIG[:school_code]
-        redirect_to new_cancellation_path, flash: { danger: 'School Code is not correct' }
-      end
-    end
 end
