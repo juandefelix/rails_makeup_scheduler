@@ -25,9 +25,6 @@ describe "All Users" do
   end
 
   it "should be able to delete another user" do
-    expect do
-      click_link('delete', match: :first)
-    end.to change(User, :count).by(-1)
+    expect { click_link('delete', match: :first) }.to change(User, :count).by(-1)
   end
-
 end
