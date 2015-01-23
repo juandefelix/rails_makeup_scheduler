@@ -1,18 +1,16 @@
-<!-- <div class="row"> -->
-  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="jumbotron" id="home-jumbotron">
-      <h2>Bucktown Music<br/>Makeup Scheduler<br>
-      <small>This application was designed to help you manage lesson cancellations</small></h2>
-        <div id="home-button-container">
-          <% if signed_in?%>
-            <%= link_to "Absence Notification", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
-            <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
-          <% else %>
-            <div id='sign-in-button'>
-              <%= link_to "", "/auth/facebook", class: 'inner'%>
-            </div>
-          <% end %>
-        </div>
-    </div>
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="jumbotron" id="home-jumbotron">
+    <h2>Bucktown Music<br/>Makeup Scheduler<br>
+    <small>This application was designed to help you manage lesson cancellations</small></h2>
+      <div id="home-button-container">
+        <% if signed_in?%>
+          <%= link_to "Absence Notification", new_cancellation_path, class: "btn btn-primary new-cancellation-button"%>
+          <%= link_to "Available Makeups", cancellations_path, class: "btn btn-info new-cancellation-button" %>
+        <% else %>
+          <div id='sign-in-button'>
+            <%= link_to "", "/auth/facebook", class: 'inner'%>
+          </div>
+        <% end %>
+      </div>
   </div>
-<!-- </div> -->
+</div>
