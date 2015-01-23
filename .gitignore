@@ -28,3 +28,4 @@ doc/
 .idea
 .secret
 .rvmrc.env
+.rvmrc
