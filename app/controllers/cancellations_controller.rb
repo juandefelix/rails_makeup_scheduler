@@ -95,7 +95,7 @@ class CancellationsController < ApplicationController
     end
 
     def check_school_code
-      unless params[:school_code] == ENV['school_code']
+      unless params[:school_code] == ENV[SCHOOL_CODE]
         redirect_to new_cancellation_path, flash: { danger: 'School Code is not correct' }
       end
     end
