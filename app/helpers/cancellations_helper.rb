@@ -108,9 +108,9 @@ module CancellationsHelper
       :day_names_height => 22,
       :day_nums_height => 22
     }
-    end
+  end
 
-    def event_calendar
+  def event_calendar
     # args is an argument hash containing :event, :day, and :options
     calendar event_calendar_opts do |args|
       event = args[:event]
