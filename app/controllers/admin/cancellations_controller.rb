@@ -85,7 +85,7 @@ class Admin::CancellationsController < ApplicationController
 
 
   def admin_check_school_code
-    unless params[:school_code] == ENV[SCHOOL_CODE]
+    unless params[:school_code] == ENV['SCHOOL_CODE']
       redirect_to new_admin_cancellation_path, flash: { danger: 'School Code is not correct' }
     end
   end

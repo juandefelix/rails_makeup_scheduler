@@ -27,7 +27,7 @@ RailsMakeupScheduler::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  ENV["school_code"] = YAML.load(File.read(File.expand_path('../../school_code.yml', __FILE__))).values[0]
+  ENV['SCHOOL_CODE'] = YAML.load(File.read(File.expand_path('../../school_code.yml', __FILE__))).values[0]
 
   config.before_configuration do
     config = YAML.load(File.read(File.expand_path('../../local_env.yml', __FILE__)))
