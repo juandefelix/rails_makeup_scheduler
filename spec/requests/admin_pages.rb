@@ -15,6 +15,7 @@ describe "Admin Pages" do
     end
 
     it "has the name of the users" do
+      should have_content 'All Users'
       should have_link "Juan Ortiz"
       should have_link "#{user.name}"
     end

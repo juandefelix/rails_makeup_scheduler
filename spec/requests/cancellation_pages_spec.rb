@@ -16,7 +16,7 @@ describe "Cancellation Pages" do
     before { visit cancellation_path(cancellation) }
 
     it do 
-      should have_content(cancellation.name) 
+      should have_content(cancellation.instrument) 
     end
     
     it { should have_title(full_title("#{cancellation.instrument} #{cancellation.start_at.strftime("%m-%d-%y")}")) }
@@ -46,12 +46,13 @@ describe "Cancellation Pages" do
         fill_in "Student Name", with: "Joe Shidel"
         fill_in "Instrument", with: "Clarinet"
         fill_in "Date", with: 2.days.from_now.strftime("%-m/%d/%y")
-        fill_in "School Code", with: "#{CONFIG[:school_code]}"
+        fill_in "School Code", with: "#{ENV['SCHOOL_CODE']}"
         select "3:30 pm", :from => "Start time" 
       end
 
       it "should create a user " do
-        expect { click_button submit }.to change(Cancellation, :count).by 1
+        expect { click_button 'Send' }.to change(Cancellation, :count).by 1
+
       end
     end
   end
@@ -129,10 +130,10 @@ describe "Cancellation Pages" do
       # save_and_open_page
     end
 
-    it { should have_link("delete cancellation", href: admin_cancellation_path(cancellation) ) }
+    it { should have_link("Delete cancellation", href: admin_cancellation_path(cancellation) ) }
 
     it "should be able to delete a cancellation" do
-      expect { click_link 'delete cancellation' }.to change(Cancellation, :count).by -1
+      expect { click_link 'Delete cancellation' }.to change(Cancellation, :count).by -1
     end
   end
 end

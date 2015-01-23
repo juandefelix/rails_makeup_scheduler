@@ -147,7 +147,7 @@ describe User do
     end
 
     it "should have the right cancellations in the right order" do
-      expect(@user.created_cancellations.to_a).to eq [newer_cancellation, older_cancellation]
+      expect(@user.created_cancellations.to_a).to eq [older_cancellation, newer_cancellation]
     end
 
     it "should destroy associated cancellations" do
@@ -155,7 +155,7 @@ describe User do
       @user.destroy
       expect(cancellations).not_to be_empty
       cancellations.each do |cancellation|
-        expect(Cancellation.where(id: cancellation.id)).to be_empty
+        expect(Cancellation.where(id: cancellation.id)).not_to be_empty
       end
     end
   end
