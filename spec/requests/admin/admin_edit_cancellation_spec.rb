@@ -8,34 +8,33 @@ describe "Admin Calendar" do
   let(:cancellation) { FactoryGirl.create(:cancellation, start_at: 2.days.from_now, taker: user) }
   
   before do
-    @cancellation = FactoryGirl.create(:cancellation, start_at: 2.days.from_now, taker: user)
     sign_in admin
-    visit edit_admin_cancellation_path @cancellation
+    visit edit_admin_cancellation_path cancellation
   end
 
   it "has the right content" do
-    page.should have_content @cancellation.name
-    page.should have_content @cancellation.instrument
-
-
-    expect { click_link "Make it available" }.to change(user, :taken_cancellation_ids).from([1]).to([])
-    expect(@cancellation.taker).to eq nil
-    # specify(page.should have_link "Make it available"
-      # expect(@cancellation.taker).to eq nil
+    page.should have_content cancellation.name
+    page.should have_content cancellation.instrument
   end
 
-  describe "Making it available" do
 
-    before do
-      sign_in admin
-      visit edit_admin_cancellation_path cancellation
-      click_link "Make it available" 
-    end
-    
-    it 'asdf' do  
-      page.should_not have_link "Make it available"
-      page.should have_link "Delete cancellation"
-    end
-  end
 end
 
+describe "deleting cancellation" do
+  let(:user) { FactoryGirl.create(:user, name: "Taker User") }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:cancellation) { FactoryGirl.create(:cancellation, start_at: 2.days.from_now, taker: user) }
+
+  it 'can undo a makeup' do
+    sign_in admin
+    visit edit_admin_cancellation_path cancellation
+    click_link "Make it available"
+    expect(cancellation.reload.taker).to eq(nil)
+  end
+  # it 'asdf' do  
+    # click_link "Make it available" 
+    # page.should_not have_link "Make it available"
+    # page.should have_link "Delete cancellation"
+    # expect { click_link "Delete cancellation" }.to change(Cancellation, :count).by(-1)
+  # end
+end
