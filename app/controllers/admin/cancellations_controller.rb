@@ -68,6 +68,8 @@ class Admin::CancellationsController < ApplicationController
       end
     else
       user = @cancellation.taker
+      # binding.pry
+      # user.delete_taken_cancellations @cancellation
       user.taken_cancellations.delete @cancellation
       flash[:success] = "Makeup available"
       redirect_to edit_admin_cancellation_path @cancellation

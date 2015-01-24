@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def delete_taken_cancellations(cancellation)
+    taken_cancellations.delete(cancellation)
+    cancellation.taker = nil
+    cancellation.save
+  end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
