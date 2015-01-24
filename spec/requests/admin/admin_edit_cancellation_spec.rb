@@ -18,16 +18,24 @@ describe "Admin Calendar" do
   end
 
   describe "Editing cacellation" do
-    it 'Making it available' do
-      click_link "Make it available"
-      expect(cancellation.reload.taker).to eq(nil)
+    it 'Changing instrument' do
+      fill_in "New Instrument",    with: "Balalaika"
+      click_button 'Send'
+      visit edit_admin_cancellation_path cancellation
+      page.should have_content "Balalaika"
     end
 
-    # it 'Deleting the cancellation' do
-      # click_link "Make it available"
-      # click_link "Make it available"
-    # end
-  end
+    it 'Making it available' do
+      click_link "Make it available"
+      expect(cancellation.reload.taker).to eq nil
+      # this syntax doesn't work here!
+      # expect{ click_link "Make it available" }.to change(cancellation, :taker).to nil
+    end
 
+    it 'Deleting the cancellation' do
+      click_link "Make it available"
+      expect{ click_link "Delete cancellation" }.to change(Cancellation, :count).by -1
+    end
+  end
 end
 
