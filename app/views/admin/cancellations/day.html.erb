@@ -20,7 +20,7 @@
               <td><b><%= "#{index + 1}"%></b></td>
               <td><%= cancellation.get_time %></td>
               <td><%= cancellation.instrument.capitalize %></td>
-              <td><%= cancellation.creator.name %></td>
+              <td><%= cancellation.name %></td>
               <td><%= taker_of cancellation  %></td>
             </tr>
         <% end %>

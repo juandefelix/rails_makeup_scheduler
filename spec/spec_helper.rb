@@ -71,6 +71,9 @@ Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.factories.clear
   FactoryGirl.reload
+
+  # server css
+  # Capybara.asset_host = 'http://localhost:3000'
 end
 
 # --- Instructions ---
