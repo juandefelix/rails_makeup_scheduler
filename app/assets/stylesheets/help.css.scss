@@ -1,0 +1,32 @@
+.help-page {
+  img {
+    display: block;
+    // text-align: center;
+    margin: auto;
+    padding: 15px;
+  }
+  p {
+    font-size: 20px;
+  }
+  img.help-page-list {
+    text-align: center;
+    margin: 15px 15px;
+    }
+  ul {
+    li {
+      img.inline-img {
+        // display: inline;
+        // margin: auto;
+        // padding: 20px;
+      }
+      li:last-child {
+        margin-bottom: 45px;
+      }
+      img {
+        display: block;
+        margin: auto;
+        padding: 15px;
+      }
+    }
+  }
+}
