@@ -7,6 +7,10 @@ def full_title(page_title)
   "#{base_title} | #{page_title}"
 end
 
+def early_morning
+  Time.now.beginning_of_day + 1.day + 8.hours
+end
+
 def future_date
   (Time.now + 2.day).strftime("%m/%d/%y")
 end
