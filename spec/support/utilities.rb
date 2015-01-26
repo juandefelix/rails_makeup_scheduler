@@ -7,6 +7,10 @@ def full_title(page_title)
   "#{base_title} | #{page_title}"
 end
 
+def early_morning
+  Time.now.beginning_of_day + 1.day + 8.hours
+end
+
 def future_date
   (Time.now + 2.day).strftime("%m/%d/%y")
 end
@@ -21,7 +25,7 @@ end
 
 def load_yaml_from(file, key)
   env_file = File.join(Rails.root, 'config', file)
-  YAML.load(File.open(env_file))[key]
+  YAML.load(File.open(env_file)).fetch(key)
 end
 
 # this was created with the for the initial version of the app based on Michael Hartl's tutorial
