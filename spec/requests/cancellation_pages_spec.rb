@@ -51,7 +51,6 @@ describe "Cancellation Pages" do
 
       it "should create a user " do
         expect { click_button 'Send' }.to change(Cancellation, :count).by 1
-
       end
     end
   end
