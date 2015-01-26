@@ -40,7 +40,6 @@ describe "Cancellation Pages" do
       end
     end
 
-
     describe "with valid information" do
       before do
         fill_in "Student Name", with: "Joe Shidel"
@@ -92,8 +91,25 @@ describe "Cancellation Pages" do
       visit edit_cancellation_path cancellation
     end
 
-    it { should have_content "Instrument: #{cancellation.instrument}" }
-    it { should have_link "Take this spot" }
+    describe 'with enough makeups' do
+      before do
+        FactoryGirl.create(:cancellation, creator: @user)
+      end
+
+      it { should have_content "Instrument: #{cancellation.instrument}"}
+      it { should have_link "Take this spot"}
+      specify do
+        expect { click_link "Take this spot" }.to change { @user.taken_cancellations(true).count }.by 1 
+      end
+    end
+
+    describe 'without enough makeups' do
+      it { should have_content "Instrument: #{cancellation.instrument}"}
+      it { should have_link "Take this spot"}
+      specify do
+        expect { click_link "Take this spot" }.not_to change { @user.taken_cancellations(true).count }
+      end
+    end
 
     describe 'in the present day or in the future' do
       before { click_link "Take this spot"}
@@ -121,6 +137,8 @@ describe "Cancellation Pages" do
 
       it { should_not have_link "Take this spot" }
     end
+
+    describe ''
   end
 
   describe "delete cancellations" do
@@ -129,7 +147,6 @@ describe "Cancellation Pages" do
     before do
       @user.add_role :admin
       visit edit_admin_cancellation_path cancellation
-      # save_and_open_page
     end
 
     it { should have_link("Delete cancellation", href: admin_cancellation_path(cancellation) ) }
@@ -141,5 +158,5 @@ describe "Cancellation Pages" do
 end
 
 # questions:
-# - what is the scope of FactoryGirl:create:cancellation. Do they exist after the 'describe' block is closed?
+# - what is the scope of FactoryGirl.create(:cancellation). Do they exist after the 'describe' block is closed?
 #   - No, it does not exist after exiting the 'before' block   
