@@ -1,9 +1,9 @@
-<% provide :title, 'Help' unless current_user.has_role? :admin %>
-<% provide :title, "Admin Help" if current_user.has_role? :admin %>
+<% provide :title, 'Help' unless current_user && current_user.has_role?(:admin) %>
+<% provide :title, "Admin Help" if current_user && current_user.has_role?(:admin) %>
 <div class="help-page col-xs-12 col-md-5 col-md-offset-4">
   <h1>Help</h1>
   <p>No public help provided yet</p>
-  <% if current_user.has_role? :admin %>
-    <%= render 'admin_help' %>
+  <% if current_user %>
+    <%= render 'admin_help' if current_user.has_role? :admin %>
   <% end %>
 <div>
