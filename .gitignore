@@ -28,4 +28,4 @@ doc/
 .idea
 .secret
 .rvmrc.env
-.rvmrc
+.ruby-version
