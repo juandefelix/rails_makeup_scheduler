@@ -30,6 +30,10 @@ module CancellationsHelper
     ["8:30 pm", "20:30"] ]
   end
 
+# ====================== #
+#  form default displays #
+# ====================== #
+
   def last_name_used
     # 'name' takes the earliest cancellation in the latest day. 
     # We want the latest cancellatio in the lastest dat
@@ -64,6 +68,10 @@ module CancellationsHelper
     eval_time
   end
 
+# ======================== #
+#  time formatting helpers #
+# ======================== #
+
   def next_date_formatted
     next_date_available.strftime("%m/%d/%y")
   end
@@ -71,14 +79,6 @@ module CancellationsHelper
   def next_date_available
     return (Time.now.beginning_of_day + 2.days) if eval_time > 23
     Time.now.beginning_of_day + 1.day
-  end
-  
-  def name_example
-    Faker::Name.name 
-  end
-
-  def instrument_example
-    ["Guitar", "Piano", "Voice", "Clarinet"].sample
   end
 
   def formatted_time_now
@@ -89,8 +89,23 @@ module CancellationsHelper
     cancellation = user.taken_cancellations[index]
     "#{cancellation.get_date} #{cancellation.get_time}" if cancellation
   end
-  
-  # custom options for this calendar
+
+  def current_year
+    Time.now.year
+  end
+
+  def current_month
+    Time.now.month
+  end
+
+  def current_date_url_matcher
+    "#{current_year}/#{current_month}"
+  end
+
+# ================================ #
+# custom options for this calendar #
+# ================================ #
+
   def month_link(month_date)
     link_to(I18n.localize(month_date, :format => "%B").upcase, {:month => month_date.month, :year => month_date.year})
   end
@@ -119,3 +134,12 @@ module CancellationsHelper
   end
 end
 
+# Miscelaneous #
+  
+  def name_example
+    Faker::Name.name 
+  end
+
+  def instrument_example
+    ["Guitar", "Piano", "Voice", "Clarinet"].sample
+  end
