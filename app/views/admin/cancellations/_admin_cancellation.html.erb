@@ -7,7 +7,7 @@
 
   <%= f.submit "Send", class: "btn btn-primary edit-btn", id: "new"%>
 <% end %>
-
+<hr>
 <% if @cancellation.taker == nil %>
   <%= link_to admin_cancellation_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger edit-btn" do %>
     Delete cancellation <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">

@@ -8,8 +8,12 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
+  def admin_help
+  end
+
   def fallback
     flash[:danger] = "That URL doesn't exist"
     redirect_to root_path
   end
+
 end

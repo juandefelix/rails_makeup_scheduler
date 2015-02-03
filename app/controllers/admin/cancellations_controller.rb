@@ -54,7 +54,7 @@ class Admin::CancellationsController < ApplicationController
   end
 
   def edit
-    flash.now[:warning] = "Cancellation already taken!! Make sure yo want to modify or delete it." if @cancellation.taker
+    flash.now[:warning] = "Cancellation already taken!! Make sure you want to modify or delete it." if @cancellation.taker
   end
 
   def update

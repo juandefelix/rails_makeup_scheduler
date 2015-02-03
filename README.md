@@ -1,4 +1,4 @@
-## MAKEUP SCHEDULER  ##
+## MAKEUP SCHEDULER  V 1.0.0##
 
 This is an application built in Rails 4.0
 
@@ -14,7 +14,6 @@ This application was built to help some small business like music schools, to he
 
 
 ####Where I Am  
-Wrote association between Users and Cancellations. A user can create and 'take' many cancellations. A cancellation wil have a creator and a 'taker'. Wrote tests for a user creating cancellations. There are **missing tests for a User taking cancellations (makeups)**.  
 A user can only create absences if it is signed in. The cancellations will have the same `creator` as the `user.id`  
 A user with admin privileges is allowed to delete cancellations.  
 A user can't take cancellations if they are reserved or if the are in a past date.
