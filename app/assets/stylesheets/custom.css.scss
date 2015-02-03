@@ -120,6 +120,7 @@ h2 {
   position: static;
   border-top: 1px solid #eaeaea;
   min-height: 30px;
+  clear: both;
   .container-fluid {
     ul {
       list-style: none;
@@ -139,4 +140,9 @@ h2 {
   #logo {
     padding-left: 15px;
   }
+
+  #footer ul:first-child li {
+    padding-left: 15px;
+  }
+  
 }
