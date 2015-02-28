@@ -41,7 +41,6 @@ group :development, :test do
   gem 'pry'
   gem 'faker'
   gem 'pry-byebug'
-  # gem 'byebug'
 end
 
 group :test do
