@@ -1,4 +1,5 @@
 class Business < ActiveRecord::Base
+  has_many :users, dependent: :destroy
   has_secure_password
   before_save { email.downcase! }
 

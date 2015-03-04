@@ -106,4 +106,18 @@ describe Business do
       specify { expect(business_for_invalid_password).to be_false }
     end
   end
+
+  describe "users belonging to a business" do
+    before do
+      @business.save
+      @user = @business.users.create(name: "Example User", email: "example@user.com", provider: "Provider", uid: "uid")
+    end
+
+    describe "when business is destroyed" do
+      it "should be destroyed" do
+        expect{@business.destroy}.to change{@business.users.count}.from(1).to(0)
+      end
+    end
+  end
+
 end
