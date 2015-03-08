@@ -115,7 +115,7 @@ describe Business do
 
     describe "when business is destroyed" do
       it "should be destroyed" do
-        expect{@business.destroy}.to change{@business.users.count}.from(1).to(0)
+        expect{@business.destroy}.to change{User.count}.from(1).to(0)
       end
     end
   end
