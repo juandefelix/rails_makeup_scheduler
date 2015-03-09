@@ -16,7 +16,8 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  resources :users, :cancellations, :businesses
+  resources :users, :cancellations
+  resources :businesses, only: [:index, :show]
   resources :sessions, only: [:create, :destroy]
 
   namespace :admin do
