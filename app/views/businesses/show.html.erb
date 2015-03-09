@@ -1,0 +1,10 @@
+<% provide(:title, @business.name) %>
+<h1><%= @business.name %></h1>
+
+<% if @business.users.any? %>
+  <h3>Users (<%= @business.users.count %>)</h3>
+  <ol class="users">
+    <%= render @users %>
+  </ol>
+  <%= will_paginate @users %>
+<% end %>

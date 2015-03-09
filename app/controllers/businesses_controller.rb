@@ -4,12 +4,8 @@ class BusinessesController < ApplicationController
     @businesses = Business.paginate(page: params[:page])
   end
 
-  def new
-  end
-
-  def create
-  end
-
   def show
+    @business = Business.find(params[:id])
+    @users = @business.users.paginate(page: params[:page])
   end
 end
