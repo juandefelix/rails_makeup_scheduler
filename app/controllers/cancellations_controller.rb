@@ -1,5 +1,4 @@
 class CancellationsController < ApplicationController
-
   before_action :redirect_to_home_if_not_signed_in
   before_action :find_cancellation, except: [:new, :create, :index]
   before_action :check_date_format, only: :create
@@ -8,7 +7,6 @@ class CancellationsController < ApplicationController
   def new
     @cancellation = Cancellation.new
   end
-
 
   def create
     @cancellation = Cancellation.new(name: params[:cancellation][:name],
@@ -30,10 +28,8 @@ class CancellationsController < ApplicationController
     end
   end
 
-
   def show
   end
-
 
   def index
     @month = (params[:month] || (Time.zone || Time).now.month).to_i

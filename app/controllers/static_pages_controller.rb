@@ -15,5 +15,4 @@ class StaticPagesController < ApplicationController
     flash[:danger] = "That URL doesn't exist"
     redirect_to root_path
   end
-
 end
