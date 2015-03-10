@@ -17,6 +17,7 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
   resources :users, :cancellations
+  resources :businesses, only: [:index, :show]
   resources :sessions, only: [:create, :destroy]
 
   namespace :admin do

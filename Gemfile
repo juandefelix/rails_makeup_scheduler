@@ -10,6 +10,8 @@ gem 'event-calendar', :require => 'event_calendar', :git => 'https://github.com/
 gem 'rolify'
 gem 'cancan'
 gem 'omniauth-facebook'
+gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 3.2'
 # Use Uglifier as compressor for JavaScript assets
