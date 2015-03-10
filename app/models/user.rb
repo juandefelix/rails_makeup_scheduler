@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   before_save { email.downcase! }
   before_create :create_remember_token
 
+  default_scope -> { order(name: :desc) }
+
   validates :name, :email, :provider, presence: true
   validates :name, length: { in: 4..50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -12,6 +14,7 @@ class User < ActiveRecord::Base
 
   # has_secure_password
 
+  belongs_to :business
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
