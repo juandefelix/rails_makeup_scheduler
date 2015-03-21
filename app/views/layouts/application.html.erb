@@ -18,7 +18,7 @@
         <% end %>
       </div>
       <%= yield %>
-      <%#= debug(params) if Rails.env.development? %>
+      <%= debug(params) if Rails.env.development? %>
       <%#= debug("Admin: #{@current_user.has_role? :admin}") if Rails.env.development? && signed_in? %>
     </div>
     <%= render 'layouts/footer'%>
