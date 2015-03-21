@@ -11,14 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150321154110) do
+=======
+ActiveRecord::Schema.define(version: 20150321194628) do
+>>>>>>> 59eb214541343d0337388a8971caff3aaf356bf7
 
   create_table "businesses", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "phone_number"
+    t.string   "website"
   end
 
   add_index "businesses", ["email"], name: "index_businesses_on_email", unique: true
