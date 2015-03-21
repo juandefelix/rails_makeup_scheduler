@@ -1,0 +1,33 @@
+<% provide :title, "New business"%>
+
+<h1>New business</h1>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+
+    <%= form_for(@business) do |f| %>
+
+      <%= render 'shared/business_error_messages'%>
+
+      <%= f.label :name%>
+      <%= f.text_field :name, placeholder: "name" %>
+
+      <%= f.label :email%>
+      <%= f.text_field :email, placeholder: "email" %>
+
+      <%= f.label :city%>
+      <%= f.text_field :city, placeholder: "city" %>
+
+      <%= f.label :zip%>
+      <%= f.text_field :zip, placeholder: "zip code" %>
+
+      <%= f.label :phone_number%>
+      <%= f.text_field :phone_number, placeholder: "phone number" %>
+
+      <%= f.label :website%>
+      <%= f.text_field :website, placeholder: "website" %>
+
+      <%= f.submit "Create business", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
