@@ -1,7 +1,13 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :rememberable, :recoverable, :validatable, :omniauthable #,  :confirmable
+  devise :database_authenticatable, 
+         :registerable, 
+         :rememberable#, 
+         # :recoverable, 
+         # :validatable, 
+         # :omniauthable, 
+         # :confirmable
   rolify
   before_save { email.downcase! }
   before_create :create_remember_token
