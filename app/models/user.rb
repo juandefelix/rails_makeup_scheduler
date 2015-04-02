@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, 
          :registerable, 
-         :rememberable#, 
+         :rememberable, 
+         :omniauthable, :omniauth_providers => [:facebook]
          # :recoverable, 
          # :validatable, 
-         # :omniauthable, 
          # :confirmable
   rolify
   before_save { email.downcase! }
