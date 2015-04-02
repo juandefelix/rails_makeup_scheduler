@@ -7,26 +7,23 @@
           <%= devise_error_messages! %>    
           
         <div class="field form-group">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
+          <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-control'  %>
         </div>
 
         <div class="field form-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, class: 'form-control'  %>
+          <%= f.email_field :email, placeholder: 'Email', class: 'form-control'  %>
         </div>
     
         <div class="field form-group">
-          <%= f.label :password %>
           <% if @validatable %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
+          <% end %>
+          <br />
+          <%= f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'form-control'  %>
         </div>
     
         <div class="field form-group">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'  %>
+          <%= f.password_field :password_confirmation, placeholder: 'Password Confirmation', autocomplete: "off", class: 'form-control'  %>
         </div>
     
         <div class="actions">
