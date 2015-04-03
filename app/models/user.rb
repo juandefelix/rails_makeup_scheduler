@@ -25,12 +25,16 @@ class User < ActiveRecord::Base
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.email = auth["info"]["email"]
+
+
+  def self.from_omniauth(auth)
+    binding.pry
+    email = auth[:info][:email]
+    where(email: auth[:info][:email]).first_or_create do |user|
+      user.provider ||= auth["provider"]
+      user.uid ||= auth["uid"]
+      user.name ||= auth["info"]["name"]
+      user.email ||= auth["info"]["email"]
     end
   end
 

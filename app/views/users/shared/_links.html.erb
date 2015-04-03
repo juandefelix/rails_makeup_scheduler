@@ -22,7 +22,7 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
     <div class="home-button-container">
       <div class='sign-in-button'>
-        <%= link_to "", omniauth_authorize_path(resource_name, provider), class: 'inner' %><br />
+        <%= link_to "", user_omniauth_authorize_path(provider), class: 'inner' %><br />
       </div>
     </div>
   <% end -%>
