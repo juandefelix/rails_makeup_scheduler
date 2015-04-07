@@ -36,14 +36,20 @@ describe "Static Pages" do
   end
 
   describe "Help Page" do
-    before { visit help_path }
+    before do
+      sign_in
+      visit help_path 
+    end
   
-    xit { should have_content('Help') }
-    xit { should have_title(full_title('Help')) }
+    it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
   describe "Contact" do
-    before { visit contact_path }
+    before do 
+      sign_in
+      visit contact_path 
+    end
 
     it { should have_content('Contact') }
     it { should have_title(full_title('Contact')) }
