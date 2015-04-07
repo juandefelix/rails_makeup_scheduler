@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :redirect_to_home_if_not_signed_in
+  
   def home
   end
 

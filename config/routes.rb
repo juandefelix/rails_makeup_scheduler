@@ -1,6 +1,9 @@
 RailsMakeupScheduler::Application.routes.draw do
   root 'static_pages#home'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  resources :users, only: [:show]
+
   match '/help',   to: 'static_pages#help',   via: 'get'
   match '/contact',  to: 'static_pages#contact',  via: 'get'
   match '/admin_help',  to: 'static_pages#admin_help',  via: 'get'
@@ -14,15 +17,12 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/admin/cancellations/:year/:month/:day', to: 'admin/cancellations#day', via: 'get', :as => :day_admin_cancellations,
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/}
   
-  match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
-  match '/login', to: 'sessions#new', via: 'get'
-
-  resources :users, :cancellations
+  resources :cancellations
   resources :businesses, only: [:index, :show]
 
   namespace :admin do
-   resources :cancellations, :users
+   resources :cancellations
+   resources :users, only: [:index, :destroy]
   end
 
   # get '*fallback', to: 'static_pages#fallback'

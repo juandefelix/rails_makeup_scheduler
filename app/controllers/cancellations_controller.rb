@@ -86,10 +86,6 @@ class CancellationsController < ApplicationController
       Date.strptime(str,format) rescue false
     end
 
-    def redirect_to_home_if_not_signed_in
-      redirect_to root_url if !signed_in?
-    end
-
     def check_school_code
       unless params[:school_code] == ENV['SCHOOL_CODE']
         redirect_to new_cancellation_path, flash: { danger: 'School Code is not correct' }
