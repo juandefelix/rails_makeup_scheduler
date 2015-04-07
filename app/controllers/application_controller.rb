@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   include SessionsHelper
 
+  def redirect_to_home_if_not_signed_in
+    redirect_to new_user_session_path unless signed_in?
+  end
+
   def check_admin_role
     redirect_to root_url unless signed_in? && current_user.has_role?(:admin)
   end
