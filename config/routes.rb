@@ -1,7 +1,9 @@
 RailsMakeupScheduler::Application.routes.draw do
   root 'static_pages#home'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, 
+    :path        => '', 
+    :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, only: [:show]
 
   match '/help',   to: 'static_pages#help',   via: 'get'
@@ -25,7 +27,7 @@ RailsMakeupScheduler::Application.routes.draw do
    resources :users, only: [:index, :destroy]
   end
 
-  # get '*fallback', to: 'static_pages#fallback'
+  get '*fallback', to: 'static_pages#fallback'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
