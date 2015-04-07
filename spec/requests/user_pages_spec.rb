@@ -26,28 +26,28 @@ describe "User pages" do
   end
 
   describe "signup page" do #no signup page since Facebook sign in
-    before { visit signup_path }
+    before { visit new_user_registration_path }
 
-    xit { should have_content "Sign up"}
-    xit { should have_title(full_title("Sign up")) }
+    it { should have_content "Sign up"}
+    it { should have_title(full_title("User Registration")) }
   end
 
   describe "signup" do
 
-    before { visit signup_path }
+    before { visit new_user_registration_path }
 
-    let(:submit) { "Create my account" }
+    let(:submit) { "Sign up" }
 
     describe "with invalid information" do
-      xit "should not create a user" do
+      it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
 
       describe "after submission" do
         before { click_button submit }
 
-        xit { should have_title('Sign up') }
-        xit { should have_content('error') }
+        it { should have_title(full_title("User Registration")) }
+        it { should have_content('error') }
       end  
 
     end
@@ -57,10 +57,10 @@ describe "User pages" do
         fill_in "Name",  with: "Example User"
         fill_in "Email", with: "user@example.com"
         fill_in "Password", with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Password Confirmation", with: "foobar"
       end
 
-      xit "should create a user" do
+      it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
 
@@ -68,9 +68,9 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        xit { should have_link('Logout') }
-        xit { should have_title(user.name) }
-        xit { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { should have_link('Logout') }
+        it { should have_title(full_title) }
+        it { should have_content('Welcome') }
       end
     end
   end
