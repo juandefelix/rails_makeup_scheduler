@@ -3,14 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery
   before_action :configure_permitted_parameters, if: :devise_controller?
-  include SessionsHelper
 
   def redirect_to_home_if_not_signed_in
     redirect_to new_user_session_path unless signed_in?
   end
 
   def check_admin_role
-    redirect_to root_url unless signed_in? && current_user.has_role?(:admin)
+    redirect_to root_url unless current_user.has_role?(:admin)
   end
 
   def get_date_time
