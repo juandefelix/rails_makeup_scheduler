@@ -16,6 +16,7 @@ RailsMakeupScheduler::Application.routes.draw do
   
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
+  match '/login', to: 'sessions#new', via: 'get'
 
   resources :users, :cancellations
   resources :businesses, only: [:index, :show]

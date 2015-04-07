@@ -1,3 +1,28 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container, .container-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-control {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#fb-signin {
+  background: url('facebook-button.png');
+
+  width: 100%;
+  background-position: 50% 25%;
+  background-repeat: no-repeat;
+
+  .inner {
+    padding-top: 22.77%;
+    display: block;
+  }
+}
