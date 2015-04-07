@@ -20,7 +20,7 @@ def past_date
 end
 
 def sign_in(user=nil)
-  visit '/users/auth/facebook'
+  visit '/auth/facebook'
 end
 
 def load_yaml_from(file, key)

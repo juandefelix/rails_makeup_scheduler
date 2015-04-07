@@ -7,7 +7,7 @@ describe "User pages" do
   describe "siging up with facebook creates a User" do
     before { visit root_path }
     it do
-      expect { click_link "Sign in" }.to change(User, :count)
+      expect { find(:xpath, "//a[@href='/auth/facebook']").click }.to change { User.count }
     end
   end
 
