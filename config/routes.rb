@@ -19,7 +19,6 @@ RailsMakeupScheduler::Application.routes.draw do
 
   resources :users, :cancellations
   resources :businesses, only: [:index, :show]
-  # resources :sessions, only: [:create, :destroy]
 
   namespace :admin do
    resources :cancellations, :users

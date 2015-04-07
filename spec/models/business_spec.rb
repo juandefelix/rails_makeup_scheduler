@@ -1,16 +1,20 @@
 require 'spec_helper'
 
 describe Business do
-  before { @business = Business.new(name: "Bucktown Music", email: "luis@bucktownmusic.com",
-                                    password: "foobar", password_confirmation: "foobar") }
+  before { @business = Business.new(name: "Bucktown Music",
+                                    email: "luis@bucktownmusic.com",
+                                    city: "Chicago",
+                                    zip: "60657",
+                                    phone_number: "3124029850",
+                                    website: "www.bucktownmusic.com") }
   subject { @business }
 
   it { should respond_to :name }
   it { should respond_to :email }
-  it { should respond_to :password_digest }
-  it { should respond_to :password }
-  it { should respond_to :password_confirmation }
-  it { should respond_to :authenticate }
+  it { should respond_to :city }
+  it { should respond_to :zip }
+  it { should respond_to :phone_number }
+  it { should respond_to :website }
 
   it { should be_valid }
 
@@ -22,6 +26,30 @@ describe Business do
 
   describe "when name is not present" do
     before { @business.name = ""}
+
+    it { should_not be_valid }
+  end
+
+  describe "when city is not present" do
+    before { @business.city = ""}
+
+    it { should_not be_valid }
+  end
+
+  describe "when zip is not present" do
+    before { @business.zip = ""}
+
+    it { should_not be_valid }
+  end
+
+  describe "when phone number is not present" do
+    before { @business.phone_number = ""}
+
+    it { should_not be_valid }
+  end
+
+  describe "when website is not present" do
+    before { @business.website = ""}
 
     it { should_not be_valid }
   end
@@ -71,40 +99,6 @@ describe Business do
     end
 
     it { should_not be_valid }
-  end
-
-  describe "when password is not present" do
-    before do
-      @business = Business.new(name: "Example", email: "business@example.com",
-                               password: "", password_confirmation: "")
-    end
-    it { should_not be_valid }
-  end
-
-  describe "when password doesn't match confirmation" do
-    before { @business.password_confirmation = "mismatch" }
-    it { should_not be_valid }
-  end
-
-  describe "with a password that's too short" do
-    before { @business.password = @business.password_confirmation = "a" * 5 }
-    it { should be_invalid }
-  end
-
-  describe "return value of authenticate method" do
-    before { @business.save }
-    let(:found_business) { Business.find_by email:(@business.email) }
-
-    describe "with valid password" do
-      it { should eq found_business.authenticate(@business.password) }
-    end
-
-    describe "with invalid password" do
-      let(:business_for_invalid_password) { found_business.authenticate("invalid") }
-
-      it { should_not eq business_for_invalid_password }
-      specify { expect(business_for_invalid_password).to be_false }
-    end
   end
 
   describe "users belonging to a business" do
