@@ -16,13 +16,15 @@
   }
 }
 
-#home-button-container {
+.home-button-container {
+  text-align: center;
+  
   a {
     margin-bottom: 10px;
   }
 }
 
-#sign-in-button {
+.sign-in-button {
   // outline: 1px solid red;
   background: url('facebook-button.png');
 

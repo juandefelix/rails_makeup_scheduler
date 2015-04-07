@@ -1,7 +1,13 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :rememberable, :recoverable, :validatable, :omniauthable #,  :confirmable
+  devise :database_authenticatable, 
+         :registerable, 
+         :rememberable, 
+         :omniauthable, :omniauth_providers => [:facebook]
+         # :recoverable, 
+         # :validatable, 
+         # :confirmable
   rolify
   before_save { email.downcase! }
   before_create :create_remember_token
@@ -19,12 +25,13 @@ class User < ActiveRecord::Base
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.email = auth["info"]["email"]
+
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name
     end
   end
 

@@ -1,6 +1,6 @@
 RailsMakeupScheduler::Application.routes.draw do
-  devise_for :users
   root 'static_pages#home'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   match '/help',   to: 'static_pages#help',   via: 'get'
   match '/contact',  to: 'static_pages#contact',  via: 'get'
   match '/admin_help',  to: 'static_pages#admin_help',  via: 'get'
@@ -17,14 +17,14 @@ RailsMakeupScheduler::Application.routes.draw do
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
   match '/logout', to: 'sessions#destroy',     via: 'delete'
 
-  resources :users, :cancellations, :businesses
-  resources :sessions, only: [:create, :destroy]
+  resources :users, :cancellations
+  resources :businesses, only: [:index, :show]
 
   namespace :admin do
    resources :cancellations, :users
   end
 
-  get '*fallback', to: 'static_pages#fallback'
+  # get '*fallback', to: 'static_pages#fallback'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
