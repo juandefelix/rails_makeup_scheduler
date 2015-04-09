@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  # resourcify
   rolify
 
   devise :database_authenticatable, 
