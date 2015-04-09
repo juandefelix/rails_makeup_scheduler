@@ -1,21 +1,20 @@
 class Cancellation < ActiveRecord::Base
+  resourcify
   
   belongs_to :creator, class_name: "User"
   belongs_to :taker, class_name: "User"
 
   default_scope -> { order('start_at ASC') }
 
-  has_event_calendar 
+  has_event_calendar
+
+  VALID_DATE_FORMAT = /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i
 
   validates_presence_of :name, :instrument, :start_at, :creator_id
-
-  validates :start_at, format: { with: /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i, 
+  validates :start_at, format: { with: VALID_DATE_FORMAT, 
                                  message: "must have the right format" }
   validate :in_the_past, if: "start_at.present?"
   validate :less_than_24, if: Proc.new { |c| c.start_at.present? && !c.in_the_past? }
-
-  resourcify
-
 
   def self.by_day(year, month, day)
     date = Time.local(year, month, day)

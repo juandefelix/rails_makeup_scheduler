@@ -1,31 +1,28 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # resourcify
+  rolify
+
   devise :database_authenticatable, 
          :registerable, 
          :rememberable, 
          :omniauthable, :omniauth_providers => [:facebook]
-         # :recoverable, 
-         # :validatable, 
-         # :confirmable
-  rolify
+
+  belongs_to :business
+  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
+  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
+  
   before_save { email.downcase! }
   before_create :create_remember_token
 
   default_scope -> { order(name: :desc) }
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
+
   validates :name, :email, presence: true
   validates :name, length: { in: 4..50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  # validates :uid, presence: true, uniqueness: { case_sensitive: false }
-  # validates :password, length: { minimum: 6 }
-
-  belongs_to :business
-  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
-  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
-
-
+  validates :email, presence: true,
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

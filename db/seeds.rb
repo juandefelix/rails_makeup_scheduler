@@ -21,15 +21,19 @@ lincolnsq = Business.create!(name: "Lincoln Square Music",
                              website: "wwww.lincolnsqmusic.com")
 
 # Business admins
-bucktown.users.create!(name: "Bucktown Admin",
-                       email: "bucktown@admin.com",
-                       password: "password",
-                       password_confirmation: "password")
+bucktown.users.create!(
+  name: "Bucktown Admin",
+  email: "bucktown@admin.com",
+  password: "password",
+  password_confirmation: "password"
+).add_role(:business_admin)
 
-lincolnsq.users.create!(name: "Lincoln Sq Admin",
-                        email: "lincolnsq@admin.com",
-                        password: "password",
-                        password_confirmation: "password")
+lincolnsq.users.create!(
+  name: "Lincoln Sq Admin",
+  email: "lincolnsq@admin.com",
+  password: "password",
+  password_confirmation: "password"
+).add_role(:business_admin)
 
 # Students accounts
 30.times do |n|
