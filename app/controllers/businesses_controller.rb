@@ -1,4 +1,5 @@
 class BusinessesController < ApplicationController
+  load_and_authorize_resource
 
   def new
     @business = Business.new
