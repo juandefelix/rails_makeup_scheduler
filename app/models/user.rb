@@ -4,24 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, 
          :registerable, 
          :rememberable, 
+         :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-
-  belongs_to :business
-  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
-  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
   
   before_save { email.downcase! }
   before_create :create_remember_token
 
   default_scope -> { order(name: :desc) }
-
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
-
-  validates :name, :email, presence: true
-  validates :name, length: { in: 4..50 }
-  validates :email, presence: true,
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  belongs_to :business
+  has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
+  has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -31,11 +23,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def User.new_remember_token
+  def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
 
-  def User.digest(token)
+  def self.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 

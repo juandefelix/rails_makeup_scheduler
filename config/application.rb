@@ -9,6 +9,7 @@ Bundler.require(:default, Rails.env)
 module RailsMakeupScheduler
   class Application < Rails::Application
     config.assets.initialize_on_precompile = false
+    config.autoload_paths << Rails.root.join('lib')
 
     # CONFIG = YAML.load(File.read(File.expand_path('../school_code.yml', __FILE__)))
     # CONFIG.merge! CONFIG.fetch(Rails.env, {})
