@@ -1,3 +1,7 @@
+User.destroy_all
+Business.destroy_all
+Cancellation.destroy_all
+
 # Site admin user
 User.create!(name: "Juan Ortiz",
              email: "juan@admin.com",

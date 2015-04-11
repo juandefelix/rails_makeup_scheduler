@@ -8,10 +8,8 @@ class Cancellation < ActiveRecord::Base
 
   has_event_calendar
 
-  VALID_DATE_FORMAT = /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i
-
   validates_presence_of :name, :instrument, :start_at, :creator_id
-  validates :start_at, format: { with: VALID_DATE_FORMAT, 
+  validates :start_at, format: { with: MsUtilities::VALID_DATE_REGEX, 
                                  message: "must have the right format" }
   validate :in_the_past, if: "start_at.present?"
   validate :less_than_24, if: Proc.new { |c| c.start_at.present? && !c.in_the_past? }
@@ -26,7 +24,7 @@ class Cancellation < ActiveRecord::Base
   # Instance methods  
 
   def date_time_valid_format?
-    self.start_at.to_s =~ /20\d{2}[-\/][01]?\d[-\/][0-3]?\d [0-2]?\d:[0-5]?\d/i
+    self.start_at.to_s =~ MsUtilities::VALID_DATE_REGEX
   end
 
   def in_the_past

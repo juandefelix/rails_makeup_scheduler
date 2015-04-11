@@ -1,5 +1,4 @@
 class CancellationsController < ApplicationController
-  load_and_authorize_resource
 
   before_action :redirect_to_home_if_not_signed_in
   before_action :find_cancellation, except: [:new, :create, :index]
