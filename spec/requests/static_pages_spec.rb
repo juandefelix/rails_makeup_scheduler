@@ -21,7 +21,7 @@ describe "Static Pages" do
       let(:user) { FactoryGirl.create(:user) }
       
       before do
-        sign_in
+        facebook_sign_in
         # fill_in "Email",    with: user.email.upcase
         # fill_in "Password", with: user.password
         # click_button "Sign in"
@@ -37,7 +37,7 @@ describe "Static Pages" do
 
   describe "Help Page" do
     before do
-      sign_in
+      facebook_sign_in
       visit help_path 
     end
   
@@ -47,7 +47,7 @@ describe "Static Pages" do
 
   describe "Contact" do
     before do 
-      sign_in
+      facebook_sign_in
       visit contact_path 
     end
 

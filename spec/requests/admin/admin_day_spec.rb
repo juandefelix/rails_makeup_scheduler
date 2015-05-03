@@ -3,13 +3,10 @@ require 'spec_helper'
 describe "Day link" do
   subject { page }
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
-
   before do 
-    sign_in admin
+    @admin = FactoryGirl.create(:admin)
+    facebook_sign_in
   end
-  
 
   describe 'empty day should not display a table' do
     before do

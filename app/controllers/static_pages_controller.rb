@@ -1,6 +1,4 @@
 class StaticPagesController < ApplicationController
-  before_action :redirect_to_home_if_not_signed_in
-  
   def home
   end
 
@@ -8,9 +6,6 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
-  end
-
-  def admin_help
   end
 
   def fallback
