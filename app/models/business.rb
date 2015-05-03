@@ -5,7 +5,7 @@ class Business < ActiveRecord::Base
 
   before_save { email.downcase! }
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@([a-z\d\-]+\.)+[a-z]+\z/i
+  VALID_EMAIL_REGEX = MsUtilities::VALID_EMAIL_REGEX
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :city, :zip, :phone_number, :website, presence: true
