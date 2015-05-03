@@ -10,16 +10,17 @@ FactoryGirl.define do
   factory :user do
     sequence(:name)  { |n| "Person #{n}" }
     sequence(:email) { |n| "person#{n}@example.com" }
-    sequence(:uid)   { |n| "#{n}" }
-    provider "facebook"
+    provider 'facebook'
+    password Devise.friendly_token[0, 20]
+    uid '12345'
 
     # the :admin factory creates a User with the attributes expected in the test env. to sign in with facebook
     factory :admin do
-      name "Juan Ortiz"
-      uid "1337"
-      provider "facebook"
+      name 'Juan Ortiz'
+      email 'juan@test.com'
+      uid '1337'
+      provider 'facebook'
       after(:create) {|user| user.add_role(:admin)}
     end
   end
 end
-
