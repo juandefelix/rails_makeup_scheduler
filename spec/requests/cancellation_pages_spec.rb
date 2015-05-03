@@ -5,7 +5,7 @@ describe "Cancellation Pages" do
   let(:another_user) { FactoryGirl.create(:user) }
 
   before do
-    sign_in
+    facebook_sign_in
     @user = User.first
   end  
 

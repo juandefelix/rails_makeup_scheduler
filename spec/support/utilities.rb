@@ -19,7 +19,7 @@ def past_date
   (Time.now - 1.day).strftime("%m/%d/%y")
 end
 
-def sign_in(user=nil)
+def facebook_sign_in
   visit '/auth/facebook'
 end
 

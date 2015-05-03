@@ -5,18 +5,15 @@ describe "User pages" do
   subject { page }
 
   describe "siging up with facebook creates a User" do
-    before { visit root_path }
+    before { visit new_user_registration_path }
     it do
       expect { find(:xpath, "//a[@href='/auth/facebook']").click }.to change(User, :count)
     end
   end
 
   describe "profile page" do
-
-    # let(:user) { FactoryGirl.create(:user) }
-
     before do 
-      sign_in
+      facebook_sign_in
       @user = User.first
       visit user_path @user
     end
@@ -25,7 +22,7 @@ describe "User pages" do
     it { should have_content @user.name }
   end
 
-  describe "signup page" do #no signup page since Facebook sign in
+  describe "signup page" do 
     before { visit new_user_registration_path }
 
     it { should have_content "Sign up"}
@@ -36,15 +33,13 @@ describe "User pages" do
 
     before { visit new_user_registration_path }
 
-    let(:submit) { "Sign up" }
-
     describe "with invalid information" do
       it "should not create a user" do
-        expect { click_button submit }.not_to change(User, :count)
+        expect { click_button 'Sign up' }.not_to change(User, :count)
       end
 
       describe "after submission" do
-        before { click_button submit }
+        before { click_button 'Sign up' }
 
         it { should have_title(full_title("User Registration")) }
         it { should have_content('error') }
@@ -54,23 +49,22 @@ describe "User pages" do
 
     describe "with valid information" do
       before do
-        fill_in "Name",  with: "Example User"
-        fill_in "Email", with: "user@example.com"
-        fill_in "Password", with: "foobar"
-        fill_in "Password Confirmation", with: "foobar"
+        fill_in "user_name", with: "user name"
+        fill_in "user_email", with: "user@example.com"
+        fill_in "Password", with: "foobar12"
+        fill_in "Password Confirmation", with: "foobar12"
       end
 
       it "should create a user" do
-        expect { click_button submit }.to change(User, :count).by(1)
+        expect { click_button 'Sign up' }.to change(User, :count).by(1)
       end
 
       describe "after saving the user" do
-        before { click_button submit }
-        let(:user) { User.find_by(email: 'user@example.com') }
+        before { click_button 'Sign up' }
 
         it { should have_link('Logout') }
         it { should have_title(full_title) }
-        it { should have_content('Welcome') }
+        it { should have_content('Absence Notification') }
       end
     end
   end

@@ -104,7 +104,7 @@ describe Business do
   describe "users belonging to a business" do
     before do
       @business.save
-      @user = @business.users.create(name: "Example User", email: "example@user.com", provider: "Provider", uid: "uid")
+      @user = @business.users.create(FactoryGirl.attributes_for(:user))
     end
 
     describe "when business is destroyed" do
