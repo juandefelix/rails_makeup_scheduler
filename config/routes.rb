@@ -1,4 +1,5 @@
 RailsMakeupScheduler::Application.routes.draw do
+  devise_for :users
   root 'static_pages#home'
   match '/help',   to: 'static_pages#help',   via: 'get'
   match '/contact',  to: 'static_pages#contact',  via: 'get'
@@ -14,10 +15,8 @@ RailsMakeupScheduler::Application.routes.draw do
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/}
   
   match '/auth/facebook/callback', to: 'sessions#create', via: 'get'
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
-
+  
   resources :users, :cancellations
-  resources :sessions, only: [:create, :destroy]
 
   namespace :admin do
    resources :cancellations, :users
