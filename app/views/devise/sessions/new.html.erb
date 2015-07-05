@@ -26,6 +26,10 @@
       </div>
     <% end %>
 
+    <div id='sign-in-button'>
+      <%= link_to '', user_omniauth_authorize_path(:facebook), class: 'inner'%>
+    </div>
+
     <%= render "devise/shared/links" %>
   </div>
 </div>

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and 
   devise :registerable, :omniauthable, :recoverable, 
          :rememberable, :trackable,    :validatable, 
-         :confirmable,  :database_authenticatable 
+         :confirmable,  :database_authenticatable, :omniauth_providers => [:facebook]
   rolify
   before_save { email.downcase! }
   before_create :create_remember_token
