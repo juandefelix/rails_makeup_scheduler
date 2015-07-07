@@ -1,7 +1,9 @@
 <%- if devise_mapping.omniauthable? %>
-  <div id='sign-in-button'>
-    <%= link_to "", "/users/auth/facebook", class: 'inner'%>
-  </div>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <div id='sign-in-button'>
+      <%= link_to '', user_omniauth_authorize_path(:facebook), class: 'inner'%>
+    </div>
+  <% end -%>
 <% end -%>
 
 <%- if controller_name != 'sessions' %>
