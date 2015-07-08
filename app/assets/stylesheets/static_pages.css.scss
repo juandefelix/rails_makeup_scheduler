@@ -23,22 +23,21 @@
 }
 
 #sign-in-button {
-  // outline: 1px solid red;
   background: url('facebook-button.png');
 
   width: 202px;
-  display: inline-block;
+  display: block;
   vertical-align: top;
   font: 0/0 serif;
   color: transparent;
+  margin: 0 auto;
+  margin-top: 15px;
 
   -moz-background-size: 100%;
   -o-background-size: 100%;
   background-size: 100%;
   background-position: 50% 25%;
   background-repeat: no-repeat;
-
-  // margin-top: 80px;
 
   .inner {
     padding-top: 22.77%;

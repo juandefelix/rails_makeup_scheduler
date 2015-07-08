@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   include SessionsHelper
+
+  protected
 
   def check_admin_role
     redirect_to root_url unless signed_in? && current_user.has_role?(:admin)
@@ -23,5 +27,10 @@ class ApplicationController < ActionController::Base
   
   def find_cancellation
     @cancellation = Cancellation.find(params[:id])
+  end
+  
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :name
   end
 end

@@ -11,6 +11,7 @@ gem 'faker'
 gem 'rolify'
 gem 'cancan'
 gem 'omniauth-facebook'
+gem 'devise'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
