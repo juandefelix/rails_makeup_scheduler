@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   rolify
   devise :registerable, :omniauthable, :recoverable, 
          :rememberable, :trackable,    :validatable, 
-         :confirmable,  :database_authenticatable, :omniauth_providers => [:facebook]
+         :database_authenticatable, :omniauth_providers => [:facebook]
 
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id

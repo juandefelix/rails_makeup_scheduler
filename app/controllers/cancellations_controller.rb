@@ -62,7 +62,7 @@ class CancellationsController < ApplicationController
       redirect_to cancellations_path
     else
       @cancellation.update_attribute(:taker, current_user)
-      redirect_to current_user, warning: "Successfully updated"
+      redirect_to current_user, flash: { warning: "Successfully updated" }
     end
   end
 
@@ -91,7 +91,7 @@ class CancellationsController < ApplicationController
     end
 
     def check_signed_in
-      redirect_to root_url if !signed_in?
+      redirect_to new_user_session_path, flash: { warning: "Please sign in to MakeupScheduler" } if !signed_in?
     end
 
     def check_school_code

@@ -1,6 +1,6 @@
 
 RailsMakeupScheduler::Application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :path => '', :path_names => {:sign_in => 'sign_in', :sign_out => 'logout'}, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   root 'static_pages#home'
   match '/help',   to: 'static_pages#help',   via: 'get'
   match '/contact',  to: 'static_pages#contact',  via: 'get'
