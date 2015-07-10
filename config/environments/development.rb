@@ -34,7 +34,7 @@ RailsMakeupScheduler::Application.configure do
                                          authentication: "plain",  
                                          enable_starttls_auto: true,
                                          domain: ENV['APP_DOMAIN'],
-                                         user_name: ENV['EMAIL_USERNAME'],
-                                         password: ENV['EMAIL_PASSWORD'] 
+                                         user_name: ENV['MANDRILL_APIKEY'],
+                                         password: ENV['MANDRILL_APIKEY'] 
                                        }
 end
