@@ -11,4 +11,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
+
+  def failure
+    flash[:danger] = "This application needs you to login with Facebook"
+    redirect_to root_url
+  end
 end
+
