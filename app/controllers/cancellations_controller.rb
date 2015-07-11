@@ -1,5 +1,5 @@
 class CancellationsController < ApplicationController
-  before_action :redirect_to_home_if_not_signed_in
+  before_action :check_signed_in
   before_action :find_cancellation, except: [:new, :create, :index]
   before_action :check_date_format, only: :create
   before_action :check_school_code, only: :create
@@ -58,7 +58,7 @@ class CancellationsController < ApplicationController
       redirect_to cancellations_path
     else
       @cancellation.update_attribute(:taker, current_user)
-      redirect_to current_user, warning: "Successfully updated"
+      redirect_to current_user, flash: { warning: "Successfully updated" }
     end
   end
 
@@ -84,6 +84,10 @@ class CancellationsController < ApplicationController
 
     def valid_date?(str, format)
       Date.strptime(str,format) rescue false
+    end
+
+    def check_signed_in
+      redirect_to new_user_session_path, flash: { warning: "Please sign in to MakeupScheduler" } if !signed_in?
     end
 
     def check_school_code

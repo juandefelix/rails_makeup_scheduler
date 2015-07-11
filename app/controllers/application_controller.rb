@@ -4,9 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+
   def redirect_to_home_if_not_signed_in
     redirect_to new_user_session_path unless signed_in?
   end
+
+  protected
 
   def check_admin_role
     redirect_to root_url unless current_user.has_role?(:admin)

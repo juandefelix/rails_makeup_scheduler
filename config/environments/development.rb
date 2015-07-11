@@ -28,4 +28,13 @@ RailsMakeupScheduler::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = { address: "smtp.mandrillapp.com",
+                                         port: 587,
+                                         authentication: "plain",  
+                                         enable_starttls_auto: true,
+                                         domain: ENV['APP_DOMAIN'],
+                                         user_name: ENV['EMAIL_USERNAME'],
+                                         password: ENV['EMAIL_PASSWORD'] 
+                                       }
 end
