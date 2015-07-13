@@ -19,7 +19,7 @@ RailsMakeupScheduler::Application.routes.draw do
                                           :constraints => {:year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/}
   
   resources :cancellations
-  resources :businesses, only: [:index, :show]
+  resources :businesses
 
   namespace :admin do
    resources :cancellations

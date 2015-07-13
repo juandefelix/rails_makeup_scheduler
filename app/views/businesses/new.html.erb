@@ -1,6 +1,6 @@
 <% provide :title, "New business"%>
 
-<h1>New business</h1>
+<h1>Register your business</h1>
 
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
@@ -9,25 +9,42 @@
 
       <%= render 'shared/business_error_messages'%>
 
-      <%= f.label :name%>
-      <%= f.text_field :name, placeholder: "name" %>
+      <div class="form-group field">
+        <%= f.label :name, 'Company name'%>
+        <%= f.text_field :name, placeholder: "company name", class: 'form-control', autofocus: true %>
+      </div>
 
-      <%= f.label :email%>
-      <%= f.text_field :email, placeholder: "email" %>
+      <div class="form-group field">
+         <%= f.label :slug, "URL friendly" %>
+         <%= f.text_field :slug, placeholder: "URL friendly name", class: 'form-control', autofocus: true %>
+      </div>
 
-      <%= f.label :city%>
-      <%= f.text_field :city, placeholder: "city" %>
+      <div class="form-group field">
+        <%= f.label :email%>
+        <%= f.text_field :email, placeholder: "email", class: 'form-control' %>
+      </div>
 
-      <%= f.label :zip%>
-      <%= f.text_field :zip, placeholder: "zip code" %>
+      <div class="form-group field">
+        <%= f.label :city%>
+        <%= f.text_field :city, placeholder: "city", class: 'form-control' %>
+      </div>
 
-      <%= f.label :phone_number%>
-      <%= f.text_field :phone_number, placeholder: "phone number" %>
+      <div class="form-group field">
+        <%= f.label :zip%>
+        <%= f.text_field :zip, placeholder: "zip code", class: 'form-control' %>
+      </div>
 
+      <div class="form-group field">
+        <%= f.label :phone_number%>
+        <%= f.text_field :phone_number, placeholder: "phone number", class: 'form-control' %>
+      </div>
+
+    <div class="form-group field">
       <%= f.label :website%>
-      <%= f.text_field :website, placeholder: "website" %>
+      <%= f.text_field :website, placeholder: "website", class: 'form-control' %>
+    </div>
 
-      <%= f.submit "Create business", class: "btn btn-primary" %>
+      <%= f.submit "Register business", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
