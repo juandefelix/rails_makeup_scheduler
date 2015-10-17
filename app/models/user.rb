@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :created_cancellations, class_name: "Cancellation", foreign_key: :creator_id
   has_many :taken_cancellations, class_name: "Cancellation", foreign_key: :taker_id
 
+  validates :name, length: { in: 4..50 }
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
