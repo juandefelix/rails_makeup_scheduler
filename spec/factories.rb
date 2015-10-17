@@ -16,6 +16,8 @@ FactoryGirl.define do
     factory :admin do
       name "Juan Ortiz"
       email 'juanadmin@example.com'
+      provider 'facebook'
+      uid '1337'
       password '12341234'
       after(:create) {|user| user.add_role(:admin)}
     end
