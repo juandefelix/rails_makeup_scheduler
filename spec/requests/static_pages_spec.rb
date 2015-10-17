@@ -13,8 +13,6 @@ describe "Static Pages" do
 
     describe "without signing in" do
       it { should have_link("Sign in") }
-      it { should_not have_link("Available Makeups")}
-      it { should_not have_link("Absence Notification")}
     end
 
     describe "after signin in" do
@@ -22,17 +20,12 @@ describe "Static Pages" do
       
       before do
         sign_in
-        # fill_in "Email",    with: user.email.upcase
-        # fill_in "Password", with: user.password
-        # click_button "Sign in"
       end     
 
       it { should_not have_link("Sign in") }
       it { should have_link("Available Makeups")}
       it { should have_link("Absence Notification")}
     end
-
-
   end
 
   describe "Help Page" do
